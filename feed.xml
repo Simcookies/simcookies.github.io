@@ -2,30 +2,151 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Simcookies Blog</title>
-    <description>All about Simcookies Project.
-</description>
+    <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 29 Apr 2016 09:58:35 +0900</pubDate>
-    <lastBuildDate>Fri, 29 Apr 2016 09:58:35 +0900</lastBuildDate>
+    <pubDate>Sat, 30 Apr 2016 23:09:26 +0900</pubDate>
+    <lastBuildDate>Sat, 30 Apr 2016 23:09:26 +0900</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
         <title>My first post</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+        <description>&lt;p&gt;我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，&lt;strong&gt;Cmd Markdown&lt;/strong&gt; 是我们给出的答案我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown：&lt;/p&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;整理知识，学习笔记&lt;/li&gt;
+&lt;li&gt;发布日记，杂文，所见所想&lt;/li&gt;
+&lt;li&gt;撰写发布技术文稿（代码支持）&lt;/li&gt;
+&lt;li&gt;撰写发布学术论文（LaTeX 公式支持）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.zybuluo.com/static/img/logo.png&quot; alt=&quot;cmd-markdown-logo&quot;&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;p&gt;除了您现在看到的这个 Cmd Markdown 在线版本，您还可以前往以下网址下载：&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href=&quot;https://www.zybuluo.com/cmd/&quot;&gt;Windows/Mac/Linux 全平台客户端&lt;/a&gt;&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;请保留此份 Cmd Markdown 的欢迎稿兼使用说明，如需撰写新稿件，点击顶部工具栏右侧的 &lt;i class=&quot;icon-file&quot;&gt;&lt;/i&gt; &lt;strong&gt;新文稿&lt;/strong&gt; 或者使用快捷键 &lt;code&gt;Ctrl+Alt+N&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr&gt;
+
+&lt;h2&gt;什么是 Markdown&lt;/h2&gt;
+
+&lt;p&gt;Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：譬如您正在阅读的这份文档。它使用简单的符号标记不同的标题，分割不同的段落，&lt;strong&gt;粗体&lt;/strong&gt; 或者 &lt;em&gt;斜体&lt;/em&gt; 某些文字，更棒的是，它还可以&lt;/p&gt;
+
+&lt;h3&gt;2. 书写一个质能守恒公式&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://latex.codecogs.com/gif.latex?$$E=mc^2$$&quot; title=&quot;$$E=mc^2$$&quot; /&gt;&lt;/p&gt;
+
+&lt;h3&gt;3. 高亮一段代码&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SomeClass&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initinalize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;time&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@time&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;4. 绘制表格&lt;/h3&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;项目&lt;/th&gt;
+&lt;th style=&quot;text-align: right&quot;&gt;价格&lt;/th&gt;
+&lt;th style=&quot;text-align: center&quot;&gt;数量&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;计算机&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;$1600&lt;/td&gt;
+&lt;td style=&quot;text-align: center&quot;&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;手机&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;$12&lt;/td&gt;
+&lt;td style=&quot;text-align: center&quot;&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;管线&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;$1&lt;/td&gt;
+&lt;td style=&quot;text-align: center&quot;&gt;234&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
 
+&lt;h3&gt;7. 更详细语法说明&lt;/h3&gt;
+
+&lt;p&gt;想要查看更详细的语法说明，可以参考我们准备的 [Cmd Markdown 简明语法手册][1]，进阶用户可以参考 [Cmd Markdown 高阶语法手册][2] 了解更多高级功能。&lt;/p&gt;
+
+&lt;p&gt;总而言之，不同于其它 &lt;em&gt;所见即所得&lt;/em&gt; 的编辑器：你只需使用键盘专注于书写文本内容，就可以生成印刷级的排版格式，省却在键盘和工具栏之间来回切换，调整内容和格式的麻烦。&lt;strong&gt;Markdown 在流畅的书写和印刷级的阅读体验之间找到了平衡。&lt;/strong&gt; 目前它已经成为世界上最大的技术分享网站 GitHub 和 技术问答网站 StackOverFlow 的御用书写格式。&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h2&gt;什么是 Cmd Markdown&lt;/h2&gt;
+
+&lt;p&gt;您可以使用很多工具书写 Markdown，但是 Cmd Markdown 是这个星球上我们已知的、最好的 Markdown 工具——没有之一 ：）因为深信文字的力量，所以我们和你一样，对流畅书写，分享思想和知识，以及阅读体验有极致的追求，我们把对于这些诉求的回应整合在 Cmd Markdown，并且一次，两次，三次，乃至无数次地提升这个工具的体验，最终将它演化成一个 &lt;strong&gt;编辑/发布/阅读&lt;/strong&gt; Markdown 的在线平台——您可以在任何地方，任何系统/设备上管理这里的文字。&lt;/p&gt;
+
+&lt;h3&gt;1. 实时同步预览&lt;/h3&gt;
+
+&lt;p&gt;我们将 Cmd Markdown 的主界面一分为二，左边为&lt;strong&gt;编辑区&lt;/strong&gt;，右边为&lt;strong&gt;预览区&lt;/strong&gt;，在编辑区的操作会实时地渲染到预览区方便查看最终的版面效果，并且如果你在其中一个区拖动滚动条，我们有一个巧妙的算法把另一个区的滚动条同步到等价的位置，超酷！&lt;/p&gt;
+
+&lt;h3&gt;2. 编辑工具栏&lt;/h3&gt;
+
+&lt;p&gt;也许您还是一个 Markdown 语法的新手，在您完全熟悉它之前，我们在 &lt;strong&gt;编辑区&lt;/strong&gt; 的顶部放置了一个如下图所示的工具栏，您可以使用鼠标在工具栏上调整格式，不过我们仍旧鼓励你使用键盘标记格式，提高书写的流畅度。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://www.zybuluo.com/static/img/toolbar-editor.png&quot; alt=&quot;tool-editor&quot;&gt;&lt;/p&gt;
+
+&lt;h3&gt;3. 编辑模式&lt;/h3&gt;
+
+&lt;p&gt;完全心无旁骛的方式编辑文字：点击 &lt;strong&gt;编辑工具栏&lt;/strong&gt; 最右测的拉伸按钮或者按下 &lt;code&gt;Ctrl + M&lt;/code&gt;，将 Cmd Markdown 切换到独立的编辑模式，这是一个极度简洁的写作环境，所有可能会引起分心的元素都已经被挪除，超清爽！&lt;/p&gt;
+
+&lt;h3&gt;4. 实时的云端文稿&lt;/h3&gt;
+
+&lt;p&gt;为了保障数据安全，Cmd Markdown 会将您每一次击键的内容保存至云端，同时在 &lt;strong&gt;编辑工具栏&lt;/strong&gt; 的最右侧提示 &lt;code&gt;已保存&lt;/code&gt; 的字样。无需担心浏览器崩溃，机器掉电或者地震，海啸——在编辑的过程中随时关闭浏览器或者机器，下一次回到 Cmd Markdown 的时候继续写作。&lt;/p&gt;
+
+&lt;h3&gt;5. 离线模式&lt;/h3&gt;
+
+&lt;p&gt;在网络环境不稳定的情况下记录文字一样很安全！在您写作的时候，如果电脑突然失去网络连接，Cmd Markdown 会智能切换至离线模式，将您后续键入的文字保存在本地，直到网络恢复再将他们传送至云端，即使在网络恢复前关闭浏览器或者电脑，一样没有问题，等到下次开启 Cmd Markdown 的时候，她会提醒您将离线保存的文字传送至云端。简而言之，我们尽最大的努力保障您文字的安全。&lt;/p&gt;
+
+&lt;h3&gt;6. 管理工具栏&lt;/h3&gt;
+
+&lt;p&gt;为了便于管理您的文稿，在 &lt;strong&gt;预览区&lt;/strong&gt; 的顶部放置了如下所示的 &lt;strong&gt;管理工具栏&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://www.zybuluo.com/static/img/toolbar-manager.jpg&quot; alt=&quot;tool-manager&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;通过管理工具栏可以：&lt;/p&gt;
+
+&lt;p&gt;&lt;i class=&quot;icon-share&quot;&gt;&lt;/i&gt; 发布：将当前的文稿生成固定链接，在网络上发布，分享
+&lt;i class=&quot;icon-file&quot;&gt;&lt;/i&gt; 新建：开始撰写一篇新的文稿
+&lt;i class=&quot;icon-trash&quot;&gt;&lt;/i&gt; 删除：删除当前的文稿
+&lt;i class=&quot;icon-cloud&quot;&gt;&lt;/i&gt; 导出：将当前的文稿转化为 Markdown 文本或者 Html 格式，并导出到本地
+&lt;i class=&quot;icon-reorder&quot;&gt;&lt;/i&gt; 列表：所有新增和过往的文稿都可以在这里查看、操作
+&lt;i class=&quot;icon-pencil&quot;&gt;&lt;/i&gt; 模式：切换 普通/Vim/Emacs 编辑模式&lt;/p&gt;
+
+&lt;h3&gt;7. 阅读工具栏&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://www.zybuluo.com/static/img/toolbar-reader.jpg&quot; alt=&quot;tool-manager&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;通过 &lt;strong&gt;预览区&lt;/strong&gt; 右上角的 &lt;strong&gt;阅读工具栏&lt;/strong&gt;，可以查看当前文稿的目录并增强阅读体验。&lt;/p&gt;
+
+&lt;p&gt;工具栏上的五个图标依次为：&lt;/p&gt;
+
+&lt;p&gt;&lt;i class=&quot;icon-list&quot;&gt;&lt;/i&gt; 目录：快速导航当前文稿的目录结构以跳转到感兴趣的段落
+&lt;i class=&quot;icon-chevron-sign-left&quot;&gt;&lt;/i&gt; 视图：互换左边编辑区和右边预览区的位置
+&lt;i class=&quot;icon-adjust&quot;&gt;&lt;/i&gt; 主题：内置了黑白两种模式的主题，试试 &lt;strong&gt;黑色主题&lt;/strong&gt;，超炫！
+&lt;i class=&quot;icon-desktop&quot;&gt;&lt;/i&gt; 阅读：心无旁骛的阅读模式提供超一流的阅读体验
+&lt;i class=&quot;icon-fullscreen&quot;&gt;&lt;/i&gt; 全屏：简洁，简洁，再简洁，一个完全沉浸式的写作和阅读环境&lt;/p&gt;
+
+&lt;h3&gt;8. 阅读模式&lt;/h3&gt;
+
+&lt;p&gt;在 &lt;strong&gt;阅读工具栏&lt;/strong&gt; 点击 &lt;i class=&quot;icon-desktop&quot;&gt;&lt;/i&gt; 或者按下 &lt;code&gt;Ctrl+Alt+M&lt;/code&gt; 随即进入独立的阅读模式界面，我们在版面渲染上的每一个细节：字体，字号，行间距，前背景色都倾注了大量的时间，努力提升阅读的体验和品质。&lt;/p&gt;
 </description>
         <pubDate>Sat, 02 Apr 2016 19:35:16 +0900</pubDate>
         <link>http://simcookies.github.io/update/2016/04/02/my-first-jekyll.html</link>
@@ -40,20 +161,19 @@
     
       <item>
         <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;p&gt;To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
 
 &lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
-
 </description>
         <pubDate>Mon, 21 Mar 2016 15:35:16 +0900</pubDate>
         <link>http://simcookies.github.io/jekyll/2016/03/21/welcome-to-jekyll.html</link>
