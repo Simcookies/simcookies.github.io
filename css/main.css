@@ -427,6 +427,24 @@ table {
   .post-content p {
     line-height: 27px; }
 
+.post-nav {
+  margin-bottom: 100px; }
+  .post-nav .left,
+  .post-nav .right {
+    background: #375a7f;
+    padding: 6px 10px;
+    border-radius: 5px; }
+  .post-nav .left {
+    float: left; }
+  .post-nav .right {
+    float: right; }
+  .post-nav .link {
+    color: #eee; }
+    .post-nav .link:hover {
+      background: #4673a3; }
+  .post-nav .unlink {
+    color: #28415b; }
+
 /**
  * Syntax highlighting styles
  */
