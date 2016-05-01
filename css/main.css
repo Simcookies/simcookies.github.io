@@ -332,6 +332,9 @@ table {
     .sidebar .col .category_count {
       float: right;
       _position: relative; }
+    .sidebar .col .tag {
+      display: inline-block;
+      margin: 1px; }
     .sidebar .col .tag-name {
       font-size: 18px;
       color: #fff;

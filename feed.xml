@@ -5,9 +5,168 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 30 Apr 2016 23:09:26 +0900</pubDate>
-    <lastBuildDate>Sat, 30 Apr 2016 23:09:26 +0900</lastBuildDate>
+    <pubDate>Sun, 01 May 2016 12:08:00 +0900</pubDate>
+    <lastBuildDate>Sun, 01 May 2016 12:08:00 +0900</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>Post blogs with Jekyll</title>
+        <description>&lt;p&gt;Jekyll is a tool can transform plain text into static websites and blog. It&amp;#39;s a open source project on &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Install jekyll&lt;/h2&gt;
+
+&lt;p&gt;Jekyll writed by Ruby, they pack up it as a gem, so we can use RubyGems to install it.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;~ $ gem install jekyll
+~ $ jekyll new your_site_dir
+~ $ cd your_site_dir
+~/your_site_dir $ jekyll serve
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And then check the localhost at port 4000 as inputing localhost:4000 at address column of browser. We will see the standard blog pages. Here we use &lt;code&gt;jekyll serve&lt;/code&gt;, it will build the project and make a server at port 4000, we can also use &lt;code&gt;jekyll build --destrination &amp;lt;destrination&amp;gt;&lt;/code&gt; directly just for build. It&amp;#39;s enough for me.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h2&gt;Directory&lt;/h2&gt;
+
+&lt;p&gt;Because the website is static, we can modify it by CSS/HTML and JavaScript. But we need to check the directory firstly:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;your_site_dir/
+|-- README.md
+|-- _config.yml
+|-- _include/
+|   |-- head.html
+|   |-- header.html
+|   |-- footer.html
+|-- _layouts/
+|   |-- default.html
+|   |-- page.html
+|   |-- post.html
+|-- _plugins/
+|-- _posts/
+|-- _sass/
+|   |-- _base.scss
+|   |-- _layout.scss
+|   |-- _syntax-highlighting.scss
+|-- about.md
+|-- css/
+|   |-- main.scss
+|-- feed.xml
+|-- index.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We also use table to give detials about them:&lt;/p&gt;
+
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;File/Directory&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;_config.yml&lt;/td&gt;
+&lt;td&gt;Stores configuration data. And it also can store global variables.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;_include&lt;/td&gt;
+&lt;td&gt;These are the partials that can be mixed and matched by layouts and posts to facilitate reuse.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;_layouts&lt;/td&gt;
+&lt;td&gt;These are the templates that wrap posts.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;_post&lt;/td&gt;
+&lt;td&gt;Our post with markdown format&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;_site&lt;/td&gt;
+&lt;td&gt;The normal bulid directory, but I change it other place.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;index.html and other HTML, Markdown files&lt;/td&gt;
+&lt;td&gt;These will be build directly to the build root directory.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;other file or floder&lt;/td&gt;
+&lt;td&gt;These will also be build and included to root directory, such as css or script.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;hr&gt;
+
+&lt;h2&gt;Configuration&lt;/h2&gt;
+
+&lt;p&gt;Almost all of configurations and global variables are stored in _config.yml, however I just need a little of them. The format of configuration should be like &lt;code&gt;option: value&lt;/code&gt; or &lt;code&gt;variable: value&lt;/code&gt;. For example, normally , we need config the site info, just do like this:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Site settings&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;you&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;can&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;descripe&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;here&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Social info if you want&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;twitter_username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;twitter&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;github_username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;facebook_username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facebook&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Markdown seetings&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;makrdown&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;redcarpet&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;redcarpet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;ss&quot;&gt;extensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;-[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;something&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;here&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The point is, whenever you modify the _config.yml, server needs to be restarted again or _site needs to be rebuild.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h1&gt;Use Markdown&lt;/h1&gt;
+
+&lt;p&gt;Jekyll normally supports two markdown renderers: &lt;code&gt;Redcarpet&lt;/code&gt; and &lt;code&gt;Kramdown&lt;/code&gt;, we can also make our own markdown processors, but it&amp;#39;s not easy for me. In my blog project, I used &lt;code&gt;Redcarpet&lt;/code&gt;. So I make configuration like here:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;ss&quot;&gt;markdown&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;redcarpet&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;redcarpet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;ss&quot;&gt;extensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fenced_code_blocks&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;no_intra_emphasis&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strikethrough&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;autolink&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tables&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The extensions are used normally:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;fenced_code_blocks&lt;/code&gt;: This will make it easy to write code.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;no_intra_emphasis&lt;/code&gt;: Do not parse emphasis inside of words. Strings such as &lt;code&gt;foo_bar_baz&lt;/code&gt; will not generate &lt;code&gt;&amp;lt;em&amp;gt;&lt;/code&gt; tags.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;strikethrough&lt;/code&gt;: Parse strikethrough, PHP-Markdown style. Two &lt;code&gt;~&lt;/code&gt; characters mark the start of a strikethrough. Such as &lt;del&gt;Text&lt;/del&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;autolink&lt;/code&gt;: Parse links even when they are not enclosed in &amp;lt;&amp;gt; characters. Autolinks for the http, https and ftp protocols will be automatically detected.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tables&lt;/code&gt;: Parse tables.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr&gt;
+
+&lt;h2&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;Use the jekyll to make own blog, and then we can focus on writting blogs. If we want to chage the theme of blog, we can also check &lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;here&lt;/a&gt;, fork their repository. Or we can make own themes, it&amp;#39;s a big challenge for skills of Front-End. OK, let&amp;#39;s enjoy blog now.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h2&gt;References&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Jekyll offical docs site: &lt;a href=&quot;https://jekyllrb.com/docs/home/&quot;&gt;https://jekyllrb.com/docs/home/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Jekyll GitHub repository souce code: &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;https://github.com/jekyll/jekyll&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Markdown processer redcarpet: &lt;a href=&quot;https://github.com/vmg/redcarpet&quot;&gt;https://github.com/vmg/redcarpet&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Jekyll theme offical site: &lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;http://jekyllthemes.org/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sun, 01 May 2016 00:00:00 +0900</pubDate>
+        <link>http://simcookies.github.io/2016/05/01/deploy-first-blog-by-jekyll</link>
+        <guid isPermaLink="true">http://simcookies.github.io/2016/05/01/deploy-first-blog-by-jekyll</guid>
+        
+        <category>jekyll</category>
+        
+        <category>markdown</category>
+        
+        
+        <category>Blog Develop</category>
+        
+      </item>
     
       <item>
         <title>My first post</title>
@@ -149,8 +308,8 @@
 &lt;p&gt;在 &lt;strong&gt;阅读工具栏&lt;/strong&gt; 点击 &lt;i class=&quot;icon-desktop&quot;&gt;&lt;/i&gt; 或者按下 &lt;code&gt;Ctrl+Alt+M&lt;/code&gt; 随即进入独立的阅读模式界面，我们在版面渲染上的每一个细节：字体，字号，行间距，前背景色都倾注了大量的时间，努力提升阅读的体验和品质。&lt;/p&gt;
 </description>
         <pubDate>Sat, 02 Apr 2016 19:35:16 +0900</pubDate>
-        <link>http://simcookies.github.io/update/2016/04/02/my-first-jekyll.html</link>
-        <guid isPermaLink="true">http://simcookies.github.io/update/2016/04/02/my-first-jekyll.html</guid>
+        <link>http://simcookies.github.io/2016/04/02/my-first-jekyll</link>
+        <guid isPermaLink="true">http://simcookies.github.io/2016/04/02/my-first-jekyll</guid>
         
         <category>test</category>
         
@@ -176,13 +335,13 @@
 &lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Mon, 21 Mar 2016 15:35:16 +0900</pubDate>
-        <link>http://simcookies.github.io/jekyll/2016/03/21/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://simcookies.github.io/jekyll/2016/03/21/welcome-to-jekyll.html</guid>
-        
-        <category>hello</category>
-        
+        <link>http://simcookies.github.io/2016/03/21/welcome-to-jekyll</link>
+        <guid isPermaLink="true">http://simcookies.github.io/2016/03/21/welcome-to-jekyll</guid>
         
         <category>jekyll</category>
+        
+        
+        <category>Blog Develop</category>
         
       </item>
     

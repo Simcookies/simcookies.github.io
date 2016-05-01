@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Post blogs with Jekyll</title>
+  <meta name="description" content="Jekyll is a tool can transform plain text into static websites and blog. It&#39;s a open source project on Github.">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="canonical" href="http://simcookies.github.io/2016/05/01/deploy-first-blog-by-jekyll">
+  <link rel="alternate" type="application/rss+xml" title="Simcookies Blog" href="http://simcookies.github.io/feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Simcookies Blog</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+	  
+	  <a class="page-link" href="/feed.xml">Feeds</a>
+	  <a class="page-link" href="https://github.com/Simcookies?tab=repositories">
+	    <i class="fa fa-github-alt fa-lg"></i>
+	    Repositories
+	  </a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Post blogs with Jekyll</h1>
+    <p class="post-meta">
+      <time datetime="2016-05-01T00:00:00+09:00" itemprop="datePublished">May 1, 2016</time>
+      
+      &nbsp;<i class="fa fa-tag"></i>&nbsp;
+      
+      <span><a href="/tag/jekyll">jekyll</a></span>
+      
+      <span><a href="/tag/markdown">markdown</a></span>
+      
+      &nbsp;
+      
+      &nbsp;<i class="fa fa-archive" aria-hidden="true"></i>&nbsp;
+      <span><a href="/category/Blog Develop">Blog Develop</a></span>
+      
+    </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Jekyll is a tool can transform plain text into static websites and blog. It&#39;s a open source project on <a href="https://github.com/jekyll/jekyll">Github</a>.</p>
+
+<h2>Install jekyll</h2>
+
+<p>Jekyll writed by Ruby, they pack up it as a gem, so we can use RubyGems to install it.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">~ $ gem install jekyll
+~ $ jekyll new your_site_dir
+~ $ cd your_site_dir
+~/your_site_dir $ jekyll serve
+</code></pre></div>
+<p>And then check the localhost at port 4000 as inputing localhost:4000 at address column of browser. We will see the standard blog pages. Here we use <code>jekyll serve</code>, it will build the project and make a server at port 4000, we can also use <code>jekyll build --destrination &lt;destrination&gt;</code> directly just for build. It&#39;s enough for me.</p>
+
+<hr>
+
+<h2>Directory</h2>
+
+<p>Because the website is static, we can modify it by CSS/HTML and JavaScript. But we need to check the directory firstly:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">your_site_dir/
+|-- README.md
+|-- _config.yml
+|-- _include/
+|   |-- head.html
+|   |-- header.html
+|   |-- footer.html
+|-- _layouts/
+|   |-- default.html
+|   |-- page.html
+|   |-- post.html
+|-- _plugins/
+|-- _posts/
+|-- _sass/
+|   |-- _base.scss
+|   |-- _layout.scss
+|   |-- _syntax-highlighting.scss
+|-- about.md
+|-- css/
+|   |-- main.scss
+|-- feed.xml
+|-- index.html
+</code></pre></div>
+<p>We also use table to give detials about them:</p>
+
+<table><thead>
+<tr>
+<th>File/Directory</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>_config.yml</td>
+<td>Stores configuration data. And it also can store global variables.</td>
+</tr>
+<tr>
+<td>_include</td>
+<td>These are the partials that can be mixed and matched by layouts and posts to facilitate reuse.</td>
+</tr>
+<tr>
+<td>_layouts</td>
+<td>These are the templates that wrap posts.</td>
+</tr>
+<tr>
+<td>_post</td>
+<td>Our post with markdown format</td>
+</tr>
+<tr>
+<td>_site</td>
+<td>The normal bulid directory, but I change it other place.</td>
+</tr>
+<tr>
+<td>index.html and other HTML, Markdown files</td>
+<td>These will be build directly to the build root directory.</td>
+</tr>
+<tr>
+<td>other file or floder</td>
+<td>These will also be build and included to root directory, such as css or script.</td>
+</tr>
+</tbody></table>
+
+<hr>
+
+<h2>Configuration</h2>
+
+<p>Almost all of configurations and global variables are stored in _config.yml, however I just need a little of them. The format of configuration should be like <code>option: value</code> or <code>variable: value</code>. For example, normally , we need config the site info, just do like this:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Site settings</span>
+<span class="ss">title</span><span class="p">:</span> <span class="n">your</span> <span class="n">blog</span> <span class="n">title</span>
+<span class="ss">email</span><span class="p">:</span> <span class="n">your</span> <span class="n">email</span>
+<span class="ss">description</span><span class="p">:</span> <span class="n">you</span> <span class="n">can</span> <span class="n">descripe</span> <span class="n">your</span> <span class="n">blog</span> <span class="n">here</span><span class="o">.</span>
+
+<span class="c1"># Social info if you want</span>
+<span class="ss">twitter_username</span><span class="p">:</span> <span class="n">your</span> <span class="n">twitter</span>
+<span class="ss">github_username</span><span class="p">:</span> <span class="n">your</span> <span class="n">github</span>
+<span class="ss">facebook_username</span><span class="p">:</span> <span class="n">your</span> <span class="n">facebook</span>
+
+<span class="c1"># Markdown seetings</span>
+<span class="ss">makrdown</span><span class="p">:</span> <span class="n">redcarpet</span>
+<span class="ss">redcarpet</span><span class="p">:</span>
+  <span class="ss">extensions</span><span class="p">:</span>
+    <span class="o">-[</span> <span class="n">something</span> <span class="n">here</span> <span class="o">]</span>
+</code></pre></div>
+<p>The point is, whenever you modify the _config.yml, server needs to be restarted again or _site needs to be rebuild.</p>
+
+<hr>
+
+<h1>Use Markdown</h1>
+
+<p>Jekyll normally supports two markdown renderers: <code>Redcarpet</code> and <code>Kramdown</code>, we can also make our own markdown processors, but it&#39;s not easy for me. In my blog project, I used <code>Redcarpet</code>. So I make configuration like here:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="ss">markdown</span><span class="p">:</span> <span class="n">redcarpet</span>
+<span class="ss">redcarpet</span><span class="p">:</span>
+  <span class="ss">extensions</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">fenced_code_blocks</span>
+      <span class="o">-</span> <span class="n">no_intra_emphasis</span>
+      <span class="o">-</span> <span class="n">strikethrough</span>
+      <span class="o">-</span> <span class="n">autolink</span>
+      <span class="o">-</span> <span class="n">tables</span>
+</code></pre></div>
+<p>The extensions are used normally:</p>
+
+<ul>
+<li><code>fenced_code_blocks</code>: This will make it easy to write code.</li>
+<li><code>no_intra_emphasis</code>: Do not parse emphasis inside of words. Strings such as <code>foo_bar_baz</code> will not generate <code>&lt;em&gt;</code> tags.</li>
+<li><code>strikethrough</code>: Parse strikethrough, PHP-Markdown style. Two <code>~</code> characters mark the start of a strikethrough. Such as <del>Text</del>.</li>
+<li><code>autolink</code>: Parse links even when they are not enclosed in &lt;&gt; characters. Autolinks for the http, https and ftp protocols will be automatically detected.</li>
+<li><code>tables</code>: Parse tables.</li>
+</ul>
+
+<hr>
+
+<h2>Summary</h2>
+
+<p>Use the jekyll to make own blog, and then we can focus on writting blogs. If we want to chage the theme of blog, we can also check <a href="http://jekyllthemes.org/">here</a>, fork their repository. Or we can make own themes, it&#39;s a big challenge for skills of Front-End. OK, let&#39;s enjoy blog now.</p>
+
+<hr>
+
+<h2>References</h2>
+
+<blockquote>
+<ul>
+<li>Jekyll offical docs site: <a href="https://jekyllrb.com/docs/home/">https://jekyllrb.com/docs/home/</a></li>
+<li>Jekyll GitHub repository souce code: <a href="https://github.com/jekyll/jekyll">https://github.com/jekyll/jekyll</a></li>
+<li>Markdown processer redcarpet: <a href="https://github.com/vmg/redcarpet">https://github.com/vmg/redcarpet</a></li>
+<li>Jekyll theme offical site: <a href="http://jekyllthemes.org/">http://jekyllthemes.org/</a></li>
+</ul>
+</blockquote>
+
+  </div>
+
+  
+    <div id="disqus_thread"></div>
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+  */
+  /*
+  var disqus_config = function () {
+  this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  */
+  (function() {  // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+
+  s.src = '//simcookiesgithubio.disqus.com/embed.js';
+
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+  &copy;&nbsp;2016 by&nbsp;<a href="https://github.com/Simcookies">Simcookies</a>
+</footer>
+
+
+  </body>
+
+</html>
