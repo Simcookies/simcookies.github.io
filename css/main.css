@@ -162,6 +162,10 @@ table {
       max-width: calc(1200px - 30px - 300px);
       padding-right: 30px;
       padding-left: 30px; } }
+  @media screen and (max-width: 700px) {
+    .wrapper {
+      max: 100%;
+      padding: 0; } }
 
 /**
  * Clearfix
@@ -197,9 +201,20 @@ table {
   font-size: 26px;
   font-weight: 300;
   line-height: 56px;
-  float: left; }
+  float: left;
+  padding-left: 10px; }
   .site-title, .site-title:visited {
     color: #fff; }
+
+.menu-icon {
+  display: none; }
+  @media screen and (max-width: 700px) {
+    .menu-icon {
+      position: absolute;
+      top: 8px;
+      right: 5px;
+      display: block;
+      color: #fdfdfd; } }
 
 .site-nav {
   float: right;
@@ -211,7 +226,11 @@ table {
     -o-transition: all 0.2s;
     transition: all 0.2s;
     padding: 9px;
-    border-radius: 4px; }
+    border-radius: 4px;
+    color: #fff;
+    line-height: 1.5; }
+    .site-nav .page-link:not(:last-child) {
+      margin-right: 20px; }
     .site-nav .page-link:hover {
       -webkit-transition: all ease-in 0.1s;
       -moz-transition: all ease-in 0.1s;
@@ -220,48 +239,20 @@ table {
       .site-nav .page-link:hover:before {
         height: 20px;
         background-color: #000; }
-  .site-nav .menu-icon {
-    display: none; }
-  .site-nav .page-link {
-    color: #fff;
-    line-height: 1.5; }
-    .site-nav .page-link:not(:last-child) {
-      margin-right: 20px; }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 700px) {
     .site-nav {
-      position: absolute;
-      top: 9px;
-      right: 15px;
-      background-color: #fdfdfd;
-      border: 1px solid #e8e8e8;
-      border-radius: 5px;
-      text-align: right; }
-      .site-nav .menu-icon {
-        display: block;
-        float: right;
-        width: 36px;
-        height: 26px;
-        line-height: 0;
-        padding-top: 10px;
-        text-align: center; }
-        .site-nav .menu-icon > svg {
-          width: 18px;
-          height: 15px; }
-          .site-nav .menu-icon > svg path {
-            fill: #424242; }
+      float: none;
+      background-color: #375a7f; }
       .site-nav .trigger {
         clear: both;
-        display: none; }
-      .site-nav:hover .trigger {
-        display: block;
-        padding-bottom: 5px; }
-      .site-nav .page-link {
-        color: #111;
-        display: block;
-        padding: 5px 10px;
-        margin-left: 20px; }
-        .site-nav .page-link:not(:last-child) {
-          margin-right: 0; } }
+        display: none;
+        padding: 5px 10px; }
+        .site-nav .trigger .page-link {
+          display: block;
+          text-align: center;
+          margin: 0;
+          border-top: 1px solid #28415b;
+          border-radius: 0; } }
 
 /**
  * Site footer
@@ -270,6 +261,9 @@ table {
   text-align: center;
   padding: 30px 0;
   background: #e0e0e3; }
+  @media screen and (max-width: 700px) {
+    .site-footer {
+      background: #fafafa; } }
   .site-footer .quick-link {
     width: 48px;
     position: fixed;
@@ -294,6 +288,9 @@ table {
 .page-content {
   background: #e0e0e3;
   padding: 90px 0 30px 0; }
+  @media screen and (max-width: 700px) {
+    .page-content {
+      padding: 55px 0 0 0; } }
 
 .home {
   position: relative;
@@ -307,7 +304,8 @@ table {
   @media screen and (max-width: 1200px) {
     .home {
       float: none;
-      width: auto; } }
+      width: auto;
+      padding: 30px; } }
   .home .category-title {
     color: #618dbb;
     font-weight: bold;
@@ -330,6 +328,18 @@ table {
     padding: 12px; }
     .sidebar .col:not(:first-child) {
       margin-top: 15px; }
+    @media screen and (max-width: 1200px) {
+      .sidebar .col {
+        margin-top: 0 !important;
+        outline: none; } }
+    @media screen and (max-width: 700px) {
+      .sidebar .col {
+        box-shadow: none;
+        margin-top: 0 !important;
+        outline: none;
+        border-top: 2px dotted #ccc; }
+        .sidebar .col:last-child {
+          border-bottom: 2px dotted #ccc; } }
     .sidebar .col .category-list {
       margin-left: 0;
       list-style: none; }
@@ -395,6 +405,13 @@ table {
   box-shadow: 0 1px 4px #999;
   outline: 1px solid #ccc;
   padding: 30px 45px; }
+  @media screen and (max-width: 1200px) {
+    .post {
+      padding: 20px; } }
+  @media screen and (max-width: 700px) {
+    .post {
+      box-shadow: none;
+      outline: none; } }
 
 .post-header {
   margin-bottom: 30px; }
