@@ -345,6 +345,16 @@ table {
         border-top: 2px dotted #ccc; }
         .sidebar .col:last-child {
           border-bottom: 2px dotted #ccc; } }
+    .sidebar .col .search {
+      width: 100%;
+      font-size: 16px;
+      background-image: url("/public/image/searchicon.png");
+      background-color: #fafafa;
+      background-position: 8px 9px;
+      background-repeat: no-repeat;
+      border: none;
+      padding: 8px 8px 8px 30px;
+      box-sizing: border-box; }
     .sidebar .col .category-list {
       margin-left: 0;
       list-style: none; }
@@ -395,6 +405,13 @@ table {
   font-size: 14px;
   color: #828282;
   margin-bottom: 15px; }
+  .post-meta .tag-div {
+    color: #fff;
+    background-color: #a8c0da;
+    border-radius: 4px;
+    padding: 2px 6px; }
+  .post-meta .category-div {
+    text-transform: capitalize; }
 
 .post-link {
   display: inline;
