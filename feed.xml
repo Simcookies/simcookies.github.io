@@ -5,8 +5,8 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 06 Sep 2016 12:48:38 +0900</pubDate>
-    <lastBuildDate>Tue, 06 Sep 2016 12:48:38 +0900</lastBuildDate>
+    <pubDate>Tue, 06 Sep 2016 13:06:55 +0900</pubDate>
+    <lastBuildDate>Tue, 06 Sep 2016 13:06:55 +0900</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -145,6 +145,8 @@ fi
 
 &lt;p&gt;Finally, &lt;code&gt;rails server&lt;/code&gt; can start server at localhost:4000, you can input this address in browser and check the main page. Here we go with Rails 4!&lt;/p&gt;
 
+&lt;hr&gt;
+
 &lt;h2&gt;Surmmary&lt;/h2&gt;
 
 &lt;p&gt;The versions of deferent parts and install order are very important, here I made a flow figure:&lt;/p&gt;
@@ -152,6 +154,8 @@ fi
 &lt;p&gt;&lt;strong&gt;install RVM --&amp;gt; use RVM install Ruby and gem --&amp;gt; use gem install bundle and Rails --&amp;gt; make project&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This post was writed to help new rails developer with deeper understanding about so many concepts. Also it helps me not to forget the install process. After them, enjoy developing in Rails!&lt;/p&gt;
+
+&lt;hr&gt;
 
 &lt;h2&gt;References&lt;/h2&gt;
 
