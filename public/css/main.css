@@ -550,6 +550,9 @@ table {
 .post-date .time-info {
   color: #bbb; }
 
+.page-nav {
+  display: inline-block; }
+
 /**
  * Syntax highlighting styles
  */
