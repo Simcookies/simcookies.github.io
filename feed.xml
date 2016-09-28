@@ -5,9 +5,34 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 10 Sep 2016 17:06:34 +0900</pubDate>
-    <lastBuildDate>Sat, 10 Sep 2016 17:06:34 +0900</lastBuildDate>
-    <generator>Jekyll v3.1.2</generator>
+    <pubDate>Wed, 28 Sep 2016 19:14:00 +0900</pubDate>
+    <lastBuildDate>Wed, 28 Sep 2016 19:14:00 +0900</lastBuildDate>
+    <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Fix Nvidia bug in Ubuntu 16.04</title>
+        <description>&lt;p&gt;After I found a lot of problems with Windows 10, I installed Ubuntu 16.04 together with it. However when I finished installing it, I checked the lastest driver of Nvidia and replaced it from test to offical version, errors showed out: Driver &amp;quot;ebridge&amp;quot; was registered. So I searched online, also did as they said, but it still didn&amp;#39;t work. Finally, I just made a little change in it. Here is the way.&lt;/p&gt;
+
+&lt;p&gt;Firstly, get into recovery-mode (4.4.0-21-generic), and enter to shell:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get purge nvidia*
+sudo apt-get purge nvidia-settings
+sudo apt-get purge nvidia-prime
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot, and enter Boot with new kernel version (4.4.0-23-generic). This is what they said. But I found it still showed up with the error message. So I tried to reboot and enter normal ubuntu, offcause I can not login GUI because it has not Driver, so I used &lt;code&gt;Ctrl+Alt+F1&lt;/code&gt; to get into login shell, input:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install nvidia-current-updates
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally, reboot again. OK~ It worked!&lt;/p&gt;
+</description>
+        <pubDate>Tue, 27 Sep 2016 00:00:00 +0900</pubDate>
+        <link>http://simcookies.github.io/2016/09/27/fix-nviada-bug-ubuntu</link>
+        <guid isPermaLink="true">http://simcookies.github.io/2016/09/27/fix-nviada-bug-ubuntu</guid>
+        
+        <category>Debug</category>
+        
+        
+        <category>Linux</category>
+        
+      </item>
     
       <item>
         <title>Begin with Rails</title>
