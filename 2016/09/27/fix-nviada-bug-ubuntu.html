@@ -112,12 +112,12 @@
     <p>After I found a lot of problems with Windows 10, I installed Ubuntu 16.04 together with it. However when I finished installing it, I checked the lastest driver of Nvidia and replaced it from test to offical version, errors showed out: Driver &quot;ebridge&quot; was registered. So I searched online, also did as they said, but it still didn&#39;t work. Finally, I just made a little change in it. Here is the way.</p>
 
 <p>Firstly, get into recovery-mode (4.4.0-21-generic), and enter to shell:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">sudo apt-get purge nvidia*
+<div class="highlight"><pre><code class="language-" data-lang="">sudo apt-get purge nvidia*
 sudo apt-get purge nvidia-settings
 sudo apt-get purge nvidia-prime
 </code></pre></div>
 <p>Reboot, and enter Boot with new kernel version (4.4.0-23-generic). This is what they said. But I found it still showed up with the error message. So I tried to reboot and enter normal ubuntu, offcause I can not login GUI because it has not Driver, so I used <code>Ctrl+Alt+F1</code> to get into login shell, input:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">sudo apt-get install nvidia-current-updates
+<div class="highlight"><pre><code class="language-" data-lang="">sudo apt-get install nvidia-current-updates
 </code></pre></div>
 <p>Finally, reboot again. OK~ It worked!</p>
 
@@ -171,7 +171,7 @@ sudo apt-get purge nvidia-prime
     </div>
 
     <footer class="site-footer">
-  &copy;&nbsp;2016 by Simcookies. All rights reserved.
+  &copy;&nbsp;2016 by Simcookies with Jekyll 3.2.1. All rights reserved.
   <div class="quick-link" id="quick-link">
     <a id="page-top">
       <span class="fa-stack fa-lg">

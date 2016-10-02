@@ -5,8 +5,8 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 02 Oct 2016 12:35:45 +0900</pubDate>
-    <lastBuildDate>Sun, 02 Oct 2016 12:35:45 +0900</lastBuildDate>
+    <pubDate>Sun, 02 Oct 2016 15:08:00 +0900</pubDate>
+    <lastBuildDate>Sun, 02 Oct 2016 15:08:00 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -14,12 +14,12 @@
         <description>&lt;p&gt;After I found a lot of problems with Windows 10, I installed Ubuntu 16.04 together with it. However when I finished installing it, I checked the lastest driver of Nvidia and replaced it from test to offical version, errors showed out: Driver &amp;quot;ebridge&amp;quot; was registered. So I searched online, also did as they said, but it still didn&amp;#39;t work. Finally, I just made a little change in it. Here is the way.&lt;/p&gt;
 
 &lt;p&gt;Firstly, get into recovery-mode (4.4.0-21-generic), and enter to shell:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get purge nvidia*
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;sudo apt-get purge nvidia*
 sudo apt-get purge nvidia-settings
 sudo apt-get purge nvidia-prime
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Reboot, and enter Boot with new kernel version (4.4.0-23-generic). This is what they said. But I found it still showed up with the error message. So I tried to reboot and enter normal ubuntu, offcause I can not login GUI because it has not Driver, so I used &lt;code&gt;Ctrl+Alt+F1&lt;/code&gt; to get into login shell, input:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install nvidia-current-updates
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;sudo apt-get install nvidia-current-updates
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Finally, reboot again. OK~ It worked!&lt;/p&gt;
 </description>
@@ -97,21 +97,21 @@ sudo apt-get purge nvidia-prime
 &lt;/blockquote&gt;
 
 &lt;h3&gt;Install RVM&lt;/h3&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;~ $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;~ $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 ~ $ \curl -sSL https://get.rvm.io | bash -s stable
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;After installing, you can use &lt;code&gt;rvm -v&lt;/code&gt; to check version of RVM you installed. Like:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;~ $ rvm -v
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;~ $ rvm -v
 rvm 1.27.0 (latest) by Wayne E. Seguin &amp;lt;wayneeseguin@gmail.com&amp;gt;, Michal Papis &amp;lt;mpapis@gmail.com&amp;gt; [https://rvm.io/]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;Install Ruby with RVM&lt;/h3&gt;
 
 &lt;p&gt;If you installed RVM successfully, you can use it to install RVM now. Firstly, you can use &lt;code&gt;rvm list known&lt;/code&gt; to list all versions you can install, and choose from them.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;~ $ rvm requirements # If without the step, it also included in next step.
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;~ $ rvm requirements # If without the step, it also included in next step.
 ~ $ rvm install 2.2.2 # Here you can decide which version by yourself.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Here it may be take a bit long time because of downloading and complile. This installing also includes RubyGems. After it, you can use &lt;code&gt;rvm list&lt;/code&gt; to list all the versions you have installed. Like:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;~ $ rvm list
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;~ $ rvm list
 
 rvm rubies
 
@@ -124,17 +124,18 @@ rvm rubies
 &lt;p&gt;Use &lt;code&gt;rvm use 2.2.2&lt;/code&gt; to set version of current ruby. And &lt;code&gt;rvm use 2.2.2 --default&lt;/code&gt; can set default version and you can use that version of ruby after openning console without setting version every time.&lt;/p&gt;
 
 &lt;p&gt;However, when I installed rvm and use it firstly, it give me an error like this:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;~ $ rvm use 2.2.2 --default
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;~ $ rvm use 2.2.2 --default
 
-RVM is not a function, selecting rubies with &amp;#39;rvm use ...&amp;#39; will not work.
+RVM is not a function, selecting rubies with 'rvm use ...' will not work.
 
 You need to change your terminal emulator preferences to allow login shell.
 Sometimes it is required to use `/bin/bash --login` as the command.
 Please visit https://rvm.io/integration/gnome-terminal/ for an example.
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Why showed this error? Because when we install rvm, it will add RVM path and RVM loading line to ~/.profile:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s &amp;quot;$HOME/.rvm/scripts/rvm&amp;quot; ]] &amp;amp;&amp;amp; source &amp;quot;$HOME/.rvm/scripts/rvm&amp;quot; # Load RVM into a shell session *as a function* 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+[[ -s &quot;$HOME/.rvm/scripts/rvm&quot; ]] &amp;amp;&amp;amp; source &quot;$HOME/.rvm/scripts/rvm&quot; # Load RVM into a shell session *as a function* 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;But we the console which we openned is always non-login bash, it will not load the .profile. Here I give my solution:&lt;/p&gt;
 
@@ -143,11 +144,11 @@ Please visit https://rvm.io/integration/gnome-terminal/ for an example.
 &lt;/blockquote&gt;
 
 &lt;p&gt;If we use non-login bash, it will load .bashrc, if we use login-bash, it will load .profile, and load .bashrc through:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;# if running bash
-if [ -n &amp;quot;$BASH_VERSION&amp;quot; ]; then
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;# if running bash
+if [ -n &quot;$BASH_VERSION&quot; ]; then
     # include .bashrc if it exists
-    if [ -f &amp;quot;$HOME/.bashrc&amp;quot; ]; then
-        . &amp;quot;$HOME/.bashrc&amp;quot;
+    if [ -f &quot;$HOME/.bashrc&quot; ]; then
+        . &quot;$HOME/.bashrc&quot;
     fi
 fi
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -162,11 +163,11 @@ fi
 &lt;h3&gt;Test Installing&lt;/h3&gt;
 
 &lt;p&gt;According the offical documentation &lt;code&gt;rails new blog&lt;/code&gt; to make new rails project. But it will bundle install the lastest Rails and related gems automaticly, so we have to specify the version of rails which we want, like this:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;~ $ rails _4.2.7.1_ new blog
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;~ $ rails _4.2.7.1_ new blog
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This is quite important point, because the gems depend with each other. When I firstly rails new a project, I use &lt;code&gt;rails new blog&lt;/code&gt; directly, and just it generates a file named Gemfile, I just modify the version of rails in it:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Bundle edge Rails instead: gem &amp;#39;rails&amp;#39;, github: &amp;#39;rails/rails&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;rails&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;4.2.7.1&amp;#39;&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'rails'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'4.2.7.1'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Errors will be showed when we start server. So itt&amp;#39;s better to spectify version.&lt;/p&gt;
 
@@ -213,7 +214,7 @@ fi
 &lt;h2&gt;Install jekyll&lt;/h2&gt;
 
 &lt;p&gt;Jekyll writed by Ruby, they pack up it as a gem, so we can use RubyGems to install it.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;~ $ gem install jekyll
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;~ $ gem install jekyll
 ~ $ jekyll new your_site_dir
 ~ $ cd your_site_dir
 ~/your_site_dir $ jekyll serve
@@ -225,7 +226,7 @@ fi
 &lt;h2&gt;Directory&lt;/h2&gt;
 
 &lt;p&gt;Because the website is static, we can modify it by CSS/HTML and JavaScript. But we need to check the directory firstly:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;your_site_dir/
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;your_site_dir/
 |-- README.md
 |-- _config.yml
 |-- _include/
@@ -292,20 +293,20 @@ fi
 
 &lt;p&gt;Almost all of configurations and global variables are stored in _config.yml, however I just need a little of them. The format of configuration should be like &lt;code&gt;option: value&lt;/code&gt; or &lt;code&gt;variable: value&lt;/code&gt;. For example, normally , we need config the site info, just do like this:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Site settings&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;you&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;can&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;descripe&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;here&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;title: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;email: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;description: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;you&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;can&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;descripe&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;here&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
 
 &lt;span class=&quot;c1&quot;&gt;# Social info if you want&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;twitter_username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;twitter&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;github_username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;facebook_username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facebook&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;twitter_username: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;twitter&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;github_username: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;facebook_username: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facebook&lt;/span&gt;
 
 &lt;span class=&quot;c1&quot;&gt;# Markdown seetings&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;makrdown&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;redcarpet&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;redcarpet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;ss&quot;&gt;extensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;something&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;here&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;makrdown: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;redcarpet&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;redcarpet:
+  extensions:
+    &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;something&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;here&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The point is, whenever you modify the _config.yml, server needs to be restarted again or _site needs to be rebuild.&lt;/p&gt;
 
@@ -314,10 +315,10 @@ fi
 &lt;h1&gt;Use Markdown&lt;/h1&gt;
 
 &lt;p&gt;Jekyll normally supports two markdown renderers: &lt;code&gt;Redcarpet&lt;/code&gt; and &lt;code&gt;Kramdown&lt;/code&gt;, we can also make our own markdown processors, but it&amp;#39;s not easy for me. In my blog project, I used &lt;code&gt;Redcarpet&lt;/code&gt;. So I make configuration like here:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;ss&quot;&gt;markdown&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;redcarpet&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;redcarpet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;ss&quot;&gt;extensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fenced_code_blocks&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;ss&quot;&gt;markdown: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;redcarpet&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;redcarpet:
+  extensions:
+      &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fenced_code_blocks&lt;/span&gt;
       &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;no_intra_emphasis&lt;/span&gt;
       &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strikethrough&lt;/span&gt;
       &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;autolink&lt;/span&gt;
@@ -402,7 +403,7 @@ fi
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SomeClass&lt;/span&gt;
 
   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initinalize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;vi&quot;&gt;@time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;now&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;time&lt;/span&gt;
@@ -524,10 +525,10 @@ fi
 &lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
 </description>

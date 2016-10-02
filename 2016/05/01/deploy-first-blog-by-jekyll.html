@@ -114,7 +114,7 @@
 <h2>Install jekyll</h2>
 
 <p>Jekyll writed by Ruby, they pack up it as a gem, so we can use RubyGems to install it.</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">~ $ gem install jekyll
+<div class="highlight"><pre><code class="language-" data-lang="">~ $ gem install jekyll
 ~ $ jekyll new your_site_dir
 ~ $ cd your_site_dir
 ~/your_site_dir $ jekyll serve
@@ -126,7 +126,7 @@
 <h2>Directory</h2>
 
 <p>Because the website is static, we can modify it by CSS/HTML and JavaScript. But we need to check the directory firstly:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">your_site_dir/
+<div class="highlight"><pre><code class="language-" data-lang="">your_site_dir/
 |-- README.md
 |-- _config.yml
 |-- _include/
@@ -193,20 +193,20 @@
 
 <p>Almost all of configurations and global variables are stored in _config.yml, however I just need a little of them. The format of configuration should be like <code>option: value</code> or <code>variable: value</code>. For example, normally , we need config the site info, just do like this:</p>
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Site settings</span>
-<span class="ss">title</span><span class="p">:</span> <span class="n">your</span> <span class="n">blog</span> <span class="n">title</span>
-<span class="ss">email</span><span class="p">:</span> <span class="n">your</span> <span class="n">email</span>
-<span class="ss">description</span><span class="p">:</span> <span class="n">you</span> <span class="n">can</span> <span class="n">descripe</span> <span class="n">your</span> <span class="n">blog</span> <span class="n">here</span><span class="o">.</span>
+<span class="ss">title: </span><span class="n">your</span> <span class="n">blog</span> <span class="n">title</span>
+<span class="ss">email: </span><span class="n">your</span> <span class="n">email</span>
+<span class="ss">description: </span><span class="n">you</span> <span class="n">can</span> <span class="n">descripe</span> <span class="n">your</span> <span class="n">blog</span> <span class="n">here</span><span class="o">.</span>
 
 <span class="c1"># Social info if you want</span>
-<span class="ss">twitter_username</span><span class="p">:</span> <span class="n">your</span> <span class="n">twitter</span>
-<span class="ss">github_username</span><span class="p">:</span> <span class="n">your</span> <span class="n">github</span>
-<span class="ss">facebook_username</span><span class="p">:</span> <span class="n">your</span> <span class="n">facebook</span>
+<span class="ss">twitter_username: </span><span class="n">your</span> <span class="n">twitter</span>
+<span class="ss">github_username: </span><span class="n">your</span> <span class="n">github</span>
+<span class="ss">facebook_username: </span><span class="n">your</span> <span class="n">facebook</span>
 
 <span class="c1"># Markdown seetings</span>
-<span class="ss">makrdown</span><span class="p">:</span> <span class="n">redcarpet</span>
-<span class="ss">redcarpet</span><span class="p">:</span>
-  <span class="ss">extensions</span><span class="p">:</span>
-    <span class="o">-[</span> <span class="n">something</span> <span class="n">here</span> <span class="o">]</span>
+<span class="ss">makrdown: </span><span class="n">redcarpet</span>
+<span class="ss">redcarpet:
+  extensions:
+    </span><span class="o">-</span><span class="p">[</span> <span class="n">something</span> <span class="n">here</span> <span class="p">]</span>
 </code></pre></div>
 <p>The point is, whenever you modify the _config.yml, server needs to be restarted again or _site needs to be rebuild.</p>
 
@@ -215,10 +215,10 @@
 <h1>Use Markdown</h1>
 
 <p>Jekyll normally supports two markdown renderers: <code>Redcarpet</code> and <code>Kramdown</code>, we can also make our own markdown processors, but it&#39;s not easy for me. In my blog project, I used <code>Redcarpet</code>. So I make configuration like here:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="ss">markdown</span><span class="p">:</span> <span class="n">redcarpet</span>
-<span class="ss">redcarpet</span><span class="p">:</span>
-  <span class="ss">extensions</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">fenced_code_blocks</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="ss">markdown: </span><span class="n">redcarpet</span>
+<span class="ss">redcarpet:
+  extensions:
+      </span><span class="o">-</span> <span class="n">fenced_code_blocks</span>
       <span class="o">-</span> <span class="n">no_intra_emphasis</span>
       <span class="o">-</span> <span class="n">strikethrough</span>
       <span class="o">-</span> <span class="n">autolink</span>
@@ -303,7 +303,7 @@
     </div>
 
     <footer class="site-footer">
-  &copy;&nbsp;2016 by Simcookies. All rights reserved.
+  &copy;&nbsp;2016 by Simcookies with Jekyll 3.2.1. All rights reserved.
   <div class="quick-link" id="quick-link">
     <a id="page-top">
       <span class="fa-stack fa-lg">

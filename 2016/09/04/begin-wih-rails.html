@@ -166,21 +166,21 @@
 </blockquote>
 
 <h3>Install RVM</h3>
-<div class="highlight"><pre><code class="language-text" data-lang="text">~ $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+<div class="highlight"><pre><code class="language-" data-lang="">~ $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 ~ $ \curl -sSL https://get.rvm.io | bash -s stable
 </code></pre></div>
 <p>After installing, you can use <code>rvm -v</code> to check version of RVM you installed. Like:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">~ $ rvm -v
+<div class="highlight"><pre><code class="language-" data-lang="">~ $ rvm -v
 rvm 1.27.0 (latest) by Wayne E. Seguin &lt;wayneeseguin@gmail.com&gt;, Michal Papis &lt;mpapis@gmail.com&gt; [https://rvm.io/]
 </code></pre></div>
 <h3>Install Ruby with RVM</h3>
 
 <p>If you installed RVM successfully, you can use it to install RVM now. Firstly, you can use <code>rvm list known</code> to list all versions you can install, and choose from them.</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">~ $ rvm requirements # If without the step, it also included in next step.
+<div class="highlight"><pre><code class="language-" data-lang="">~ $ rvm requirements # If without the step, it also included in next step.
 ~ $ rvm install 2.2.2 # Here you can decide which version by yourself.
 </code></pre></div>
 <p>Here it may be take a bit long time because of downloading and complile. This installing also includes RubyGems. After it, you can use <code>rvm list</code> to list all the versions you have installed. Like:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">~ $ rvm list
+<div class="highlight"><pre><code class="language-" data-lang="">~ $ rvm list
 
 rvm rubies
 
@@ -193,17 +193,18 @@ rvm rubies
 <p>Use <code>rvm use 2.2.2</code> to set version of current ruby. And <code>rvm use 2.2.2 --default</code> can set default version and you can use that version of ruby after openning console without setting version every time.</p>
 
 <p>However, when I installed rvm and use it firstly, it give me an error like this:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">~ $ rvm use 2.2.2 --default
+<div class="highlight"><pre><code class="language-" data-lang="">~ $ rvm use 2.2.2 --default
 
-RVM is not a function, selecting rubies with &#39;rvm use ...&#39; will not work.
+RVM is not a function, selecting rubies with 'rvm use ...' will not work.
 
 You need to change your terminal emulator preferences to allow login shell.
 Sometimes it is required to use `/bin/bash --login` as the command.
 Please visit https://rvm.io/integration/gnome-terminal/ for an example.
+
 </code></pre></div>
 <p>Why showed this error? Because when we install rvm, it will add RVM path and RVM loading line to ~/.profile:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s &quot;$HOME/.rvm/scripts/rvm&quot; ]] &amp;&amp; source &quot;$HOME/.rvm/scripts/rvm&quot; # Load RVM into a shell session *as a function* 
+<div class="highlight"><pre><code class="language-" data-lang="">PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function* 
 </code></pre></div>
 <p>But we the console which we openned is always non-login bash, it will not load the .profile. Here I give my solution:</p>
 
@@ -212,11 +213,11 @@ Please visit https://rvm.io/integration/gnome-terminal/ for an example.
 </blockquote>
 
 <p>If we use non-login bash, it will load .bashrc, if we use login-bash, it will load .profile, and load .bashrc through:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"># if running bash
-if [ -n &quot;$BASH_VERSION&quot; ]; then
+<div class="highlight"><pre><code class="language-" data-lang=""># if running bash
+if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
-    if [ -f &quot;$HOME/.bashrc&quot; ]; then
-        . &quot;$HOME/.bashrc&quot;
+    if [ -f "$HOME/.bashrc" ]; then
+        . "$HOME/.bashrc"
     fi
 fi
 </code></pre></div>
@@ -231,11 +232,11 @@ fi
 <h3>Test Installing</h3>
 
 <p>According the offical documentation <code>rails new blog</code> to make new rails project. But it will bundle install the lastest Rails and related gems automaticly, so we have to specify the version of rails which we want, like this:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">~ $ rails _4.2.7.1_ new blog
+<div class="highlight"><pre><code class="language-" data-lang="">~ $ rails _4.2.7.1_ new blog
 </code></pre></div>
 <p>This is quite important point, because the gems depend with each other. When I firstly rails new a project, I use <code>rails new blog</code> directly, and just it generates a file named Gemfile, I just modify the version of rails in it:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Bundle edge Rails instead: gem &#39;rails&#39;, github: &#39;rails/rails&#39;</span>
-<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;4.2.7.1&#39;</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Bundle edge Rails instead: gem 'rails', github: 'rails/rails'</span>
+<span class="n">gem</span> <span class="s1">'rails'</span><span class="p">,</span> <span class="s1">'4.2.7.1'</span>
 </code></pre></div>
 <p>Errors will be showed when we start server. So itt&#39;s better to spectify version.</p>
 
@@ -314,7 +315,7 @@ fi
     </div>
 
     <footer class="site-footer">
-  &copy;&nbsp;2016 by Simcookies. All rights reserved.
+  &copy;&nbsp;2016 by Simcookies with Jekyll 3.2.1. All rights reserved.
   <div class="quick-link" id="quick-link">
     <a id="page-top">
       <span class="fa-stack fa-lg">
