@@ -11,7 +11,7 @@
 
   <link rel="stylesheet" href="/public/css/main.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link rel="canonical" href="http://simcookies.github.io/2016/05/01/deploy-first-blog-by-jekyll">
+  <link rel="canonical" href="http://simcookies.github.io/2016/05/01/post-blogs-with-jekyll">
   <link rel="alternate" type="application/rss+xml" title="Simcookies" href="http://simcookies.github.io/feed.xml">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="/public/script/main.js"></script>
@@ -247,11 +247,38 @@ The point is, whenever you modify the _config.yml, server needs to be restarted 
 
 <hr />
 
-<h1 id="use-markdown">Use Markdown</h1>
+<h2 id="write-post">Write Post</h2>
 
-<p>Jekyll normally supports two markdown renderers: <code class="highlighter-rouge">Redcarpet</code> and <code class="highlighter-rouge">Kramdown</code>, we can also make our own markdown processors, but it’s not easy for me. In my blog project, I used <code class="highlighter-rouge">Redcarpet</code>. So I make configuration like here:</p>
+<p>After some basic setting, you can write your own blog now. You can use any editor to write blog at the path of <code class="highlighter-rouge">_post</code>, at the same time, Jekyll server can keep watch over your post and refresh the web page. Here is the point you should be care about:</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="ss">markdown: </span><span class="n">redcarpet</span>
+<ul>
+  <li>The extension of post file should be <code class="highlighter-rouge">.markdown</code>,<code class="highlighter-rouge">.md</code>(and so on, I use <code class="highlighter-rouge">.md</code>).</li>
+  <li>Post filename should be write like: <code class="highlighter-rouge">YYYY-MM-DD-your-blog-name.md</code></li>
+</ul>
+
+<p>Open one post, write below code at first of file:</p>
+
+<div class="language-markdown highlighter-rouge"><pre class="highlight"><code><span class="nn">---</span>
+<span class="s">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Your</span><span class="nv"> </span><span class="s">blog</span><span class="nv"> </span><span class="s">title"</span>
+<span class="s">date</span><span class="pi">:</span>   <span class="s">2016-03-21 15:35:16 +0900</span>
+<span class="s">category</span><span class="pi">:</span> <span class="s">Blog</span>
+<span class="s">tag</span><span class="pi">:</span> <span class="s">Test</span>
+<span class="nn">---</span>
+</code></pre>
+</div>
+
+<p>Go on write something you want after these code. These code are provided to Jekyll for explaining some info of post. Index page can use ttile variable to show posts order by date variable, and also we can sort out posts with category and tag variables. Well, you can find more information about how to use these varibale at <a href="https://jekyllrb.com/docs/home/">offical page</a> or I will post new blog about it, you can subscribe it.</p>
+
+<hr />
+
+<h2 id="use-markdown">Use Markdown</h2>
+
+<p>Why we use Jekyll to write blog is beacuse we do not need to focus on HTML pages every time, just concentrate on writting. And with Markdwon, this process will be more easy and happy.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> is a lightweight markup language with plain text. We just write some text, and Markdown processers help us to translate it into beautiful HTML pages. Jekyll normally supports two markdown renderers: <code class="highlighter-rouge">Redcarpet</code> and <code class="highlighter-rouge">Kramdown</code>, even we can also make our own markdown processors. In my blog project, I used <code class="highlighter-rouge">Redcarpet</code>. So I make configuration like here:</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Here are write at _config.yml</span>
+<span class="ss">markdown: </span><span class="n">redcarpet</span>
 <span class="ss">redcarpet:
   extensions:
       </span><span class="o">-</span> <span class="n">fenced_code_blocks</span>
@@ -270,6 +297,8 @@ The point is, whenever you modify the _config.yml, server needs to be restarted 
   <li><code class="highlighter-rouge">autolink</code>: Parse links even when they are not enclosed in &lt;&gt; characters. Autolinks for the http, https and ftp protocols will be automatically detected.</li>
   <li><code class="highlighter-rouge">tables</code>: Parse tables.</li>
 </ul>
+
+<p>There are some basic syntax rules, please have a look at <a href="https://guides.github.com/features/mastering-markdown/">Github Guide</a>.</p>
 
 <hr />
 

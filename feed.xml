@@ -5,8 +5,8 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 04 Oct 2016 10:47:42 +0900</pubDate>
-    <lastBuildDate>Tue, 04 Oct 2016 10:47:42 +0900</lastBuildDate>
+    <pubDate>Tue, 04 Oct 2016 22:50:31 +0900</pubDate>
+    <lastBuildDate>Tue, 04 Oct 2016 22:50:31 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -386,11 +386,38 @@ The point is, whenever you modify the _config.yml, server needs to be restarted 
 
 &lt;hr /&gt;
 
-&lt;h1 id=&quot;use-markdown&quot;&gt;Use Markdown&lt;/h1&gt;
+&lt;h2 id=&quot;write-post&quot;&gt;Write Post&lt;/h2&gt;
 
-&lt;p&gt;Jekyll normally supports two markdown renderers: &lt;code class=&quot;highlighter-rouge&quot;&gt;Redcarpet&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Kramdown&lt;/code&gt;, we can also make our own markdown processors, but it’s not easy for me. In my blog project, I used &lt;code class=&quot;highlighter-rouge&quot;&gt;Redcarpet&lt;/code&gt;. So I make configuration like here:&lt;/p&gt;
+&lt;p&gt;After some basic setting, you can write your own blog now. You can use any editor to write blog at the path of &lt;code class=&quot;highlighter-rouge&quot;&gt;_post&lt;/code&gt;, at the same time, Jekyll server can keep watch over your post and refresh the web page. Here is the point you should be care about:&lt;/p&gt;
 
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;ss&quot;&gt;markdown: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;redcarpet&lt;/span&gt;
+&lt;ul&gt;
+  &lt;li&gt;The extension of post file should be &lt;code class=&quot;highlighter-rouge&quot;&gt;.markdown&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;.md&lt;/code&gt;(and so on, I use &lt;code class=&quot;highlighter-rouge&quot;&gt;.md&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Post filename should be write like: &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-your-blog-name.md&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Open one post, write below code at first of file:&lt;/p&gt;
+
+&lt;div class=&quot;language-markdown highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Your&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;blog&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;title&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;   &lt;span class=&quot;s&quot;&gt;2016-03-21 15:35:16 +0900&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;category&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Blog&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Test&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Go on write something you want after these code. These code are provided to Jekyll for explaining some info of post. Index page can use ttile variable to show posts order by date variable, and also we can sort out posts with category and tag variables. Well, you can find more information about how to use these varibale at &lt;a href=&quot;https://jekyllrb.com/docs/home/&quot;&gt;offical page&lt;/a&gt; or I will post new blog about it, you can subscribe it.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;use-markdown&quot;&gt;Use Markdown&lt;/h2&gt;
+
+&lt;p&gt;Why we use Jekyll to write blog is beacuse we do not need to focus on HTML pages every time, just concentrate on writting. And with Markdwon, this process will be more easy and happy.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Markdown&quot;&gt;Markdown&lt;/a&gt; is a lightweight markup language with plain text. We just write some text, and Markdown processers help us to translate it into beautiful HTML pages. Jekyll normally supports two markdown renderers: &lt;code class=&quot;highlighter-rouge&quot;&gt;Redcarpet&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Kramdown&lt;/code&gt;, even we can also make our own markdown processors. In my blog project, I used &lt;code class=&quot;highlighter-rouge&quot;&gt;Redcarpet&lt;/code&gt;. So I make configuration like here:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Here are write at _config.yml&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;markdown: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;redcarpet&lt;/span&gt;
 &lt;span class=&quot;ss&quot;&gt;redcarpet:
   extensions:
       &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fenced_code_blocks&lt;/span&gt;
@@ -409,6 +436,8 @@ The point is, whenever you modify the _config.yml, server needs to be restarted 
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;autolink&lt;/code&gt;: Parse links even when they are not enclosed in &amp;lt;&amp;gt; characters. Autolinks for the http, https and ftp protocols will be automatically detected.&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tables&lt;/code&gt;: Parse tables.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;There are some basic syntax rules, please have a look at &lt;a href=&quot;https://guides.github.com/features/mastering-markdown/&quot;&gt;Github Guide&lt;/a&gt;.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -430,8 +459,8 @@ The point is, whenever you modify the _config.yml, server needs to be restarted 
 &lt;/blockquote&gt;
 </description>
         <pubDate>Sun, 01 May 2016 00:00:00 +0900</pubDate>
-        <link>http://simcookies.github.io/2016/05/01/deploy-first-blog-by-jekyll</link>
-        <guid isPermaLink="true">http://simcookies.github.io/2016/05/01/deploy-first-blog-by-jekyll</guid>
+        <link>http://simcookies.github.io/2016/05/01/post-blogs-with-jekyll</link>
+        <guid isPermaLink="true">http://simcookies.github.io/2016/05/01/post-blogs-with-jekyll</guid>
         
         <category>jekyll</category>
         
