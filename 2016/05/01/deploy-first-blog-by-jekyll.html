@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Post blogs with Jekyll</title>
-  <meta name="description" content="Jekyll is a tool can transform plain text into static websites and blog. It’s a open source project on Github.">
+  <meta name="description" content="Jekyll is a tool can transform plain text into static websites and blog. It’s a open source project on Github. In this blog, I will talk about how to install...">
 
   <link rel="stylesheet" href="/public/css/main.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -105,11 +105,11 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>Jekyll is a tool can transform plain text into static websites and blog. It’s a open source project on <a href="https://github.com/jekyll/jekyll">Github</a>.</p>
+    <p>Jekyll is a tool can transform plain text into static websites and blog. It’s a open source project on <a href="https://github.com/jekyll/jekyll">Github</a>. In this blog, I will talk about how to install Jekyll and use it to generate our static blogs.</p>
 
 <h2 id="install-jekyll">Install jekyll</h2>
 
-<p>Jekyll writed by Ruby, they pack up it as a gem, so we can use RubyGems to install it.</p>
+<p>Jekyll writed by Ruby, they pack up it as a gem, so we can use RubyGems to install it. Use command like these:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>~ $ gem install jekyll
 ~ $ jekyll new your_site_dir
@@ -118,17 +118,29 @@
 </code></pre>
 </div>
 
-<p>And then check the localhost at port 4000 as inputing localhost:4000 at address column of browser. We will see the standard blog pages. Here we use <code class="highlighter-rouge">jekyll serve</code>, it will build the project and make a server at port 4000, we can also use <code class="highlighter-rouge">jekyll build --destrination &lt;destrination&gt;</code> directly just for build. It’s enough for me.</p>
+<p>And then check the localhost at port 4000 as inputing localhost:4000 at address column of browser. We will see the standard blog pages. Here we use <code class="highlighter-rouge">jekyll serve</code>, it will build the project and make a server at port 4000, we can also use <code class="highlighter-rouge">jekyll build --destrination &lt;destrination&gt;</code> to specify build path directly. Here you can repalce <code class="highlighter-rouge">&lt;destrination&gt;</code> to directory which you want to build. The default path is <code class="highlighter-rouge">./_site</code>.</p>
+
+<p>As time goes, the project will need another gems, so we can make a Gemfile to collect the gems together at root path. Here is context of Gemfile:</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Gemfile</span>
+<span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
+<span class="n">gem</span> <span class="s2">"jekyll"</span><span class="p">,</span> <span class="s2">"3.2.1"</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>After making Gemfile, we can use <code class="highlighter-rouge">bundle install</code> to install all gems we need, if we want to add some other gems, we can add into Gemfile, and run <code class="highlighter-rouge">bundle install</code> again.</p>
 
 <hr />
 
 <h2 id="directory">Directory</h2>
 
-<p>Because the website is static, we can modify it by CSS/HTML and JavaScript. But we need to check the directory firstly:</p>
+<p>Because the website is static, we can modify it by CSS/HTML and JavaScript. Let’s check the directory firstly:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>your_site_dir/
+<div class="highlighter-rouge"><pre class="highlight"><code>your_site_root_dir/
 |-- README.md
 |-- _config.yml
+|-- Gemfile
 |-- _include/
 |   |-- head.html
 |   |-- header.html
@@ -150,7 +162,7 @@
 |-- index.html
 </code></pre>
 </div>
-<p>We also use table to give detials about them:</p>
+<p>Here I made a table to give detials about them:</p>
 
 <table>
   <thead>
@@ -163,6 +175,10 @@
     <tr>
       <td>_config.yml</td>
       <td>Stores configuration data. And it also can store global variables.</td>
+    </tr>
+    <tr>
+      <td>Gemfile</td>
+      <td>I made it by myself (The lastest version Jekyll will make it for you)</td>
     </tr>
     <tr>
       <td>_include</td>
@@ -195,7 +211,7 @@
 
 <h2 id="configuration">Configuration</h2>
 
-<p>Almost all of configurations and global variables are stored in _config.yml, however I just need a little of them. The format of configuration should be like <code class="highlighter-rouge">option: value</code> or <code class="highlighter-rouge">variable: value</code>. For example, normally , we need config the site info, just do like this:</p>
+<p>Almost all of configurations and global variables are stored in _config.yml. The format of configuration should be like <code class="highlighter-rouge">option: value</code> or <code class="highlighter-rouge">variable: value</code>. For example, normally , we need config the site info, just do like this:</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Site settings</span>
 <span class="ss">title: </span><span class="n">your</span> <span class="n">blog</span> <span class="n">title</span>
@@ -215,7 +231,19 @@
 </code></pre>
 </div>
 
-<p>The point is, whenever you modify the _config.yml, server needs to be restarted again or _site needs to be rebuild.</p>
+<p>If you set variables in _config.yml, you can use them in HTML as Liquid Language. For instance:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>{{ github_username }}<span class="nt">&lt;/p&gt;</span>
+</code></pre>
+</div>
+
+<p>It will turned into real HTML context:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>your_github_username<span class="nt">&lt;/p&gt;</span>
+</code></pre>
+</div>
+<p>For more information about Liquid language, you can check <a href="https://jekyllrb.com/docs/home/">Jekyll offical docs site</a>.
+The point is, whenever you modify the _config.yml, server needs to be restarted again or <code class="highlighter-rouge">_site</code> needs to be rebuild.</p>
 
 <hr />
 
@@ -255,10 +283,10 @@
 
 <blockquote>
   <ul>
-    <li>Jekyll offical docs site: https://jekyllrb.com/docs/home/</li>
-    <li>Jekyll GitHub repository souce code: https://github.com/jekyll/jekyll</li>
-    <li>Markdown processer redcarpet: https://github.com/vmg/redcarpet</li>
-    <li>Jekyll theme offical site: http://jekyllthemes.org/</li>
+    <li>Jekyll offical docs site: <a href="https://jekyllrb.com/docs/home/">https://jekyllrb.com/docs/home/</a></li>
+    <li>Jekyll GitHub repository souce code: <a href="https://github.com/jekyll/jekyll">https://github.com/jekyll/jekyll</a></li>
+    <li>Markdown processer redcarpet: <a href="https://github.com/vmg/redcarpet">https://github.com/vmg/redcarpet</a></li>
+    <li>Jekyll theme offical site: <a href="http://jekyllthemes.org/">http://jekyllthemes.org/</a></li>
   </ul>
 </blockquote>
 

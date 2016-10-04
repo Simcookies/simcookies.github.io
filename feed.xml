@@ -5,8 +5,8 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 04 Oct 2016 09:40:38 +0900</pubDate>
-    <lastBuildDate>Tue, 04 Oct 2016 09:40:38 +0900</lastBuildDate>
+    <pubDate>Tue, 04 Oct 2016 10:47:42 +0900</pubDate>
+    <lastBuildDate>Tue, 04 Oct 2016 10:47:42 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -224,10 +224,10 @@ fi
 
 &lt;blockquote&gt;
   &lt;ul&gt;
-    &lt;li&gt;Offical RVM page: https://rvm.io/&lt;/li&gt;
-    &lt;li&gt;Chinese install guide book: https://ruby-china.org/wiki/rvm-guide&lt;/li&gt;
-    &lt;li&gt;Offical Rails guide book: http://guides.rubyonrails.org/&lt;/li&gt;
-    &lt;li&gt;How to solve the problem with “RVM is not a function”: http://stackoverflow.com/questions/9336596/rvm-installation-not-working-rvm-is-not-a-function&lt;/li&gt;
+    &lt;li&gt;Offical RVM page: &lt;a href=&quot;https://rvm.io/&quot;&gt;https://rvm.io/&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Chinese install guide book: &lt;a href=&quot;https://ruby-china.org/wiki/rvm-guide&quot;&gt;https://ruby-china.org/wiki/rvm-guide&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Offical Rails guide book: &lt;a href=&quot;http://guides.rubyonrails.org/&quot;&gt;http://guides.rubyonrails.org/&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;How to solve the problem with “RVM is not a function”: &lt;a href=&quot;http://stackoverflow.com/questions/9336596/rvm-installation-not-working-rvm-is-not-a-function&quot;&gt;http://stackoverflow.com/questions/9336596/rvm-installation-not-working-rvm-is-not-a-function&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/blockquote&gt;
 </description>
@@ -244,11 +244,11 @@ fi
     
       <item>
         <title>Post blogs with Jekyll</title>
-        <description>&lt;p&gt;Jekyll is a tool can transform plain text into static websites and blog. It’s a open source project on &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+        <description>&lt;p&gt;Jekyll is a tool can transform plain text into static websites and blog. It’s a open source project on &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Github&lt;/a&gt;. In this blog, I will talk about how to install Jekyll and use it to generate our static blogs.&lt;/p&gt;
 
 &lt;h2 id=&quot;install-jekyll&quot;&gt;Install jekyll&lt;/h2&gt;
 
-&lt;p&gt;Jekyll writed by Ruby, they pack up it as a gem, so we can use RubyGems to install it.&lt;/p&gt;
+&lt;p&gt;Jekyll writed by Ruby, they pack up it as a gem, so we can use RubyGems to install it. Use command like these:&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ $ gem install jekyll
 ~ $ jekyll new your_site_dir
@@ -257,17 +257,29 @@ fi
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;And then check the localhost at port 4000 as inputing localhost:4000 at address column of browser. We will see the standard blog pages. Here we use &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, it will build the project and make a server at port 4000, we can also use &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll build --destrination &amp;lt;destrination&amp;gt;&lt;/code&gt; directly just for build. It’s enough for me.&lt;/p&gt;
+&lt;p&gt;And then check the localhost at port 4000 as inputing localhost:4000 at address column of browser. We will see the standard blog pages. Here we use &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, it will build the project and make a server at port 4000, we can also use &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll build --destrination &amp;lt;destrination&amp;gt;&lt;/code&gt; to specify build path directly. Here you can repalce &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;destrination&amp;gt;&lt;/code&gt; to directory which you want to build. The default path is &lt;code class=&quot;highlighter-rouge&quot;&gt;./_site&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;As time goes, the project will need another gems, so we can make a Gemfile to collect the gems together at root path. Here is context of Gemfile:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Gemfile&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://rubygems.org&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jekyll&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;3.2.1&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;After making Gemfile, we can use &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle install&lt;/code&gt; to install all gems we need, if we want to add some other gems, we can add into Gemfile, and run &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle install&lt;/code&gt; again.&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;h2 id=&quot;directory&quot;&gt;Directory&lt;/h2&gt;
 
-&lt;p&gt;Because the website is static, we can modify it by CSS/HTML and JavaScript. But we need to check the directory firstly:&lt;/p&gt;
+&lt;p&gt;Because the website is static, we can modify it by CSS/HTML and JavaScript. Let’s check the directory firstly:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;your_site_dir/
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;your_site_root_dir/
 |-- README.md
 |-- _config.yml
+|-- Gemfile
 |-- _include/
 |   |-- head.html
 |   |-- header.html
@@ -289,7 +301,7 @@ fi
 |-- index.html
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;We also use table to give detials about them:&lt;/p&gt;
+&lt;p&gt;Here I made a table to give detials about them:&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -302,6 +314,10 @@ fi
     &lt;tr&gt;
       &lt;td&gt;_config.yml&lt;/td&gt;
       &lt;td&gt;Stores configuration data. And it also can store global variables.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Gemfile&lt;/td&gt;
+      &lt;td&gt;I made it by myself (The lastest version Jekyll will make it for you)&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;_include&lt;/td&gt;
@@ -334,7 +350,7 @@ fi
 
 &lt;h2 id=&quot;configuration&quot;&gt;Configuration&lt;/h2&gt;
 
-&lt;p&gt;Almost all of configurations and global variables are stored in _config.yml, however I just need a little of them. The format of configuration should be like &lt;code class=&quot;highlighter-rouge&quot;&gt;option: value&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;variable: value&lt;/code&gt;. For example, normally , we need config the site info, just do like this:&lt;/p&gt;
+&lt;p&gt;Almost all of configurations and global variables are stored in _config.yml. The format of configuration should be like &lt;code class=&quot;highlighter-rouge&quot;&gt;option: value&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;variable: value&lt;/code&gt;. For example, normally , we need config the site info, just do like this:&lt;/p&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Site settings&lt;/span&gt;
 &lt;span class=&quot;ss&quot;&gt;title: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;
@@ -354,7 +370,19 @@ fi
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;The point is, whenever you modify the _config.yml, server needs to be restarted again or _site needs to be rebuild.&lt;/p&gt;
+&lt;p&gt;If you set variables in _config.yml, you can use them in HTML as Liquid Language. For instance:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;{{ github_username }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;It will turned into real HTML context:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;your_github_username&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;For more information about Liquid language, you can check &lt;a href=&quot;https://jekyllrb.com/docs/home/&quot;&gt;Jekyll offical docs site&lt;/a&gt;.
+The point is, whenever you modify the _config.yml, server needs to be restarted again or &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; needs to be rebuild.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -394,10 +422,10 @@ fi
 
 &lt;blockquote&gt;
   &lt;ul&gt;
-    &lt;li&gt;Jekyll offical docs site: https://jekyllrb.com/docs/home/&lt;/li&gt;
-    &lt;li&gt;Jekyll GitHub repository souce code: https://github.com/jekyll/jekyll&lt;/li&gt;
-    &lt;li&gt;Markdown processer redcarpet: https://github.com/vmg/redcarpet&lt;/li&gt;
-    &lt;li&gt;Jekyll theme offical site: http://jekyllthemes.org/&lt;/li&gt;
+    &lt;li&gt;Jekyll offical docs site: &lt;a href=&quot;https://jekyllrb.com/docs/home/&quot;&gt;https://jekyllrb.com/docs/home/&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Jekyll GitHub repository souce code: &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;https://github.com/jekyll/jekyll&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Markdown processer redcarpet: &lt;a href=&quot;https://github.com/vmg/redcarpet&quot;&gt;https://github.com/vmg/redcarpet&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Jekyll theme offical site: &lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;http://jekyllthemes.org/&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/blockquote&gt;
 </description>
