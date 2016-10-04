@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Post blogs with Jekyll</title>
-  <meta name="description" content="Jekyll is a tool can transform plain text into static websites and blog. It&#39;s a open source project on Github.">
+  <meta name="description" content="Jekyll is a tool can transform plain text into static websites and blog. It’s a open source project on Github.">
 
   <link rel="stylesheet" href="/public/css/main.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -109,24 +109,28 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>Jekyll is a tool can transform plain text into static websites and blog. It&#39;s a open source project on <a href="https://github.com/jekyll/jekyll">Github</a>.</p>
+    <p>Jekyll is a tool can transform plain text into static websites and blog. It’s a open source project on <a href="https://github.com/jekyll/jekyll">Github</a>.</p>
 
-<h2>Install jekyll</h2>
+<h2 id="install-jekyll">Install jekyll</h2>
 
 <p>Jekyll writed by Ruby, they pack up it as a gem, so we can use RubyGems to install it.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">~ $ gem install jekyll
+
+<div class="highlighter-rouge"><pre class="highlight"><code>~ $ gem install jekyll
 ~ $ jekyll new your_site_dir
 ~ $ cd your_site_dir
 ~/your_site_dir $ jekyll serve
-</code></pre></div>
-<p>And then check the localhost at port 4000 as inputing localhost:4000 at address column of browser. We will see the standard blog pages. Here we use <code>jekyll serve</code>, it will build the project and make a server at port 4000, we can also use <code>jekyll build --destrination &lt;destrination&gt;</code> directly just for build. It&#39;s enough for me.</p>
+</code></pre>
+</div>
 
-<hr>
+<p>And then check the localhost at port 4000 as inputing localhost:4000 at address column of browser. We will see the standard blog pages. Here we use <code class="highlighter-rouge">jekyll serve</code>, it will build the project and make a server at port 4000, we can also use <code class="highlighter-rouge">jekyll build --destrination &lt;destrination&gt;</code> directly just for build. It’s enough for me.</p>
 
-<h2>Directory</h2>
+<hr />
+
+<h2 id="directory">Directory</h2>
 
 <p>Because the website is static, we can modify it by CSS/HTML and JavaScript. But we need to check the directory firstly:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">your_site_dir/
+
+<div class="highlighter-rouge"><pre class="highlight"><code>your_site_dir/
 |-- README.md
 |-- _config.yml
 |-- _include/
@@ -148,51 +152,56 @@
 |   |-- main.scss
 |-- feed.xml
 |-- index.html
-</code></pre></div>
+</code></pre>
+</div>
 <p>We also use table to give detials about them:</p>
 
-<table><thead>
-<tr>
-<th>File/Directory</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>_config.yml</td>
-<td>Stores configuration data. And it also can store global variables.</td>
-</tr>
-<tr>
-<td>_include</td>
-<td>These are the partials that can be mixed and matched by layouts and posts to facilitate reuse.</td>
-</tr>
-<tr>
-<td>_layouts</td>
-<td>These are the templates that wrap posts.</td>
-</tr>
-<tr>
-<td>_post</td>
-<td>Our post with markdown format</td>
-</tr>
-<tr>
-<td>_site</td>
-<td>The normal bulid directory, but I change it other place.</td>
-</tr>
-<tr>
-<td>index.html and other HTML, Markdown files</td>
-<td>These will be build directly to the build root directory.</td>
-</tr>
-<tr>
-<td>other file or floder</td>
-<td>These will also be build and included to root directory, such as css or script.</td>
-</tr>
-</tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>File/Directory</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>_config.yml</td>
+      <td>Stores configuration data. And it also can store global variables.</td>
+    </tr>
+    <tr>
+      <td>_include</td>
+      <td>These are the partials that can be mixed and matched by layouts and posts to facilitate reuse.</td>
+    </tr>
+    <tr>
+      <td>_layouts</td>
+      <td>These are the templates that wrap posts.</td>
+    </tr>
+    <tr>
+      <td>_post</td>
+      <td>Our post with markdown format</td>
+    </tr>
+    <tr>
+      <td>_site</td>
+      <td>The normal bulid directory, but I change it other place.</td>
+    </tr>
+    <tr>
+      <td>index.html and other HTML, Markdown files</td>
+      <td>These will be build directly to the build root directory.</td>
+    </tr>
+    <tr>
+      <td>other file or floder</td>
+      <td>These will also be build and included to root directory, such as css or script.</td>
+    </tr>
+  </tbody>
+</table>
 
-<hr>
+<hr />
 
-<h2>Configuration</h2>
+<h2 id="configuration">Configuration</h2>
 
-<p>Almost all of configurations and global variables are stored in _config.yml, however I just need a little of them. The format of configuration should be like <code>option: value</code> or <code>variable: value</code>. For example, normally , we need config the site info, just do like this:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Site settings</span>
+<p>Almost all of configurations and global variables are stored in _config.yml, however I just need a little of them. The format of configuration should be like <code class="highlighter-rouge">option: value</code> or <code class="highlighter-rouge">variable: value</code>. For example, normally , we need config the site info, just do like this:</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Site settings</span>
 <span class="ss">title: </span><span class="n">your</span> <span class="n">blog</span> <span class="n">title</span>
 <span class="ss">email: </span><span class="n">your</span> <span class="n">email</span>
 <span class="ss">description: </span><span class="n">you</span> <span class="n">can</span> <span class="n">descripe</span> <span class="n">your</span> <span class="n">blog</span> <span class="n">here</span><span class="o">.</span>
@@ -207,15 +216,18 @@
 <span class="ss">redcarpet:
   extensions:
     </span><span class="o">-</span><span class="p">[</span> <span class="n">something</span> <span class="n">here</span> <span class="p">]</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 <p>The point is, whenever you modify the _config.yml, server needs to be restarted again or _site needs to be rebuild.</p>
 
-<hr>
+<hr />
 
-<h1>Use Markdown</h1>
+<h1 id="use-markdown">Use Markdown</h1>
 
-<p>Jekyll normally supports two markdown renderers: <code>Redcarpet</code> and <code>Kramdown</code>, we can also make our own markdown processors, but it&#39;s not easy for me. In my blog project, I used <code>Redcarpet</code>. So I make configuration like here:</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="ss">markdown: </span><span class="n">redcarpet</span>
+<p>Jekyll normally supports two markdown renderers: <code class="highlighter-rouge">Redcarpet</code> and <code class="highlighter-rouge">Kramdown</code>, we can also make our own markdown processors, but it’s not easy for me. In my blog project, I used <code class="highlighter-rouge">Redcarpet</code>. So I make configuration like here:</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="ss">markdown: </span><span class="n">redcarpet</span>
 <span class="ss">redcarpet:
   extensions:
       </span><span class="o">-</span> <span class="n">fenced_code_blocks</span>
@@ -223,34 +235,35 @@
       <span class="o">-</span> <span class="n">strikethrough</span>
       <span class="o">-</span> <span class="n">autolink</span>
       <span class="o">-</span> <span class="n">tables</span>
-</code></pre></div>
+</code></pre>
+</div>
 <p>The extensions are used normally:</p>
 
 <ul>
-<li><code>fenced_code_blocks</code>: This will make it easy to write code.</li>
-<li><code>no_intra_emphasis</code>: Do not parse emphasis inside of words. Strings such as <code>foo_bar_baz</code> will not generate <code>&lt;em&gt;</code> tags.</li>
-<li><code>strikethrough</code>: Parse strikethrough, PHP-Markdown style. Two <code>~</code> characters mark the start of a strikethrough. Such as <del>Text</del>.</li>
-<li><code>autolink</code>: Parse links even when they are not enclosed in &lt;&gt; characters. Autolinks for the http, https and ftp protocols will be automatically detected.</li>
-<li><code>tables</code>: Parse tables.</li>
+  <li><code class="highlighter-rouge">fenced_code_blocks</code>: This will make it easy to write code.</li>
+  <li><code class="highlighter-rouge">no_intra_emphasis</code>: Do not parse emphasis inside of words. Strings such as <code class="highlighter-rouge">foo_bar_baz</code> will not generate <code class="highlighter-rouge">&lt;em&gt;</code> tags.</li>
+  <li><code class="highlighter-rouge">strikethrough</code>: Parse strikethrough, PHP-Markdown style. Two <code class="highlighter-rouge">~</code> characters mark the start of a strikethrough. Such as <del>Text</del>.</li>
+  <li><code class="highlighter-rouge">autolink</code>: Parse links even when they are not enclosed in &lt;&gt; characters. Autolinks for the http, https and ftp protocols will be automatically detected.</li>
+  <li><code class="highlighter-rouge">tables</code>: Parse tables.</li>
 </ul>
 
-<hr>
+<hr />
 
-<h2>Summary</h2>
+<h2 id="summary">Summary</h2>
 
-<p>Use the jekyll to make own blog, and then we can focus on writting blogs. If we want to chage the theme of blog, we can also check <a href="http://jekyllthemes.org/">here</a>, fork their repository. Or we can make own themes, it&#39;s a big challenge for skills of Front-End. OK, let&#39;s enjoy blog now.</p>
+<p>Use the jekyll to make own blog, and then we can focus on writting blogs. If we want to chage the theme of blog, we can also check <a href="http://jekyllthemes.org/">here</a>, fork their repository. Or we can make own themes, it’s a big challenge for skills of Front-End. OK, let’s enjoy blog now.</p>
 
-<hr>
+<hr />
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 
 <blockquote>
-<ul>
-<li>Jekyll offical docs site: <a href="https://jekyllrb.com/docs/home/">https://jekyllrb.com/docs/home/</a></li>
-<li>Jekyll GitHub repository souce code: <a href="https://github.com/jekyll/jekyll">https://github.com/jekyll/jekyll</a></li>
-<li>Markdown processer redcarpet: <a href="https://github.com/vmg/redcarpet">https://github.com/vmg/redcarpet</a></li>
-<li>Jekyll theme offical site: <a href="http://jekyllthemes.org/">http://jekyllthemes.org/</a></li>
-</ul>
+  <ul>
+    <li>Jekyll offical docs site: https://jekyllrb.com/docs/home/</li>
+    <li>Jekyll GitHub repository souce code: https://github.com/jekyll/jekyll</li>
+    <li>Markdown processer redcarpet: https://github.com/vmg/redcarpet</li>
+    <li>Jekyll theme offical site: http://jekyllthemes.org/</li>
+  </ul>
 </blockquote>
 
   </div>
