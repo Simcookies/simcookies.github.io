@@ -5,8 +5,8 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 05 Oct 2016 22:28:53 +0900</pubDate>
-    <lastBuildDate>Wed, 05 Oct 2016 22:28:53 +0900</lastBuildDate>
+    <pubDate>Wed, 05 Oct 2016 22:43:31 +0900</pubDate>
+    <lastBuildDate>Wed, 05 Oct 2016 22:43:31 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -33,12 +33,12 @@ sudo apt-get purge nvidia-prime
         <link>http://simcookies.github.io/2016/09/27/fix-nviada-bug-ubuntu</link>
         <guid isPermaLink="true">http://simcookies.github.io/2016/09/27/fix-nviada-bug-ubuntu</guid>
         
-        <category>Linux</category>
+        <category>linux</category>
         
-        <category>Ubuntu</category>
+        <category>ubuntu</category>
         
         
-        <category>Solution</category>
+        <category>solution</category>
         
       </item>
     
@@ -235,10 +235,10 @@ fi
         <link>http://simcookies.github.io/2016/09/04/begin-wih-rails</link>
         <guid isPermaLink="true">http://simcookies.github.io/2016/09/04/begin-wih-rails</guid>
         
-        <category>Rails</category>
+        <category>rails</category>
         
         
-        <category>Basics</category>
+        <category>basics</category>
         
       </item>
     
@@ -467,7 +467,7 @@ The point is, whenever you modify the _config.yml, server needs to be restarted 
         <category>markdown</category>
         
         
-        <category>Blog</category>
+        <category>blog</category>
         
       </item>
     
@@ -497,7 +497,7 @@ The point is, whenever you modify the _config.yml, server needs to be restarted 
         <category>jekyll</category>
         
         
-        <category>Blog</category>
+        <category>blog</category>
         
       </item>
     
