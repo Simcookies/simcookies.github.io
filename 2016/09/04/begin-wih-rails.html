@@ -105,7 +105,7 @@
   <div class="post-content" itemprop="articleBody">
     <p>For a new developer of Rails, it may be a quite problem to distinguish the concepts of Ruby, Rails, rvm, gem, bundle and rake. So I want post this blog to summarize them, also summarize the steps to install Rails 4 on Linux Ubuntu 16.04.</p>
 
-<h2 id="basic-concepts">Basic Concepts</h2>
+<h1 id="basic-concepts">Basic Concepts</h1>
 
 <table>
   <thead>
@@ -156,15 +156,15 @@
 
 <hr />
 
-<h2 id="install-rails-4">Install Rails 4</h2>
+<h1 id="install-rails-4">Install Rails 4</h1>
 
-<h3 id="test-os">Test OS</h3>
+<h2 id="test-os">Test OS</h2>
 
 <blockquote>
   <p>Linux – Ubuntu 16.04</p>
 </blockquote>
 
-<h3 id="install-rvm">Install RVM</h3>
+<h2 id="install-rvm">Install RVM</h2>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>~ $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 ~ $ \curl -sSL https://get.rvm.io | bash -s stable
@@ -178,7 +178,7 @@ rvm 1.27.0 (latest) by Wayne E. Seguin &lt;wayneeseguin@gmail.com&gt;, Michal Pa
 </code></pre>
 </div>
 
-<h3 id="install-ruby-with-rvm">Install Ruby with RVM</h3>
+<h2 id="install-ruby-with-rvm">Install Ruby with RVM</h2>
 
 <p>If you installed RVM successfully, you can use it to install RVM now. Firstly, you can use <code class="highlighter-rouge">rvm list known</code> to list all versions you can install, and choose from them.</p>
 
@@ -242,13 +242,13 @@ fi
 
 <p>After this, I think it will be OK. Finally, use <code class="highlighter-rouge">gem -v</code> to check version of Gemfile.</p>
 
-<h3 id="install-bundler-and-rails-4">Install Bundler and Rails 4</h3>
+<h2 id="install-bundler-and-rails-4">Install Bundler and Rails 4</h2>
 
 <p><code class="highlighter-rouge">gem install bundle</code> to install bundler.</p>
 
 <p><code class="highlighter-rouge">gem install rails --version=4.2.7.1</code> Use <code class="highlighter-rouge">--version</code> option to install specific rails.</p>
 
-<h3 id="test-installing">Test Installing</h3>
+<h2 id="test-installing">Test Installing</h2>
 
 <p>According the offical documentation <code class="highlighter-rouge">rails new blog</code> to make new rails project. But it will bundle install the lastest Rails and related gems automaticly, so we have to specify the version of rails which we want, like this:</p>
 
@@ -269,7 +269,7 @@ fi
 
 <hr />
 
-<h2 id="surmmary">Surmmary</h2>
+<h1 id="surmmary">Surmmary</h1>
 
 <p>The versions of deferent parts and install order are very important, here I made a flow figure:</p>
 
@@ -279,7 +279,7 @@ fi
 
 <hr />
 
-<h2 id="references">References</h2>
+<h1 id="references">References</h1>
 
 <blockquote>
   <ul>

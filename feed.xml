@@ -5,8 +5,8 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 05 Oct 2016 22:50:02 +0900</pubDate>
-    <lastBuildDate>Wed, 05 Oct 2016 22:50:02 +0900</lastBuildDate>
+    <pubDate>Fri, 07 Oct 2016 22:40:25 +0900</pubDate>
+    <lastBuildDate>Fri, 07 Oct 2016 22:40:25 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -46,7 +46,7 @@ sudo apt-get purge nvidia-prime
         <title>Begin with Rails</title>
         <description>&lt;p&gt;For a new developer of Rails, it may be a quite problem to distinguish the concepts of Ruby, Rails, rvm, gem, bundle and rake. So I want post this blog to summarize them, also summarize the steps to install Rails 4 on Linux Ubuntu 16.04.&lt;/p&gt;
 
-&lt;h2 id=&quot;basic-concepts&quot;&gt;Basic Concepts&lt;/h2&gt;
+&lt;h1 id=&quot;basic-concepts&quot;&gt;Basic Concepts&lt;/h1&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -97,15 +97,15 @@ sudo apt-get purge nvidia-prime
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;install-rails-4&quot;&gt;Install Rails 4&lt;/h2&gt;
+&lt;h1 id=&quot;install-rails-4&quot;&gt;Install Rails 4&lt;/h1&gt;
 
-&lt;h3 id=&quot;test-os&quot;&gt;Test OS&lt;/h3&gt;
+&lt;h2 id=&quot;test-os&quot;&gt;Test OS&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Linux – Ubuntu 16.04&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;install-rvm&quot;&gt;Install RVM&lt;/h3&gt;
+&lt;h2 id=&quot;install-rvm&quot;&gt;Install RVM&lt;/h2&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 ~ $ \curl -sSL https://get.rvm.io | bash -s stable
@@ -119,7 +119,7 @@ rvm 1.27.0 (latest) by Wayne E. Seguin &amp;lt;wayneeseguin@gmail.com&amp;gt;, M
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h3 id=&quot;install-ruby-with-rvm&quot;&gt;Install Ruby with RVM&lt;/h3&gt;
+&lt;h2 id=&quot;install-ruby-with-rvm&quot;&gt;Install Ruby with RVM&lt;/h2&gt;
 
 &lt;p&gt;If you installed RVM successfully, you can use it to install RVM now. Firstly, you can use &lt;code class=&quot;highlighter-rouge&quot;&gt;rvm list known&lt;/code&gt; to list all versions you can install, and choose from them.&lt;/p&gt;
 
@@ -183,13 +183,13 @@ fi
 
 &lt;p&gt;After this, I think it will be OK. Finally, use &lt;code class=&quot;highlighter-rouge&quot;&gt;gem -v&lt;/code&gt; to check version of Gemfile.&lt;/p&gt;
 
-&lt;h3 id=&quot;install-bundler-and-rails-4&quot;&gt;Install Bundler and Rails 4&lt;/h3&gt;
+&lt;h2 id=&quot;install-bundler-and-rails-4&quot;&gt;Install Bundler and Rails 4&lt;/h2&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gem install bundle&lt;/code&gt; to install bundler.&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gem install rails --version=4.2.7.1&lt;/code&gt; Use &lt;code class=&quot;highlighter-rouge&quot;&gt;--version&lt;/code&gt; option to install specific rails.&lt;/p&gt;
 
-&lt;h3 id=&quot;test-installing&quot;&gt;Test Installing&lt;/h3&gt;
+&lt;h2 id=&quot;test-installing&quot;&gt;Test Installing&lt;/h2&gt;
 
 &lt;p&gt;According the offical documentation &lt;code class=&quot;highlighter-rouge&quot;&gt;rails new blog&lt;/code&gt; to make new rails project. But it will bundle install the lastest Rails and related gems automaticly, so we have to specify the version of rails which we want, like this:&lt;/p&gt;
 
@@ -210,7 +210,7 @@ fi
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;surmmary&quot;&gt;Surmmary&lt;/h2&gt;
+&lt;h1 id=&quot;surmmary&quot;&gt;Surmmary&lt;/h1&gt;
 
 &lt;p&gt;The versions of deferent parts and install order are very important, here I made a flow figure:&lt;/p&gt;
 
@@ -220,7 +220,7 @@ fi
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
 
 &lt;blockquote&gt;
   &lt;ul&gt;
