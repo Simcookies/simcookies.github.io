@@ -103,7 +103,7 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p><a href="https://en.wikipedia.org/wiki/Google_Analytics">Google Analytics</a> is a freemium web analytics service offered by Google that tracks and reports website traffic. It is now the most widely used web analytics service on the Internet. You can get many different information with Google analytic. For example, where is the user who visited you blog from, how long he stay at your pages and so on.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Google_Analytics">Google Analytics</a> is a freemium web analytics service offered by Google that tracks and reports website traffic. It is now the most widely used web analytics service on the Internet. You can get many information with Google analytic. For example, where is the user who visited you blog from, how long he stay at your pages and so on.</p>
 
 <hr />
 
@@ -138,9 +138,9 @@
 
 <h1 id="exclude-developmet-environment">Exclude developmet environment</h1>
 
-<p>Here is a problem: Google analytics code was applied into every page, when someone visit your site, it will send necessary information to Google automaticly. But if we run jekyll server locally, every pages will also send information. That is not we hope, because we want to get info of visitors not self.</p>
+<p>Here is a problem: Google analytics code was included into every page, when someone visit your site, it will send necessary information to Google automaticlly. But if we run jekyll server locally, every pages will also send information. That is not we hope, because we want to get info of visitors not-self.</p>
 
-<p>In other word, we shoud just use google analytic code in production environment not development environment. By the way, the default environment of <code class="highlighter-rouge">jekyll s</code> is development. So we need a judgement before include JS code. <code class="highlighter-rouge">jekyll.environment</code> will give the answer.</p>
+<p>In other word, we should just use google analytic code in production environment not development environment. By the way, the default environment of <code class="highlighter-rouge">jekyll s</code> is development. So we need a judgement before include JS code. <code class="highlighter-rouge">jekyll.environment</code> will give the answer.</p>
 
 <div class="language-html highlighter-rouge"><pre class="highlight"><code>  ...
   {% if jekyll.enviroment == 'production' %}
@@ -152,13 +152,13 @@
 </code></pre>
 </div>
 
-<p>Well, now, you can inspect your site, it does not show JS code indeed. Before you public your blog, you need use <code class="highlighter-rouge">JEKYLL_ENV</code> to spectify enviroment of jekyll: <code class="highlighter-rouge">JEKYLL_ENV=production jekyll build</code> and the JS code will be included in your blog site. You can make a sure after deploying or just use <code class="highlighter-rouge">JEKYLL_ENV=production jekyll server</code> to make sure locally.</p>
+<p>Well, now, you can inspect your site, it does not show JS code indeed. Before you public your blog, you need use <code class="highlighter-rouge">JEKYLL_ENV</code> to specify enviroment of jekyll: <code class="highlighter-rouge">JEKYLL_ENV=production jekyll build</code> and the JS code will be included in your blog site. You can make a sure after deploying or just use <code class="highlighter-rouge">JEKYLL_ENV=production jekyll server</code> to make sure locally.</p>
 
 <hr />
 
 <h1 id="summay">Summay</h1>
 
-<p>Use Jekyll include Google Analytics Code into our blog site. This can help us to get information about our visitors. By doing this, we may see some information about both Pros and Cons, this remind us we need take some actions to improve our artile writing skills, make site more valuable and readable.</p>
+<p>Use Jekyll include Google Analytics Code into our blog site. This can help us to get information about our visitors. By doing this, we may see some information about both Pros and Cons, this remind us we need take some actions to improve our article writing skills, make site more valuable and readable.</p>
 
 <blockquote>
   <p>Only good articles can attract more visitors.</p>

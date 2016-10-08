@@ -5,13 +5,13 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 08 Oct 2016 12:19:14 +0900</pubDate>
-    <lastBuildDate>Sat, 08 Oct 2016 12:19:14 +0900</lastBuildDate>
+    <pubDate>Sun, 09 Oct 2016 08:32:43 +0900</pubDate>
+    <lastBuildDate>Sun, 09 Oct 2016 08:32:43 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
         <title>Import Google Analytics into Blog</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Google_Analytics&quot;&gt;Google Analytics&lt;/a&gt; is a freemium web analytics service offered by Google that tracks and reports website traffic. It is now the most widely used web analytics service on the Internet. You can get many different information with Google analytic. For example, where is the user who visited you blog from, how long he stay at your pages and so on.&lt;/p&gt;
+        <description>&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Google_Analytics&quot;&gt;Google Analytics&lt;/a&gt; is a freemium web analytics service offered by Google that tracks and reports website traffic. It is now the most widely used web analytics service on the Internet. You can get many information with Google analytic. For example, where is the user who visited you blog from, how long he stay at your pages and so on.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -46,9 +46,9 @@
 
 &lt;h1 id=&quot;exclude-developmet-environment&quot;&gt;Exclude developmet environment&lt;/h1&gt;
 
-&lt;p&gt;Here is a problem: Google analytics code was applied into every page, when someone visit your site, it will send necessary information to Google automaticly. But if we run jekyll server locally, every pages will also send information. That is not we hope, because we want to get info of visitors not self.&lt;/p&gt;
+&lt;p&gt;Here is a problem: Google analytics code was included into every page, when someone visit your site, it will send necessary information to Google automaticlly. But if we run jekyll server locally, every pages will also send information. That is not we hope, because we want to get info of visitors not-self.&lt;/p&gt;
 
-&lt;p&gt;In other word, we shoud just use google analytic code in production environment not development environment. By the way, the default environment of &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll s&lt;/code&gt; is development. So we need a judgement before include JS code. &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll.environment&lt;/code&gt; will give the answer.&lt;/p&gt;
+&lt;p&gt;In other word, we should just use google analytic code in production environment not development environment. By the way, the default environment of &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll s&lt;/code&gt; is development. So we need a judgement before include JS code. &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll.environment&lt;/code&gt; will give the answer.&lt;/p&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  ...
   {% if jekyll.enviroment == 'production' %}
@@ -60,13 +60,13 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Well, now, you can inspect your site, it does not show JS code indeed. Before you public your blog, you need use &lt;code class=&quot;highlighter-rouge&quot;&gt;JEKYLL_ENV&lt;/code&gt; to spectify enviroment of jekyll: &lt;code class=&quot;highlighter-rouge&quot;&gt;JEKYLL_ENV=production jekyll build&lt;/code&gt; and the JS code will be included in your blog site. You can make a sure after deploying or just use &lt;code class=&quot;highlighter-rouge&quot;&gt;JEKYLL_ENV=production jekyll server&lt;/code&gt; to make sure locally.&lt;/p&gt;
+&lt;p&gt;Well, now, you can inspect your site, it does not show JS code indeed. Before you public your blog, you need use &lt;code class=&quot;highlighter-rouge&quot;&gt;JEKYLL_ENV&lt;/code&gt; to specify enviroment of jekyll: &lt;code class=&quot;highlighter-rouge&quot;&gt;JEKYLL_ENV=production jekyll build&lt;/code&gt; and the JS code will be included in your blog site. You can make a sure after deploying or just use &lt;code class=&quot;highlighter-rouge&quot;&gt;JEKYLL_ENV=production jekyll server&lt;/code&gt; to make sure locally.&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;h1 id=&quot;summay&quot;&gt;Summay&lt;/h1&gt;
 
-&lt;p&gt;Use Jekyll include Google Analytics Code into our blog site. This can help us to get information about our visitors. By doing this, we may see some information about both Pros and Cons, this remind us we need take some actions to improve our artile writing skills, make site more valuable and readable.&lt;/p&gt;
+&lt;p&gt;Use Jekyll include Google Analytics Code into our blog site. This can help us to get information about our visitors. By doing this, we may see some information about both Pros and Cons, this remind us we need take some actions to improve our article writing skills, make site more valuable and readable.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Only good articles can attract more visitors.&lt;/p&gt;
