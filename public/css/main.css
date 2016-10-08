@@ -390,6 +390,10 @@ table {
       margin: 10px 20px; }
       .sidebar .col .context li {
         list-style: none; }
+        .sidebar .col .context li div {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis; }
 
 .post-list {
   margin-left: 0;
