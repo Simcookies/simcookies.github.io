@@ -5,9 +5,96 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 07 Oct 2016 22:44:12 +0900</pubDate>
-    <lastBuildDate>Fri, 07 Oct 2016 22:44:12 +0900</lastBuildDate>
+    <pubDate>Sat, 08 Oct 2016 09:24:37 +0900</pubDate>
+    <lastBuildDate>Sat, 08 Oct 2016 09:24:37 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Import Google Analytics into Blog</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Google_Analytics&quot;&gt;Google Analytics&lt;/a&gt; is a freemium web analytics service offered by Google that tracks and reports website traffic. It is now the most widely used web analytics service on the Internet. You can get many different information with Google analytic. For example, where is the user who visited you blog from, how long he stay at your pages and so on.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;make-a-new-google-analytic-account&quot;&gt;Make a new Google Analytic account&lt;/h1&gt;
+
+&lt;p&gt;Firstly, we need to sign up a new Google Analytic account, or just use google account. &lt;a href=&quot;https://analytics.google.com/analytics/web/?authuser=0#provision/SignUp/&quot;&gt;Here&lt;/a&gt; you can sign up a account.&lt;/p&gt;
+
+&lt;p&gt;And then input your ID and website, after it you can get &lt;code class=&quot;highlighter-rouge&quot;&gt;Tracking ID&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Tracking Code&lt;/code&gt;. You just need to copy and paste this JavaScript code into every webpage you want to track. Or if you miss that guide page, you also can find this code at google analytics pages here:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/image/tracking_code.jpg&quot; alt=&quot;tracking_code&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;improt-tracking-code-to-your-blog&quot;&gt;Improt Tracking Code to your blog&lt;/h1&gt;
+
+&lt;p&gt;Now we get the tracking code, as google said, we need to copy and paste it into every page. Of course with Jekyll Liquid Language, we do not do this. Instead of it, we should make a new file &lt;code class=&quot;highlighter-rouge&quot;&gt;analytics.html&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;_include/&lt;/code&gt; and paste JS code into analytics.html.&lt;/p&gt;
+
+&lt;p&gt;Because every pages will apply &lt;code class=&quot;highlighter-rouge&quot;&gt;default&lt;/code&gt; layout, so we just need to include analytics code in &lt;code class=&quot;highlighter-rouge&quot;&gt;_layout/default.html&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  ...
+  
+  {% include analytics.html %}
+  
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;OK! After build and run you site (&lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll s&lt;/code&gt;), you can use inspect to find analytics code in every pages of your blog!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;exclude-developmet-environment&quot;&gt;Exclude developmet environment&lt;/h1&gt;
+
+&lt;p&gt;Here is a problem: Google analytics code was applied into every page, when someone visit your site, it will send necessary information to Google automaticly. But if we run jekyll server locally, every pages will also send information. That is not we hope, because we want to get info of visitors not self.&lt;/p&gt;
+
+&lt;p&gt;In other word, we shoud just use google analytic code in production environment not development environment. By the way, the default environment of &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll s&lt;/code&gt; is development. So we need a judgement before include JS code. &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll.environment&lt;/code&gt; will give the answer.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  ...
+  {% if jekyll.enviroment == 'production' %}
+    {% include analytics.html %}
+  {% endif %}
+  
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Well, now, you can inspect your site, it does not show JS code indeed. Before you public your blog, you need use &lt;code class=&quot;highlighter-rouge&quot;&gt;JEKYLL_ENV&lt;/code&gt; to spectify enviroment of jekyll: &lt;code class=&quot;highlighter-rouge&quot;&gt;JEKYLL_ENV=production jekyll build&lt;/code&gt; and the JS code will be included in your blog site. You can make a sure after deploying or just use &lt;code class=&quot;highlighter-rouge&quot;&gt;JEKYLL_ENV=production jekyll server&lt;/code&gt; to make sure locally.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;summay&quot;&gt;Summay&lt;/h1&gt;
+
+&lt;p&gt;Use Jekyll include Google Analytics Code into our blog site. This can help us to get information about our visitors. By doing this, we may see some information about both Pros and Cons, this remind us we need take some actions to improve our artile writing skills, make site more valuable and readable.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Only good articles can attract more visitors.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So let’s try our best to be a good writer!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Blog by Michael Lee: &lt;a href=&quot;https://michaelsoolee.com/google-analytics-jekyll/&quot;&gt;Google Analytics setup for Jekyll&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Google Analytics Site: &lt;a href=&quot;https://www.google.com/analytics/&quot;&gt;https://www.google.com/analytics/&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Sat, 08 Oct 2016 09:20:00 +0900</pubDate>
+        <link>http://simcookies.github.io/2016/10/08/import-google-analytics-into-blog</link>
+        <guid isPermaLink="true">http://simcookies.github.io/2016/10/08/import-google-analytics-into-blog</guid>
+        
+        <category>jekyll</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
     
       <item>
         <title>Fix Nvidia bug in Ubuntu 16.04</title>
@@ -45,6 +132,8 @@ sudo apt-get purge nvidia-prime
       <item>
         <title>Begin with Rails</title>
         <description>&lt;p&gt;For a new developer of Rails, it may be a quite problem to distinguish the concepts of Ruby, Rails, rvm, gem, bundle and rake. So I want post this blog to summarize them, also summarize the steps to install Rails 4 on Linux Ubuntu 16.04.&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;h1 id=&quot;basic-concepts&quot;&gt;Basic Concepts&lt;/h1&gt;
 
@@ -246,7 +335,9 @@ fi
         <title>Post blogs with Jekyll</title>
         <description>&lt;p&gt;Jekyll is a tool can transform plain text into static websites and blog. It’s a open source project on &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Github&lt;/a&gt;. In this blog, I will talk about how to install Jekyll and use it to generate our static blogs.&lt;/p&gt;
 
-&lt;h2 id=&quot;install-jekyll&quot;&gt;Install jekyll&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;install-jekyll&quot;&gt;Install jekyll&lt;/h1&gt;
 
 &lt;p&gt;Jekyll writed by Ruby, they pack up it as a gem, so we can use RubyGems to install it. Use command like these:&lt;/p&gt;
 
@@ -272,7 +363,7 @@ fi
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;directory&quot;&gt;Directory&lt;/h2&gt;
+&lt;h1 id=&quot;directory&quot;&gt;Directory&lt;/h1&gt;
 
 &lt;p&gt;Because the website is static, we can modify it by CSS/HTML and JavaScript. Let’s check the directory firstly:&lt;/p&gt;
 
@@ -348,7 +439,7 @@ fi
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;configuration&quot;&gt;Configuration&lt;/h2&gt;
+&lt;h1 id=&quot;configuration&quot;&gt;Configuration&lt;/h1&gt;
 
 &lt;p&gt;Almost all of configurations and global variables are stored in _config.yml. The format of configuration should be like &lt;code class=&quot;highlighter-rouge&quot;&gt;option: value&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;variable: value&lt;/code&gt;. For example, normally , we need config the site info, just do like this:&lt;/p&gt;
 
@@ -386,7 +477,7 @@ The point is, whenever you modify the _config.yml, server needs to be restarted 
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;write-post&quot;&gt;Write Post&lt;/h2&gt;
+&lt;h1 id=&quot;write-post&quot;&gt;Write Post&lt;/h1&gt;
 
 &lt;p&gt;After some basic setting, you can write your own blog now. You can use any editor to write blog at the path of &lt;code class=&quot;highlighter-rouge&quot;&gt;_post&lt;/code&gt;, at the same time, Jekyll server can keep watch over your post and refresh the web page. Here is the point you should be care about:&lt;/p&gt;
 
@@ -410,7 +501,7 @@ The point is, whenever you modify the _config.yml, server needs to be restarted 
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;use-markdown&quot;&gt;Use Markdown&lt;/h2&gt;
+&lt;h1 id=&quot;use-markdown&quot;&gt;Use Markdown&lt;/h1&gt;
 
 &lt;p&gt;Why we use Jekyll to write blog is beacuse we do not need to focus on HTML pages every time, just concentrate on writting. And with Markdwon, this process will be more easy and happy.&lt;/p&gt;
 
@@ -441,13 +532,13 @@ The point is, whenever you modify the _config.yml, server needs to be restarted 
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
 
 &lt;p&gt;Use the jekyll to make own blog, and then we can focus on writting blogs. If we want to chage the theme of blog, we can also check &lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;here&lt;/a&gt;, fork their repository. Or we can make own themes, it’s a big challenge for skills of Front-End. OK, let’s enjoy blog now.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
 
 &lt;blockquote&gt;
   &lt;ul&gt;

@@ -76,8 +76,6 @@ h1, h2, h3, h4, h5, h6 {
 a {
   color: #2a7ae2;
   text-decoration: none; }
-  a:visited {
-    color: #1756a9; }
   a:hover {
     color: #111; }
 
@@ -467,6 +465,8 @@ table {
         font-size: 18px; } }
   .post-content p {
     line-height: 27px; }
+  .post-content a:hover {
+    text-decoration: underline !important; }
 
 .post-nav {
   margin-bottom: 100px; }
