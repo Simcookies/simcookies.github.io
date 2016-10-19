@@ -558,6 +558,42 @@ table {
   display: inline-block; }
 
 /**
+ * TOC-area
+**/
+.mark-link {
+  width: 48px;
+  position: fixed;
+  top: 90px;
+  right: 1%;
+  font-size: 18px;
+  z-index: 5000; }
+  @media screen and (max-width: 1200px) {
+    .mark-link {
+      display: none; } }
+  .mark-link a {
+    color: #375a7f; }
+    .mark-link a:hover {
+      color: #4673a3; }
+
+.toc-area {
+  position: fixed;
+  width: inherit; }
+  .toc-area .section-nav {
+    padding: 1em 0 1.5em 0;
+    list-style: none;
+    margin-bottom: 0; }
+    .toc-area .section-nav a {
+      color: gray; }
+      .toc-area .section-nav a:hover {
+        color: #2a7ae2; }
+    .toc-area .section-nav .toc-h2 {
+      padding-left: 1em; }
+    .toc-area .section-nav .toc-h3 {
+      padding-left: 2em; }
+    .toc-area .section-nav .toc-h4 {
+      padding-left: 3em; }
+
+/**
  * Syntax highlighting styles
  */
 .highlight {
