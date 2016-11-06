@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Welcome to Jekyll!</title>
-  <meta name="description" content="You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different wa...">
+  <title>Using Guard Clauses</title>
+  <meta name="description" content="During my Rails develop process, somtimes I need to use many conditions in code and code will be a little chubbby like this:">
 
   <link rel="stylesheet" href="/public/css/main.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link rel="canonical" href="http://simcookies.github.io/2016/03/21/welcome-to-jekyll">
+  <link rel="canonical" href="http://simcookies.github.io/2016/11/06/using-guard-clauses">
   <link rel="alternate" type="application/rss+xml" title="Simcookies" href="http://simcookies.github.io/feed.xml">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -99,39 +99,55 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Welcome to Jekyll!</h1>
+    <h1 class="post-title" itemprop="name headline">Using Guard Clauses</h1>
     <p class="post-meta">
-      <time datetime="2016-03-21T15:35:16+09:00" itemprop="datePublished">Mar 21, 2016</time>
+      <time datetime="2016-11-06T20:46:41+09:00" itemprop="datePublished">Nov 6, 2016</time>
       
       &nbsp;<i class="fa fa-archive" aria-hidden="true"></i>&nbsp;
-      <span><a class="category-div" href="/category/blog">blog</a></span>
+      <span><a class="category-div" href="/category/programming">programming</a></span>
       
       
       &nbsp;<i class="fa fa-tag"></i>&nbsp;
       
-      <a class="tag-div" href="/tag/jekyll">jekyll</a>&nbsp;
+      <a class="tag-div" href="/tag/refactoring">refactoring</a>&nbsp;
       
       
     </p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+    <p>During my Rails develop process, somtimes I need to use many conditions in code and code will be a little chubbby like this:</p>
 
-<p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
-
-<p>Jekyll also offers powerful support for code snippets:</p>
-
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Ruby code</span>
+<span class="k">def</span> <span class="nf">publish_book</span>
+  <span class="k">if</span> <span class="vi">@book</span><span class="p">.</span><span class="nf">is_approved?</span>
+    <span class="k">if</span> <span class="vi">@book</span><span class="p">.</span><span class="nf">author</span> <span class="o">!=</span> <span class="s2">"Bad"</span>
+      <span class="vi">@book</span><span class="p">.</span><span class="nf">publish_on</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span>
+      <span class="vi">@book</span><span class="p">.</span><span class="nf">save</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="kp">false</span>
+    <span class="k">end</span>
+  <span class="k">else</span>
+    <span class="k">return</span> <span class="kp">false</span>
+  <span class="k">end</span>
 <span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span>
 </code></pre>
 </div>
 
-<p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+<p>It is a bit unclear and unreadable. When I study in <a href="https://www.codeschool.com/">Code School</a>, I learned about a new concept called <code class="highlighter-rouge">Guard Clauses</code>. We can use it to replace nested conditional with Guard Clauses.</p>
 
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Ruby code</span>
+<span class="k">def</span> <span class="nf">publish_book</span>
+  <span class="k">return</span> <span class="kp">false</span> <span class="k">unless</span> <span class="vi">@book</span><span class="p">.</span><span class="nf">is_approved?</span>
+  <span class="k">return</span> <span class="kp">false</span> <span class="k">if</span> <span class="vi">@book</span><span class="p">.</span><span class="nf">author</span> <span class="o">==</span> <span class="s2">"Bad"</span>
+
+  <span class="vi">@book</span><span class="p">.</span><span class="nf">publish_on</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span>
+  <span class="vi">@book</span><span class="p">.</span><span class="nf">save</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>It becomes clear and readable indeed. So I recommend this way to replace nested conditional during refactoring.</p>
 
   </div>
 
@@ -139,13 +155,13 @@
 
   <div class="post-nav">
     
-    <a class="left unlink">
+    <a href="/2016/10/11/experices-and-feelings-of-rubykaigi" class="left link">
     
       << Previous
     </a>
 
     
-    <a href="/2016/05/01/post-blogs-with-jekyll" class="right link">
+    <a class="right unlink">
     
       Next >>
     </a>
@@ -179,24 +195,6 @@
   
 
 </article>
-
-  <div class="mark-link">
-  <a id="bookmark">
-    <span class="fa-stack fa-lg">
-      <i class="fa fa-square fa-stack-2x"></i>
-      <i class="fa fa-book fa-stack-1x fa-inverse"></i>
-    </span>
-  </a>
-</div>
-<div id="toc-area" class="sidebar" style="display:none">
-  <div class="col toc-area">
-    &nbsp;&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;
-    Table of Contents
-    <ul class="section-nav">
-</ul>
-  </div>
-</div>
-
 
 
       </div>
