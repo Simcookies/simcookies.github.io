@@ -5,9 +5,105 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 04 Dec 2016 19:58:44 +0900</pubDate>
-    <lastBuildDate>Sun, 04 Dec 2016 19:58:44 +0900</lastBuildDate>
+    <pubDate>Mon, 02 Jan 2017 17:38:46 +0900</pubDate>
+    <lastBuildDate>Mon, 02 Jan 2017 17:38:46 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Virtual Environment for Python</title>
+        <description>&lt;p&gt;As a student, I need to deal with a lot of experiment data and have to make mess data to porcelain figures. &lt;a href=&quot;https://www.mathworks.com/products/matlab.html&quot;&gt;Matlab&lt;/a&gt; seems a good idea, but you know, we can not pay for it. Naturally, I chose &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt;. Python has two famous stable version–2.7 and 3.5. But unfortunately, they can not compatible with each other. For scientific computing, it’s better to use 2.7 because lots of modules only support 2.7. But there is a trend to use high version finally.&lt;/p&gt;
+
+&lt;p&gt;For example, I am using 2.7 to learn &lt;a href=&quot;http://matplotlib.org/&quot;&gt;matplotlib&lt;/a&gt;, using 3.5 to learn &lt;a href=&quot;https://www.djangoproject.com/&quot;&gt;Django&lt;/a&gt;. The Mac or GNU/Linux also has the default version of Python. Finally, there will be three different versions of Python and at least two versions for &lt;a href=&quot;https://en.wikipedia.org/wiki/Pip_(package_manager)&quot;&gt;pip&lt;/a&gt;. It will be very troublesome to deal with such a mess. Sometimes, I forget which version I am using. And the other reason I feel uncomfortable is I have to install module twice on my Mac which just used for one time.&lt;/p&gt;
+
+&lt;p&gt;For this state, virtualenv is a good choice for us:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A Virtual Environment is a tool to keep the dependencies required by different projects in separate places, by creating virtual Python environments for them. It solves the “Project X depends on version 1.x but, Project Y needs 4.x” dilemma, and keeps your global site-packages directory clean and manageable.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;installing--basic&quot;&gt;Installing &amp;amp; Basic&lt;/h1&gt;
+
+&lt;p&gt;Installing is very easy, we can install virtualenv via pip:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip install virtualenv
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;After installing, we can check installed modules list via &lt;code class=&quot;highlighter-rouge&quot;&gt;pip freeze&lt;/code&gt;. We can install all the modules in virtualenv, so the modules except virtualenv can be uninstalled via &lt;code class=&quot;highlighter-rouge&quot;&gt;pip uninstall one_package&lt;/code&gt;. OK, it’s time to use virtualenv now!&lt;/p&gt;
+
+&lt;p&gt;Enter your project folder, make a new virtual environment:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;virtualenv venv
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This command will make a new folder named venv in the current directory. (As a convention, we use venv.) This venv folder contains Python executable files and pip library where you can install modules(Of cause, except virtualenv). The Python executable files will use the version which you use to install virtualenv defaultly. For example, you install virtualenv via pip3 which represent of python3, so the Python excutable files of venv will be python3 too. However, you can change this:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;virtualenv -p /usr/bin/python2.7 venv
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now, it’s time to activate the virtual environment via &lt;code class=&quot;highlighter-rouge&quot;&gt;source&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;venv/bin/active
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And then the name of virtual environment will appear on the left of prompt, like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;venv&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; username@computer: ~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;From now, we can use the environment isolated from the global environment because the modules which we install will be installed into the &lt;code class=&quot;highlighter-rouge&quot;&gt;venv&lt;/code&gt;. You can leave this virtual environment:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;deactivate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;management-of-packages&quot;&gt;Management of packages&lt;/h1&gt;
+
+&lt;p&gt;In order to keep your environment consistent, it’s a good idea to “freeze” the current state of the environment packages:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ pip freeze &amp;gt; requirements.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This command can create a list file of packages which you installed via pip. This can file can be reused for other environment or by your collaborators. This can help ensure consistency across installations, across deployments, and across developers. They can install necessary packages with the file:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ pip install -r requirements.txt 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In fact, this is a little similar to &lt;a href=&quot;http://bundler.io/gemfile.html&quot;&gt;Gemfile&lt;/a&gt; which used in Ruby bundle.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Offical Python page: &lt;a href=&quot;https://www.python.org/&quot;&gt;https://www.python.org/&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Guide to Python: &lt;a href=&quot;http://docs.python-guide.org/en/latest/dev/virtualenvs/&quot;&gt;http://docs.python-guide.org/en/latest/dev/virtualenvs/&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Python Package Index: &lt;a href=&quot;https://pypi.python.org/pypi/pip&quot;&gt;https://pypi.python.org/pypi/pip&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Mon, 02 Jan 2017 13:07:57 +0900</pubDate>
+        <link>http://simcookies.github.io/2017/01/02/virtual-environment-for-python</link>
+        <guid isPermaLink="true">http://simcookies.github.io/2017/01/02/virtual-environment-for-python</guid>
+        
+        <category>python</category>
+        
+        <category>environment</category>
+        
+        
+        <category>tool</category>
+        
+      </item>
     
       <item>
         <title>Class Method V.S Scope</title>
