@@ -5,9 +5,139 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 02 Jan 2017 17:38:46 +0900</pubDate>
-    <lastBuildDate>Mon, 02 Jan 2017 17:38:46 +0900</lastBuildDate>
+    <pubDate>Sun, 19 Mar 2017 00:47:07 +0900</pubDate>
+    <lastBuildDate>Sun, 19 Mar 2017 00:47:07 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Network Studying Note 1</title>
+        <description>&lt;p&gt;There are some basic pieces of knowledge for programmers, C, Data Structure and Algorithm, Network, Operation System. So it’s time to learning about them deeply. This blog is about my learning note of Network. It includes the history of Internet, theory, and application in Linux. If I want to know a new technology, I will first be interested in its history. Knowing the history of some tech will help me to understand why this tech is necessary and why it’s fixtures work like this. So let me begin with history.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;history-of-internet&quot;&gt;History of Internet&lt;/h1&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Development Stage&lt;/th&gt;
+      &lt;th&gt;History&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;Concept was born&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;In order to make computer cooperate with other devices(etc. Printer, Fax), we need to connect them physically with communication devices and lines. Here comes the concept of Network.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;Independent Technology&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Since we have the concept of Network, during 70th and 80th at 20 century, many companies began to develop their own communication technology which just can be used for their own devices, include the software and hardware. And the most famous are Xerox and IBM. (Well, maybe you know the Xerox is the company which developed windows-based GUI and Mouse but did not commercialize them. Finally, Apple and Microsoft found business opportunities.) &lt;br /&gt;&lt;br /&gt;Xerox developed &lt;a href=&quot;https://en.wikipedia.org/wiki/Ethernet&quot;&gt;Ethernet&lt;/a&gt;, and IBM developed &lt;a href=&quot;https://en.wikipedia.org/wiki/Token_ring&quot;&gt;Token-Ring&lt;/a&gt;. They were quite fine at that moment, but the question is, the different company has different devices, and they can not talk with each other. For the formal users, it seems they still can not use Network if they use devices from the different company.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;Integration with Protocol&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Advanced Research Project Agency, which knew as ARPA of U.S.A, was also focusing on the development project of net communication. At 1967, they put forward the idea of &lt;a href=&quot;https://en.wikipedia.org/wiki/ARPANET&quot;&gt;ARPANET&lt;/a&gt; and put in into operation at the end of 1969. Different from other net technology, ARPANET introduced Network Control Protocol (NCP) as the communications protocol and provided a standard method to establish reliable communications among different computers and other devices. &lt;br /&gt;&lt;br /&gt;However, even it tried to make everything connected together, ARPANET still can not communicate with few important devices, especially, SAT-NET and ALOHA NET. So developer made a new protocol which named Transmission Control Protocol and Internet Protocol (TCP/IP) and knew by everyone. The new protocol made ARPANET connected with other devices. &lt;br /&gt;&lt;br /&gt;ARPANET was transferred to Defense Department Communicationg Agence of U.S.A at 1975. After that, many new networks were created at the base of ARPANET, like Computer Science Research Network (CSRNET), Canadian Network (CDNET), Because It’s Time Network (BITNET), National Science Foundation Network (NSFNET) and so on. TCP/IP protocols replaced NCP as the ARPANET’s principal protocol, even it was written as a part of BSD Unix. During the development of the different network, NSFNET became core between universities and ARPANET was closed at 1989 finally.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;Open to Public&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;The creation of &lt;a href=&quot;https://en.wikipedia.org/wiki/National_Science_Foundation_Network&quot;&gt;NSFET&lt;/a&gt; is a very important flag of the Internet development. It turned into commercial operation at 1994, and after that, Internet was open to the public.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The history of Internet shows the importance of the &lt;strong&gt;standard&lt;/strong&gt;. Only with the protocol, the different devices can connect with each other. The Application can focus on data processing instead of data transmission. So I will go on the blog with some protocols.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;internet-protocol-suite-ips&quot;&gt;Internet Protocol Suite (IPS)&lt;/h1&gt;
+
+&lt;h2 id=&quot;osi-model&quot;&gt;OSI Model&lt;/h2&gt;
+
+&lt;p&gt;Open Systems Interconnection model (&lt;a href=&quot;https://en.wikipedia.org/wiki/OSI_model&quot;&gt;OSI model&lt;/a&gt;) partitions a communication system into 7 abstraction layers. And here is the structure and composition of 7 layers:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Layers&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Protocol data unit&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Function&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;7.Application&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Data&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;High-level APIs, including resource sharing, remote file access&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6.Presentation&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Data&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Translation of data between a networking service and an application; including character encoding, data compression and encryption/decryption&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5.Session&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Data&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Managing communication sessions, i.e. continuous exchange of information in the form of multiple back-and-forth transmissions between two nodes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4.Transport&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Segment(TCP)/Datagram(IP)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Reliable transmission of data segments between points on a network, including segmentation, acknowledgement and multiplexing&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3.Network&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Packet&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Structuring and managing a multi-node network, including addressing, routing and traffic control&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2.Data link&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Frame&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Reliable transmission of data frames between two nodes connected by a physical layer&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1.Physical&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Bit&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Transmission and reception of raw bit streams over a physical medium&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The higher layer will package its data with a header at beginning of itself, and then send the package to next layer. This operation will be repeated and host device sends packaged data by physical line finally:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/image/osi_layers.gif&quot; alt=&quot;OSI model&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;OSI model does not provide some methods which can be realized, just gives some concepts. So it is not a standard but a concept framework which can be referred when createing a new standard. TCP/IP is such an instance.&lt;/p&gt;
+
+&lt;h2 id=&quot;tcpip-model&quot;&gt;TCP/IP model&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_protocol_suite&quot;&gt;TCP/IP&lt;/a&gt; is a quite successful protocol, so it was used to replace NCP in ARPANET. There are two reasons. First, it is easier than OSI model because it just has four layers. Second, it can support so many protocols at low layers (Physical layer and Data link layer in OSI model), include Ethernet, Token-Ring, FDDI, PPP, ATM and so on. We can think TCP/IP model is an easier version of OSI model. Here is their relationship and the most used protocols and servers:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/image/tcp_ip_structure.png&quot; alt=&quot;TCP/IP protocol suite&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As we know, TCP/IP is most used in fact. Just like OSI model, communication just exists between the same layer, higher will make header or footer to the data package and send it to the lower layer. The receiver host will make inverse operations to get final data. Understanding about these processes is important, and then it’s time to understand every layer, but this post is just until here. I will go on with a new one. &amp;gt;= =&amp;lt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Wiki&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;http://www.linux-tutorial.info/modules.php?name=MContent&amp;amp;obj=page&amp;amp;pageid=142&quot;&gt;Linux tutorial about TCP/IP&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;http://cn.linux.vbird.org/linux_server/&quot;&gt;Linux鸟哥的私房菜（服务器篇）&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Sun, 19 Mar 2017 00:00:00 +0900</pubDate>
+        <link>http://simcookies.github.io/2017/03/19/network_studying_note_1</link>
+        <guid isPermaLink="true">http://simcookies.github.io/2017/03/19/network_studying_note_1</guid>
+        
+        <category>internet</category>
+        
+        
+        <category>basics</category>
+        
+      </item>
     
       <item>
         <title>Virtual Environment for Python</title>
