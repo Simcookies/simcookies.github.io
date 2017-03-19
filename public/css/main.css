@@ -189,12 +189,13 @@ table {
  * Site header
  */
 .site-header {
-  top: 0;
   width: 100%;
-  min-height: 56px;
-  background: #375a7f;
-  position: fixed;
-  z-index: 2000; }
+  height: 56px;
+  background: #375a7f; }
+  .site-header .wrapper {
+    width: 100%;
+    position: fixed;
+    z-index: 100; }
 
 .site-title {
   font-size: 26px;
@@ -282,16 +283,20 @@ table {
     font-size: 20px;
     color: #375a7f; }
 
+.scroll-content {
+  height: calc(100vh - 56px);
+  overflow-y: scroll; }
+
 /**
  * Page content
  */
 .page-content {
   background: #e0e0e3;
-  padding: 90px 0 30px 0; }
+  padding: 30px 0; }
   @media screen and (max-width: 700px) {
     .page-content {
       background: #fff;
-      padding: 55px 0 0 0; } }
+      padding: 0; } }
 
 .home {
   position: relative;
