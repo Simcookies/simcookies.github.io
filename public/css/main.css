@@ -193,7 +193,8 @@ table {
   height: 56px;
   background: #375a7f; }
   @media screen and (max-width: 700px) {
-    .site-header .wrapper {
+    .site-header {
+      top: 0;
       width: 100%;
       position: fixed;
       z-index: 100; } }
@@ -287,6 +288,9 @@ table {
 .scroll-content {
   height: calc(100vh - 56px);
   overflow-y: scroll; }
+  @media screen and (max-width: 700px) {
+    .scroll-content {
+      height: 100%; } }
 
 /**
  * Page content
@@ -297,7 +301,7 @@ table {
   @media screen and (max-width: 700px) {
     .page-content {
       background: #fff;
-      padding: 0; } }
+      padding: 56px 0 0 0; } }
 
 .home {
   position: relative;
