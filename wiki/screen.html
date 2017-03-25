@@ -224,6 +224,61 @@ There is a screen on:
 </code></pre>
 </div>
 
+<p>And option <code class="highlighter-rouge">-r</code> can resume session.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="nb">test</span>@linux: ~ <span class="nv">$ </span>screen -r
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="configuration">Configuration</h2>
+
+<p>The file <code class="highlighter-rouge">$HOME/.screenrc</code> can customize Screen. Here are configurations.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># Turn welcome message off</span>
+startup_message off
+
+<span class="c"># Turn off visual bell</span>
+<span class="c"># screen will not make screen flash instead of a bell sound.</span>
+vbell off
+
+<span class="c"># Fix for residual editor text</span>
+<span class="c"># If not, editor will be stay visible even when close it.</span>
+altscreen on
+
+<span class="c"># Use 256 colors, or can use xterm-256color or rxvt-unicode-256color</span>
+term screen-256color
+
+<span class="c"># Show customizing status (line include color)</span>
+hardstatus off
+hardstatus alwayslastline
+hardstatus string <span class="s1">'%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W} %c %{g}]'</span>
+
+<span class="c"># Start from window 1</span>
+<span class="nb">bind </span>c screen 1
+<span class="nb">bind</span> ^c screen 1
+<span class="nb">bind </span>0 <span class="k">select </span>10
+screen 1
+</code></pre>
+</div>
+
+<p>It can be a good idea to change the default escape key, not only because “a” is usually typed with the left pinky, but also because <code class="highlighter-rouge">Ctrl + a</code> is mapped to the common command beginning-of-line in GNU Readline and Bash. (I always use Emacs in Screen.) In my configuration, I set it to <code class="highlighter-rouge">Ctrl + ^</code>.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># Change the escape key to Ctrl + ^</span>
+escape ^^^
+</code></pre>
+</div>
+
+<h2 id="references">References</h2>
+
+<blockquote>
+  <ul>
+    <li><a href="https://wiki.archlinux.org/index.php/GNU_Screen">Archlinux GNU/Screen</a></li>
+    <li><a href="https://wiki.gentoo.org/wiki/Screen">gentoo linux Screen</a></li>
+  </ul>
+</blockquote>
+
   </div>
 
 </article>
