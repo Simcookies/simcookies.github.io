@@ -5,9 +5,68 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 16 Oct 2017 21:20:21 +0900</pubDate>
-    <lastBuildDate>Mon, 16 Oct 2017 21:20:21 +0900</lastBuildDate>
+    <pubDate>Wed, 18 Oct 2017 14:50:40 +0900</pubDate>
+    <lastBuildDate>Wed, 18 Oct 2017 14:50:40 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Using BasicTex on OSX Terminal</title>
+        <description>&lt;p&gt;MacTeX is a great GUI Application for Latex Distribution. But it is too big with 2.8GB which make me can not accept it. Luckly MacText also provides a smaller distribution named BaiscTeX. I wrote this blog to take notes of installing BasicTeX and subsequent steps. The goal is to write and compile tex file in Emacs.&lt;/p&gt;
+
+&lt;h1 id=&quot;installing-basictex&quot;&gt;Installing BasicTeX&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Download &amp;amp; install &lt;a href=&quot;http://www.tug.org/mactex/morepackages.html&quot;&gt;BasicTeX&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Download &amp;amp; install &lt;a href=&quot;http://amaxwell.github.io/tlutility/&quot;&gt;TeX Live Utility&lt;/a&gt;: TeX Live Utility is a GUI App for management of updating, install and otherwis managing TeX Live.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After these two steps, latex can be used correctly. &lt;code class=&quot;highlighter-rouge&quot;&gt;latex xxx.tex&lt;/code&gt; to compile tex file to dvi file. &lt;code class=&quot;highlighter-rouge&quot;&gt;dvipdfmx&lt;/code&gt; to make dvi file to pdf file. However, it just can be useful for english writting, if you want to write for Chinese or Japanese, it needs other configurations.&lt;/p&gt;
+
+&lt;h2 id=&quot;install-platex&quot;&gt;Install platex&lt;/h2&gt;
+
+&lt;p&gt;Use Tex Live Utility can install different compilers include &lt;code class=&quot;highlighter-rouge&quot;&gt;platex&lt;/code&gt; or some font packages.&lt;/p&gt;
+
+&lt;h2 id=&quot;errors&quot;&gt;Errors&lt;/h2&gt;
+
+&lt;p&gt;Solutions of some errors.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;“jsartile” can not be found: Tex Live Utility(TLU) install “jsclasses”;&lt;/li&gt;
+  &lt;li&gt;! LaTeX Error: File ‘newpxtext.sty’ not found.: TLU install “newpx”;&lt;/li&gt;
+  &lt;li&gt;! LaTeX Error: File ‘fontaxes.sty’ not found.: TLU install “fontaxes”;&lt;/li&gt;
+  &lt;li&gt;! LaTeX Error: File ‘newtxmath.sty’ not found.: TLU install “newtx”;&lt;/li&gt;
+  &lt;li&gt;Here is a big error when output dvi to pdf:
+    &lt;blockquote&gt;
+      &lt;p&gt;kpathsea: Running mktexpk –mfmode / –bdpi 600 –mag 1+0/600 –dpi 600 qtmr.pfb
+mktexpk: don’t know how to create bitmap font for qtmr.pfb.
+mktexpk: perhaps qtmr.pfb is missing from the map file.
+kpathsea: Appending font creation commands to missfont.log.&lt;/p&gt;
+
+      &lt;p&gt;dvipdfmx:warning : Could not locate a virtual/physical font for TFM “ntx-Regular-tlf-t1”.
+dvipdfmx:warning : » This font is mapped to a physical font “qtmr.pfb”.
+dvipdfmx:warning : » Please check if kpathsea library can find this font: qtmr.pfb
+dvipdfmx:fatal: Cannot proceed without .vf or “physical” font for PDF output…&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;TLU to install &lt;code class=&quot;highlighter-rouge&quot;&gt;kastrup&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;tex-gyre&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;When transfer dvi to pdf with dvipdfmx, it said: Could not locate a virtual/physical font for TFM “rml”.: Find file of /usr/local/texlive/2017basic/texmf-config/dvipdfmx/dvipdfmx.cfg, and uncomment “cid-x.map”. After that, make &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo mktexlsr&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;dvipdfmx can load cid-x.map, but it said: dvipdfmx:fatal: Could not find encoding file “H”. : Tex Live Utility installed “adobemapping”.&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Wed, 18 Oct 2017 00:00:00 +0900</pubDate>
+        <link>http://simcookies.github.io/2017/10/18/using-basictex-on-osx-terminal</link>
+        <guid isPermaLink="true">http://simcookies.github.io/2017/10/18/using-basictex-on-osx-terminal</guid>
+        
+        <category>latex</category>
+        
+        <category>OXS</category>
+        
+        
+        <category>tool</category>
+        
+      </item>
     
       <item>
         <title>Network Studying Note 2</title>
@@ -962,237 +1021,6 @@ fi
         
         
         <category>basics</category>
-        
-      </item>
-    
-      <item>
-        <title>Post blogs with Jekyll</title>
-        <description>&lt;p&gt;Jekyll is a tool can transform plain text into static websites and blog. It’s a open source project on &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Github&lt;/a&gt;. In this blog, I will talk about how to install Jekyll and use it to generate our static blogs.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;install-jekyll&quot;&gt;Install jekyll&lt;/h1&gt;
-
-&lt;p&gt;Jekyll writed by Ruby, they pack up it as a gem, so we can use RubyGems to install it. Use command like these:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ $ gem install jekyll
-~ $ jekyll new your_site_dir
-~ $ cd your_site_dir
-~/your_site_dir $ jekyll serve
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;And then check the localhost at port 4000 as inputing localhost:4000 at address column of browser. We will see the standard blog pages. Here we use &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, it will build the project and make a server at port 4000, we can also use &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll build --destrination &amp;lt;destrination&amp;gt;&lt;/code&gt; to specify build path directly. Here you can repalce &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;destrination&amp;gt;&lt;/code&gt; to directory which you want to build. The default path is &lt;code class=&quot;highlighter-rouge&quot;&gt;./_site&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;As time goes, the project will need another gems, so we can make a Gemfile to collect the gems together at root path. Here is context of Gemfile:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Gemfile&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://rubygems.org&quot;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jekyll&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;3.2.1&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;After making Gemfile, we can use &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle install&lt;/code&gt; to install all gems we need, if we want to add some other gems, we can add into Gemfile, and run &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle install&lt;/code&gt; again.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;directory&quot;&gt;Directory&lt;/h1&gt;
-
-&lt;p&gt;Because the website is static, we can modify it by CSS/HTML and JavaScript. Let’s check the directory firstly:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;your_site_root_dir/
-|-- README.md
-|-- _config.yml
-|-- Gemfile
-|-- _include/
-|   |-- head.html
-|   |-- header.html
-|   |-- footer.html
-|-- _layouts/
-|   |-- default.html
-|   |-- page.html
-|   |-- post.html
-|-- _plugins/
-|-- _posts/
-|-- _sass/
-|   |-- _base.scss
-|   |-- _layout.scss
-|   |-- _syntax-highlighting.scss
-|-- about.md
-|-- css/
-|   |-- main.scss
-|-- feed.xml
-|-- index.html
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;Here I made a table to give detials about them:&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;File/Directory&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;_config.yml&lt;/td&gt;
-      &lt;td&gt;Stores configuration data. And it also can store global variables.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Gemfile&lt;/td&gt;
-      &lt;td&gt;I made it by myself (The lastest version Jekyll will make it for you)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;_include&lt;/td&gt;
-      &lt;td&gt;These are the partials that can be mixed and matched by layouts and posts to facilitate reuse.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;_layouts&lt;/td&gt;
-      &lt;td&gt;These are the templates that wrap posts.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;_post&lt;/td&gt;
-      &lt;td&gt;Our post with markdown format&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;_site&lt;/td&gt;
-      &lt;td&gt;The normal bulid directory, but I change it other place.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;index.html and other HTML, Markdown files&lt;/td&gt;
-      &lt;td&gt;These will be build directly to the build root directory.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;other file or floder&lt;/td&gt;
-      &lt;td&gt;These will also be build and included to root directory, such as css or script.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;configuration&quot;&gt;Configuration&lt;/h1&gt;
-
-&lt;p&gt;Almost all of configurations and global variables are stored in _config.yml. The format of configuration should be like &lt;code class=&quot;highlighter-rouge&quot;&gt;option: value&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;variable: value&lt;/code&gt;. For example, normally , we need config the site info, just do like this:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Site settings&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;title: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;email: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;description: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;you&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;can&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;descripe&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;here&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# Social info if you want&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;twitter_username: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;twitter&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;github_username: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;github&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;facebook_username: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facebook&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# Markdown seetings&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;makrdown: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;redcarpet&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;redcarpet:
-  extensions:
-    &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;something&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;here&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;If you set variables in _config.yml, you can use them in HTML as Liquid Language. For instance:&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;{{ github_username }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;It will turned into real HTML context:&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;your_github_username&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;For more information about Liquid language, you can check &lt;a href=&quot;https://jekyllrb.com/docs/home/&quot;&gt;Jekyll offical docs site&lt;/a&gt;.
-The point is, whenever you modify the _config.yml, server needs to be restarted again or &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; needs to be rebuild.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;write-post&quot;&gt;Write Post&lt;/h1&gt;
-
-&lt;p&gt;After some basic setting, you can write your own blog now. You can use any editor to write blog at the path of &lt;code class=&quot;highlighter-rouge&quot;&gt;_post&lt;/code&gt;, at the same time, Jekyll server can keep watch over your post and refresh the web page. Here is the point you should be care about:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The extension of post file should be &lt;code class=&quot;highlighter-rouge&quot;&gt;.markdown&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;.md&lt;/code&gt;(and so on, I use &lt;code class=&quot;highlighter-rouge&quot;&gt;.md&lt;/code&gt;).&lt;/li&gt;
-  &lt;li&gt;Post filename should be write like: &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-your-blog-name.md&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Open one post, write below code at first of file:&lt;/p&gt;
-
-&lt;div class=&quot;language-markdown highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Your&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;blog&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;title&quot;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;   &lt;span class=&quot;s&quot;&gt;2016-03-21 15:35:16 +0900&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;category&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Blog&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Test&lt;/span&gt;
-&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Go on write something you want after these code. These code are provided to Jekyll for explaining some info of post. Index page can use ttile variable to show posts order by date variable, and also we can sort out posts with category and tag variables. Well, you can find more information about how to use these varibale at &lt;a href=&quot;https://jekyllrb.com/docs/home/&quot;&gt;offical page&lt;/a&gt; or I will post new blog about it, you can subscribe it.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;use-markdown&quot;&gt;Use Markdown&lt;/h1&gt;
-
-&lt;p&gt;Why we use Jekyll to write blog is beacuse we do not need to focus on HTML pages every time, just concentrate on writting. And with Markdwon, this process will be more easy and happy.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Markdown&quot;&gt;Markdown&lt;/a&gt; is a lightweight markup language with plain text. We just write some text, and Markdown processers help us to translate it into beautiful HTML pages. Jekyll normally supports two markdown renderers: &lt;code class=&quot;highlighter-rouge&quot;&gt;Redcarpet&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Kramdown&lt;/code&gt;, even we can also make our own markdown processors. In my blog project, I used &lt;code class=&quot;highlighter-rouge&quot;&gt;Redcarpet&lt;/code&gt;. So I make configuration like here:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Here are write at _config.yml&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;markdown: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;redcarpet&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;redcarpet:
-  extensions:
-      &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fenced_code_blocks&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;no_intra_emphasis&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strikethrough&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;autolink&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tables&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;The extensions are used normally:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fenced_code_blocks&lt;/code&gt;: This will make it easy to write code.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;no_intra_emphasis&lt;/code&gt;: Do not parse emphasis inside of words. Strings such as &lt;code class=&quot;highlighter-rouge&quot;&gt;foo_bar_baz&lt;/code&gt; will not generate &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;em&amp;gt;&lt;/code&gt; tags.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;strikethrough&lt;/code&gt;: Parse strikethrough, PHP-Markdown style. Two &lt;code class=&quot;highlighter-rouge&quot;&gt;~&lt;/code&gt; characters mark the start of a strikethrough. Such as &lt;del&gt;Text&lt;/del&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;autolink&lt;/code&gt;: Parse links even when they are not enclosed in &amp;lt;&amp;gt; characters. Autolinks for the http, https and ftp protocols will be automatically detected.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tables&lt;/code&gt;: Parse tables.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;There are some basic syntax rules, please have a look at &lt;a href=&quot;https://guides.github.com/features/mastering-markdown/&quot;&gt;Github Guide&lt;/a&gt;.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;summary&quot;&gt;Summary&lt;/h1&gt;
-
-&lt;p&gt;Use the jekyll to make own blog, and then we can focus on writting blogs. If we want to chage the theme of blog, we can also check &lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;here&lt;/a&gt;, fork their repository. Or we can make own themes, it’s a big challenge for skills of Front-End. OK, let’s enjoy blog now.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Jekyll offical docs site: &lt;a href=&quot;https://jekyllrb.com/docs/home/&quot;&gt;https://jekyllrb.com/docs/home/&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;Jekyll GitHub repository souce code: &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;https://github.com/jekyll/jekyll&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;Markdown processer redcarpet: &lt;a href=&quot;https://github.com/vmg/redcarpet&quot;&gt;https://github.com/vmg/redcarpet&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;Jekyll theme offical site: &lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;http://jekyllthemes.org/&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Sun, 01 May 2016 00:00:00 +0900</pubDate>
-        <link>http://simcookies.github.io/2016/05/01/post-blogs-with-jekyll</link>
-        <guid isPermaLink="true">http://simcookies.github.io/2016/05/01/post-blogs-with-jekyll</guid>
-        
-        <category>jekyll</category>
-        
-        <category>markdown</category>
-        
-        
-        <category>blog</category>
         
       </item>
     
