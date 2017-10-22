@@ -1,206 +1,22 @@
-<!DOCTYPE html>
-<html>
-
-  <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Class Method V.S Scope</title>
-  <meta name="description" content="In this post, I want to write something about Class Mehotd and Scope. Firstly, let’s look some Rails code in Controller:">
-
-  <link rel="stylesheet" href="/public/css/main.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link rel="canonical" href="http://simcookies.github.io/2016/12/04/class-method-vs-scope">
-  <link rel="alternate" type="application/rss+xml" title="Simcookies" href="http://simcookies.github.io/feed.xml">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-  <script src="/public/script/main.js"></script>
-  <link rel="shortcut icon" type="image/x-icon" href="/public/favicon.ico">  
-</head>
-
-  
-  <body>
-
-    <header class="site-header">
-
-  <div class="wrapper">
-
-    <a class="site-title" href="/">Simcookies</a>
-
-    <span class="menu-icon" id="menu-icon">
-      <span class="fa-stack fa-lg">
-	<i class="fa fa-square-o fa-stack-2x"></i>
-	<i class="fa fa-bars fa-stack-1x"></i>
-      </span>
-    </span>
-    
-    <nav class="site-nav">
-      <div class="trigger">
-        
-          
-        
-          
-          <a class="page-link" href="/about/">About</a>
-          
-        
-          
-          <a class="page-link" href="/archive/">Archive</a>
-          
-        
-          
-        
-          
-        
-          
-        
-          
-          <a class="page-link" href="/wiki/">Wiki</a>
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-	  
-	  <a class="page-link" href="/feed.xml">Feeds</a>
-	  <a class="page-link" href="https://github.com/Simcookies/gitio" target="_blank">
-	    <i class="fa fa-github-alt fa-lg"></i>
-	    Repositories
-	  </a>
-      </div>
-    </nav>
-
-  </div>
-
-</header>
-
-    <div class="scroll-content">
-      <div class="page-content">
-        <div class="wrapper">
-          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Class Method V.S Scope</h1>
-    <p class="post-meta">
-      <time datetime="2016-12-04T16:12:10+09:00" itemprop="datePublished">Dec 4, 2016</time>
-      
-      &nbsp;<i class="fa fa-archive" aria-hidden="true"></i>&nbsp;
-      <span><a class="category-div" href="/category/programming">programming</a></span>
-      
-      
-      &nbsp;<i class="fa fa-tag"></i>&nbsp;
-      
-      <a class="tag-div" href="/tag/refactoring">refactoring</a>&nbsp;
-      
-      
-    </p>
-  </header>
-
-  <div class="post-content" itemprop="articleBody">
-    <p>In this post, I want to write something about Class Mehotd and Scope. Firstly, let’s look some Rails code in Controller:</p>
-
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PostController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Class Method V.S Scope</title><meta name="description" content="In this post, I want to write something about Class Mehotd and Scope. Firstly, let’s look some Rails code in Controller:"><link rel="stylesheet" href="/public/css/main.css"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="canonical" href="http://simcookies.github.io/2016/12/04/class-method-vs-scope"><link rel="alternate" type="application/rss+xml" title="Simcookies" href="http://simcookies.github.io/feed.xml"><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script><script src="/public/script/main.js"></script><link rel="shortcut icon" type="image/x-icon" href="/public/favicon.ico"></head><body><header class="site-header"><div class="wrapper"><a class="site-title" href="/">Simcookies</a> <span class="menu-icon" id="menu-icon"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i> <i class="fa fa-bars fa-stack-1x"></i></span></span><nav class="site-nav"><div class="trigger"><a class="page-link" href="/about/">About</a> <a class="page-link" href="/archive/">Archive</a> <a class="page-link" href="/wiki/">Wiki</a> <a class="page-link" href="/feed.xml">Feeds</a> <a class="page-link" href="https://github.com/Simcookies/gitio" target="_blank"><i class="fa fa-github-alt fa-lg"></i> Repositories</a></div></nav></div></header><div class="scroll-content"><div class="page-content"><div class="wrapper"><article class="post" itemscope itemtype="http://schema.org/BlogPosting"><header class="post-header"><h1 class="post-title" itemprop="name headline">Class Method V.S Scope</h1><p class="post-meta"><time datetime="2016-12-04T16:12:10+09:00" itemprop="datePublished">Dec 4, 2016</time> &nbsp;<i class="fa fa-archive" aria-hidden="true"></i>&nbsp; <span><a class="category-div" href="/category/programming">programming</a></span> &nbsp;<i class="fa fa-tag"></i>&nbsp; <a class="tag-div" href="/tag/refactoring">refactoring</a>&nbsp;</p></header><div class="post-content" itemprop="articleBody"><p>In this post, I want to write something about Class Mehotd and Scope. Firstly, let’s look some Rails code in Controller:</p><div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PostController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="k">def</span> <span class="nf">index</span>
     <span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="s1">'created_at &gt; ?'</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="nf">days</span><span class="p">.</span><span class="nf">ago</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
-</code></pre>
-</div>
-
-<hr />
-
-<h1 id="give-problems">Give Problems</h1>
-
-<p>For MVC framework, of course, there are some problems with this code.</p>
-
-<ol>
-  <li>It <strong>exposes implementation details</strong>. In fact, we should not see the details about data in Controller, logic should be put into Model.</li>
-  <li>It <strong>produces unnecessary duplication</strong>. This code may be used in other places, so we should be DRY(Don’t Repeat Yourself).</li>
-  <li>It <strong>complicates writing tests</strong>. If you write this code in Controller, it will be necessary to write test for Controller, but this is not what we want. We want to just write unit test.</li>
-</ol>
-
-<hr />
-
-<h1 id="solutions">Solutions</h1>
-
-<p>Here are two solutions to fix these problems:</p>
-
-<p>Put query into Model as a <strong>Class Method</strong>:</p>
-
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
+</code></pre></div><hr><h1 id="give-problems">Give Problems</h1><p>For MVC framework, of course, there are some problems with this code.</p><ol><li>It <strong>exposes implementation details</strong>. In fact, we should not see the details about data in Controller, logic should be put into Model.</li><li>It <strong>produces unnecessary duplication</strong>. This code may be used in other places, so we should be DRY(Don’t Repeat Yourself).</li><li>It <strong>complicates writing tests</strong>. If you write this code in Controller, it will be necessary to write test for Controller, but this is not what we want. We want to just write unit test.</li></ol><hr><h1 id="solutions">Solutions</h1><p>Here are two solutions to fix these problems:</p><p>Put query into Model as a <strong>Class Method</strong>:</p><div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">recent</span>
     <span class="n">where</span><span class="p">(</span><span class="s1">'created_at &gt; ?'</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="nf">days</span><span class="p">.</span><span class="nf">ago</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
-</code></pre>
-</div>
-
-<p>Or put query into Model as a <strong>Scope</strong>:</p>
-
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
+</code></pre></div><p>Or put query into Model as a <strong>Scope</strong>:</p><div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
   <span class="n">scope</span> <span class="ss">:recent</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="s1">'created_at &gt; ?'</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="nf">days</span><span class="p">.</span><span class="nf">ago</span><span class="p">)</span> <span class="p">}</span>
 <span class="k">end</span>
-</code></pre>
-</div>
-<p>Both of these methods can be used directly at Controller:</p>
-
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PostsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</code></pre></div><p>Both of these methods can be used directly at Controller:</p><div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PostsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="k">def</span> <span class="nf">index</span>
     <span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="p">.</span><span class="nf">recent</span>
   <span class="k">end</span>
 <span class="k">end</span>
-</code></pre>
-</div>
-
-<hr />
-
-<h1 id="comparison">Comparison</h1>
-
-<p>Class Method looks similar to scope, but what difference do they have? Or, which is better? In my opinions, it’s better to use scopes.
-For instance, if you make two class methods in Model.</p>
-
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
+</code></pre></div><hr><h1 id="comparison">Comparison</h1><p>Class Method looks similar to scope, but what difference do they have? Or, which is better? In my opinions, it’s better to use scopes. For instance, if you make two class methods in Model.</p><div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find_by_author</span><span class="p">(</span><span class="n">author</span><span class="p">)</span>
     <span class="n">where</span><span class="p">(</span><span class="ss">author: </span><span class="n">author</span><span class="p">)</span>
   <span class="k">end</span>
@@ -209,25 +25,11 @@ For instance, if you make two class methods in Model.</p>
     <span class="n">where</span><span class="p">(</span><span class="s1">'created_at &gt; ?'</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="nf">days</span><span class="p">.</span><span class="nf">ago</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
-</code></pre>
-</div>
-
-<p>Becasue both of <code class="highlighter-rouge">find_by_author</code> and <code class="highlighter-rouge">recent</code> return ActiveRecord of Post, so we can use chain query. Let’s try it in Rails console.</p>
-
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">Post</span><span class="p">.</span><span class="n">find_by_author</span><span class="p">(</span><span class="nv">"Potter"</span><span class="p">).</span><span class="n">recent</span>
+</code></pre></div><p>Becasue both of <code class="highlighter-rouge">find_by_author</code> and <code class="highlighter-rouge">recent</code> return ActiveRecord of Post, so we can use chain query. Let’s try it in Rails console.</p><div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">Post</span><span class="p">.</span><span class="n">find_by_author</span><span class="p">(</span><span class="nv">"Potter"</span><span class="p">).</span><span class="n">recent</span>
 <span class="k">SELECT</span> <span class="nv">"posts"</span><span class="p">.</span><span class="o">*</span> <span class="n">FORM</span> <span class="nv">"posts"</span> <span class="k">WHERE</span> <span class="nv">"posts"</span><span class="p">.</span><span class="nv">"author"</span> <span class="o">=</span> <span class="nv">"Potter"</span> <span class="k">AND</span> <span class="p">(</span><span class="n">CREATED_AT</span> <span class="o">&gt;</span> <span class="s1">'...'</span><span class="p">)</span>
-</code></pre>
-</div>
-<p>Fine, it found posts which be posted by Potter and be posted in recent 5 days correctly. But if the author is a nil, what it will happen?</p>
-
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">Post</span><span class="p">.</span><span class="n">find_by_author</span><span class="p">(</span><span class="n">nil</span><span class="p">).</span><span class="n">recent</span>
+</code></pre></div><p>Fine, it found posts which be posted by Potter and be posted in recent 5 days correctly. But if the author is a nil, what it will happen?</p><div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">Post</span><span class="p">.</span><span class="n">find_by_author</span><span class="p">(</span><span class="n">nil</span><span class="p">).</span><span class="n">recent</span>
 <span class="k">SELECT</span> <span class="nv">"posts"</span><span class="p">.</span><span class="o">*</span> <span class="n">FORM</span> <span class="nv">"posts"</span> <span class="k">WHERE</span> <span class="nv">"posts"</span><span class="p">.</span><span class="nv">"author"</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">AND</span> <span class="p">(</span><span class="n">CREATED_AT</span> <span class="o">&gt;</span> <span class="s1">'...'</span><span class="p">)</span>
-</code></pre>
-</div>
-
-<p>Ops, it found posts which author is nil, but we want to find all post if we do not specify the author. Let’s come back to class methods in Model and refactor <code class="highlighter-rouge">find_by_author</code> method. Now we need a judgment here:</p>
-
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
+</code></pre></div><p>Ops, it found posts which author is nil, but we want to find all post if we do not specify the author. Let’s come back to class methods in Model and refactor <code class="highlighter-rouge">find_by_author</code> method. Now we need a judgment here:</p><div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find_by_author</span><span class="p">(</span><span class="n">author</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">author</span>
       <span class="n">where</span><span class="p">(</span><span class="ss">author: </span><span class="n">author</span><span class="p">)</span>
@@ -237,32 +39,13 @@ For instance, if you make two class methods in Model.</p>
   <span class="k">end</span>
   <span class="p">.</span><span class="nf">.</span><span class="p">.</span>
 <span class="nf">end</span>
-</code></pre>
-</div>
-
-<p>We fixed problem indeed. But if we use scopes, it can be solved better. (We don’t want to use if judgment here…)</p>
-
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
+</code></pre></div><p>We fixed problem indeed. But if we use scopes, it can be solved better. (We don’t want to use if judgment here…)</p><div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
   <span class="n">scope</span> <span class="ss">:find_by_author</span><span class="p">,</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">author</span><span class="p">)</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="ss">author: </span><span class="n">author</span><span class="p">)</span> <span class="k">if</span> <span class="n">author</span><span class="p">.</span><span class="nf">present?</span> <span class="p">}</span>
   <span class="n">scope</span> <span class="ss">:recent</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="s1">'created_at &gt; ?'</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="nf">days</span><span class="p">.</span><span class="nf">ago</span><span class="p">)</span> <span class="p">}</span>
 <span class="k">end</span>
-</code></pre>
-</div>
-
-<p>Because scope always returns a chainable object, so we do not need to worry about it anymore.</p>
-
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">Post</span><span class="p">.</span><span class="n">find_by_author</span><span class="p">(</span><span class="n">nil</span><span class="p">).</span><span class="n">recent</span>
+</code></pre></div><p>Because scope always returns a chainable object, so we do not need to worry about it anymore.</p><div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">Post</span><span class="p">.</span><span class="n">find_by_author</span><span class="p">(</span><span class="n">nil</span><span class="p">).</span><span class="n">recent</span>
 <span class="k">SELECT</span> <span class="nv">"posts"</span><span class="p">.</span><span class="o">*</span> <span class="k">FROM</span> <span class="nv">"posts"</span> <span class="k">WHERE</span> <span class="p">(</span><span class="n">created_at</span> <span class="o">&gt;</span> <span class="s1">'...'</span><span class="p">)</span>
-</code></pre>
-</div>
-
-<hr />
-
-<h1 id="scope-merge">Scope merge</h1>
-
-<p>Use scope merge, we can combine conditions from different Models. For example, you have two related Models named <code class="highlighter-rouge">Comment</code> and <code class="highlighter-rouge">Post</code>.</p>
-
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Comment</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
+</code></pre></div><hr><h1 id="scope-merge">Scope merge</h1><p>Use scope merge, we can combine conditions from different Models. For example, you have two related Models named <code class="highlighter-rouge">Comment</code> and <code class="highlighter-rouge">Post</code>.</p><div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Comment</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
   <span class="n">belongs_to</span> <span class="ss">:post</span>
   <span class="n">scope</span> <span class="ss">:approved</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="ss">approved: </span><span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
 <span class="k">end</span>
@@ -271,46 +54,11 @@ For instance, if you make two class methods in Model.</p>
   <span class="n">has_many</span> <span class="ss">:comments</span>
   <span class="n">scope</span> <span class="ss">:with_approved_comments</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">joins</span><span class="p">(</span><span class="ss">:comments</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="s1">'comments.approved = ?'</span><span class="p">,</span> <span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
 <span class="k">end</span>
-</code></pre>
-</div>
-
-<p>In this two Models, there are same query logic <code class="highlighter-rouge">where('comments.approved = ?', true)</code>. We can use merge them with <code class="highlighter-rouge">merge</code>.</p>
-
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
+</code></pre></div><p>In this two Models, there are same query logic <code class="highlighter-rouge">where('comments.approved = ?', true)</code>. We can use merge them with <code class="highlighter-rouge">merge</code>.</p><div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span>
   <span class="n">has_many</span> <span class="ss">:comments</span>
   <span class="n">scope</span> <span class="ss">:with_approved_comments</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">joins</span><span class="p">(</span><span class="ss">:comments</span><span class="p">).</span><span class="nf">merge</span><span class="p">(</span><span class="no">Comment</span><span class="p">.</span><span class="nf">approved</span><span class="p">)</span> <span class="p">}</span>
 <span class="k">end</span>
-</code></pre>
-</div>
-<p>Of course, we can get some SQL query code and returns.</p>
-
-<h1 id="summary">Summary</h1>
-
-<p>Whatever Class Methods or Scopes can get same returns. Class Method maybe more understandable, it can describe more details for complicated queries. But Scopes can simplify logic relationship, it always returns chainable object. In my opinion, MVC thinkings will recommend using the scope.</p>
-
-  </div>
-
-  <hr>
-
-  <div class="post-nav">
-    
-    <a href="/2016/11/06/using-guard-clauses" class="left link">
-    
-      << Previous
-    </a>
-
-    
-    <a href="/2017/01/02/virtual-environment-for-python" class="right link">
-    
-      Next >>
-    </a>
-  </div>
-
-  <hr>
-  
-    <div id="disqus_thread"></div>
-<script>
-  /**
+</code></pre></div><p>Of course, we can get some SQL query code and returns.</p><h1 id="summary">Summary</h1><p>Whatever Class Methods or Scopes can get same returns. Class Method maybe more understandable, it can describe more details for complicated queries. But Scopes can simplify logic relationship, it always returns chainable object. In my opinion, MVC thinkings will recommend using the scope.</p></div><hr><div class="post-nav"><a href="/2016/11/06/using-guard-clauses" class="left link">&lt;&lt; Previous </a><a href="/2017/01/02/virtual-environment-for-python" class="right link">Next &gt;&gt;</a></div><hr><div id="disqus_thread"></div><script>/**
   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
   */
@@ -327,74 +75,10 @@ For instance, if you make two class methods in Model.</p>
 
   s.setAttribute('data-timestamp', +new Date());
   (d.head || d.body).appendChild(s);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
-  
-
-</article>
-
-  <div class="mark-link">
-  <a id="bookmark">
-    <span class="fa-stack fa-lg">
-      <i class="fa fa-square fa-stack-2x"></i>
-      <i class="fa fa-book fa-stack-1x fa-inverse"></i>
-    </span>
-  </a>
-</div>
-<div id="toc-area" class="sidebar" style="display:none">
-  <div class="col toc-area">
-    &nbsp;&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;
-    Table of Contents
-    <ul class="section-nav">
-<li class="toc-entry toc-h1"><a href="#give-problems">Give Problems</a></li>
-<li class="toc-entry toc-h1"><a href="#solutions">Solutions</a></li>
-<li class="toc-entry toc-h1"><a href="#comparison">Comparison</a></li>
-<li class="toc-entry toc-h1"><a href="#scope-merge">Scope merge</a></li>
-<li class="toc-entry toc-h1"><a href="#summary">Summary</a></li>
-</ul>
-  </div>
-</div>
-
-
-
-        </div>
-      </div>
-      <footer class="site-footer">
-  &copy;&nbsp;2016~2017 by Simcookies. All rights reserved.
-  <div class="quick-link" id="quick-link">
-    <a id="page-top">
-      <span class="fa-stack fa-lg">
-	<i class="fa fa-square fa-stack-2x"></i>
-	<i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-    <a href="/">
-      <span class="fa-stack fa-lg">
-	<i class="fa fa-square fa-stack-2x"></i>
-	<i class="fa fa-home fa-stack-1x fa-inverse"></i>
-      </span>      
-    </a>
-  </div>
-</footer>
-
-    </div>
-
-    
-      <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  })();</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript></article><div class="mark-link"><a id="bookmark"><span class="fa-stack fa-lg"><i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-book fa-stack-1x fa-inverse"></i></span></a></div><div id="toc-area" class="sidebar" style="display:none"><div class="col toc-area">&nbsp;&nbsp;<i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp; Table of Contents<ul class="section-nav"><li class="toc-entry toc-h1"><a href="#give-problems">Give Problems</a></li><li class="toc-entry toc-h1"><a href="#solutions">Solutions</a></li><li class="toc-entry toc-h1"><a href="#comparison">Comparison</a></li><li class="toc-entry toc-h1"><a href="#scope-merge">Scope merge</a></li><li class="toc-entry toc-h1"><a href="#summary">Summary</a></li></ul></div></div></div></div><footer class="site-footer">&copy;&nbsp;2016~2017 by Simcookies. All rights reserved.<div class="quick-link" id="quick-link"><a id="page-top"><span class="fa-stack fa-lg"><i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i> </span></a><a href="/"><span class="fa-stack fa-lg"><i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-home fa-stack-1x fa-inverse"></i></span></a></div></footer></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-85209586-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-    
-
-  </body>
-
-</html>
+  ga('send', 'pageview');</script></body></html>
