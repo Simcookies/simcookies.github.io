@@ -5,8 +5,8 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 05 Nov 2017 19:28:15 +0900</pubDate>
-    <lastBuildDate>Sun, 05 Nov 2017 19:28:15 +0900</lastBuildDate>
+    <pubDate>Sun, 05 Nov 2017 21:13:41 +0900</pubDate>
+    <lastBuildDate>Sun, 05 Nov 2017 21:13:41 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -50,7 +50,7 @@ dvipdfmx:fatal: Cannot proceed without .vf or “physical” font for PDF output
 
     &lt;p&gt;TLU to install &lt;code class=&quot;highlighter-rouge&quot;&gt;kastrup&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;tex-gyre&lt;/code&gt;&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;When transfer dvi to pdf with dvipdfmx, it said: Could not locate a virtual/physical font for TFM “rml”.: Find file of /usr/local/texlive/2017basic/texmf-config/dvipdfmx/dvipdfmx.cfg, and uncomment “cid-x.map”. After that, make &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo mktexlsr&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;When transfer dvi to pdf with dvipdfmx, it said: Could not locate a virtual/physical font for TFM “rml” (or “gbm” here).: Find file of /usr/local/texlive/2017basic/texmf-config/dvipdfmx/dvipdfmx.cfg, and uncomment “cid-x.map”. After that, make &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo mktexlsr&lt;/code&gt;.&lt;/li&gt;
   &lt;li&gt;dvipdfmx can load cid-x.map, but it said: dvipdfmx:fatal: Could not find encoding file “H”. : Tex Live Utility installed “adobemapping”.&lt;/li&gt;
 &lt;/ol&gt;
 
