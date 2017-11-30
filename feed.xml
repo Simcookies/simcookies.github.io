@@ -5,9 +5,54 @@
     <description>All about Simcookies Project.</description>
     <link>http://simcookies.github.io/</link>
     <atom:link href="http://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 23 Nov 2017 21:15:23 +0900</pubDate>
-    <lastBuildDate>Thu, 23 Nov 2017 21:15:23 +0900</lastBuildDate>
+    <pubDate>Thu, 30 Nov 2017 16:05:17 +0900</pubDate>
+    <lastBuildDate>Thu, 30 Nov 2017 16:05:17 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Rails error of 'key must be 32 bytes'</title>
+        <description>&lt;p&gt;I made a Rails Application with Rails 5.0.0.1, and got an strange error when I run the server by localhost.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ArgumentError in WelcomeController#index
+	key must be 32 bytes
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And details are here:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Extracted&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;around&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#72):&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;70&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cipher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_cipher&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;71&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;encrypt&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;72&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@secret&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;73&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;74&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Rely on OpenSSL for the initialization vector&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;75&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;random_iv&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;It seems the version of the Rails need to be update. So I changed Gemfile:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Ruby&quot;&gt;# gem 'rails', '5.0.0.1' =&amp;gt; '5.0.1'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And then &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle update&lt;/code&gt; to update the gems. The error will be gone.&lt;/p&gt;
+
+&lt;p&gt;Some people said they sitll got the error after they change the Gemfile. It’s a better way to update Ruby version too. :)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/rails/rails/issues/25185&quot;&gt;refference is here&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 30 Nov 2017 15:49:44 +0900</pubDate>
+        <link>http://simcookies.github.io/2017/11/30/rails-error-of-key-must-be-32-bytes</link>
+        <guid isPermaLink="true">http://simcookies.github.io/2017/11/30/rails-error-of-key-must-be-32-bytes</guid>
+        
+        <category>ruby</category>
+        
+        <category>rails</category>
+        
+        
+        <category>solution</category>
+        
+      </item>
     
       <item>
         <title>Insert Math into post with MathJax</title>
@@ -843,39 +888,6 @@ For instance, if you make two class methods in Model.&lt;/p&gt;
         
         
         <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>Fix Nvidia bug in Ubuntu 16.04</title>
-        <description>&lt;p&gt;After I found a lot of problems with Windows 10, I installed Ubuntu 16.04 together with it. However when I finished installing it, I checked the lastest driver of Nvidia and replaced it from test to offical version, errors showed out: Driver “ebridge” was registered. So I searched online, also did as they said, but it still didn’t work. Finally, I just made a little change in it. Here is the way.&lt;/p&gt;
-
-&lt;p&gt;Firstly, get into recovery-mode (4.4.0-21-generic), and enter to shell:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get purge nvidia*
-sudo apt-get purge nvidia-settings
-sudo apt-get purge nvidia-prime
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Reboot, and enter Boot with new kernel version (4.4.0-23-generic). This is what they said. But I found it still showed up with the error message. So I tried to reboot and enter normal ubuntu, offcause I can not login GUI because it has not Driver, so I used &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl+Alt+F1&lt;/code&gt; to get into login shell, input:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install nvidia-current-updates
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Finally, reboot again. OK~ It worked!&lt;/p&gt;
-</description>
-        <pubDate>Tue, 27 Sep 2016 00:00:00 +0900</pubDate>
-        <link>http://simcookies.github.io/2016/09/27/fix-nviada-bug-ubuntu</link>
-        <guid isPermaLink="true">http://simcookies.github.io/2016/09/27/fix-nviada-bug-ubuntu</guid>
-        
-        <category>linux</category>
-        
-        <category>ubuntu</category>
-        
-        
-        <category>solution</category>
         
       </item>
     
