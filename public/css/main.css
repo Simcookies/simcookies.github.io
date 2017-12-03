@@ -598,11 +598,19 @@ table {
       .toc-area .section-nav a:hover {
         color: #2a7ae2; }
     .toc-area .section-nav .toc-h2 {
-      padding-left: 1em; }
+      padding-left: 1pt; }
     .toc-area .section-nav .toc-h3 {
-      padding-left: 2em; }
+      padding-left: 2pt; }
     .toc-area .section-nav .toc-h4 {
-      padding-left: 3em; }
+      padding-left: 3pt; }
+
+.emoji {
+  display: inline !important; }
+
+.footnotes {
+  color: gray; }
+  .footnotes p {
+    margin: 0 !important; }
 
 /**
  * Syntax highlighting styles
