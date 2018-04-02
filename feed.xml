@@ -5,25 +5,9 @@
     <description>All about Simcookies Project.</description>
     <link>https://simcookies.github.io/</link>
     <atom:link href="https://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 02 Apr 2018 20:52:01 +0900</pubDate>
-    <lastBuildDate>Mon, 02 Apr 2018 20:52:01 +0900</lastBuildDate>
+    <pubDate>Mon, 02 Apr 2018 20:53:01 +0900</pubDate>
+    <lastBuildDate>Mon, 02 Apr 2018 20:53:01 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
-    
-      <item>
-        <title>Basic of Emacs Lisp</title>
-        <description>&lt;h2 id=&quot;function-and-variable&quot;&gt;Function and Variable&lt;/h2&gt;
-
-</description>
-        <pubDate>Wed, 10 Jan 2018 20:35:53 +0900</pubDate>
-        <link>https://simcookies.github.io/2018/01/10/basic-of-emacs-lisp</link>
-        <guid isPermaLink="true">https://simcookies.github.io/2018/01/10/basic-of-emacs-lisp</guid>
-        
-        <category>emacs</category>
-        
-        
-        <category>basic</category>
-        
-      </item>
     
       <item>
         <title>'Web Full-stack develop reference'</title>
@@ -855,6 +839,93 @@ For instance, if you make two class methods in Model.&lt;/p&gt;
         
         
         <category>programming</category>
+        
+      </item>
+    
+      <item>
+        <title>Experiences &amp; Feelings of RubyKaigi</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/RubyKaigi&quot;&gt;RubyKaigi&lt;/a&gt; 2016 was held at Kyoto, Japan from 9/8 to 9/10. I was so lucky to get such a good chance to attend this meeting with my colleagues of &lt;a href=&quot;https://tsubaiso.jp/&quot;&gt;Tusbaiso&lt;/a&gt;. During those three days, I got many experiences. Especially, as a fresh man in area of programming and Rails Development, it was quite valuable because of broadening my horizons. So I want to write a memo about my feelings about this meeting.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;about-rubykaigi&quot;&gt;About RubyKaigi&lt;/h1&gt;
+
+&lt;p&gt;Meeting began from 9/8, and sessions were held by English and Japanese together. Visitors can choose sessions which they are interest in. Firstly, Ruby Language Inventor, Matsumoto Yukihiro (a.k.a Matz), made the opening speech about &lt;em&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=2Ag8l-wq5qk&quot;&gt;Ruby3 Typing&lt;/a&gt;&lt;/em&gt;, which talked about recently change of Dynamic Programming Language and Ruby3 Typing in the future.&lt;/p&gt;
+
+&lt;p&gt;After opening speech, there were many other excellent presentations. For example, I listened about &lt;em&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=lQvDd9GPSB4&quot;&gt;Fearlessly Refactoring Legacy Ruby&lt;/a&gt;&lt;/em&gt; and &lt;em&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=UlfyX8zRVc8&quot;&gt;Deletion Driven Development&lt;/a&gt;&lt;/em&gt;. I got a deep understanding about coding and refactoring through these two sessions. Of course, other presentations were also quite excellent, I also knew some new Technology and Programming concept from those. However, for me, it just likes a flood of knowledge because of lack of basic knowledge.&lt;/p&gt;
+
+&lt;p&gt;During these three days, we had official party, signing sessions and delicious Bentou launch. It was so unbelievable I can see and even talk to so many Ruby community committees. Many companies which using Ruby on Rails Framework from different countries and regions also showed on site. Total number of visitors, staffs and speakers almost got to 1000. Such a grand meeting!&lt;/p&gt;
+
+&lt;h1 id=&quot;my-thinking-and-feeling&quot;&gt;My thinking and feeling&lt;/h1&gt;
+
+&lt;h2 id=&quot;feelings-from-rubykaigi&quot;&gt;Feelings from RubyKaigi&lt;/h2&gt;
+
+&lt;p&gt;It’s so lucky to get choice to attend Rubykaigi, such a grand meeting. I can meet so many people and know so many things which I never know if I still immersed my world. From the speechers, committers and other listeners, I can feel the big gap between them and me. &lt;strong&gt;Just like listen a talk show, but I can not get the point to laugh.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I remembered some one gave a speech about &lt;strong&gt;Concurrency&lt;/strong&gt; in Ruby. He talked a lot about how to improve algorithm to speed up our code with &lt;strong&gt;Concurrency&lt;/strong&gt;, but I can not get anything at all because I have no idea about what is concurrency not to mention how to improve my code. From their code, I can see names of variables and functions, see their focus in thinking way, see tools what they are using, and compare these to mine, it just like the difference between &lt;strong&gt;Regular Army&lt;/strong&gt; and &lt;strong&gt;Miscellaneous Army&lt;/strong&gt; = =||.&lt;/p&gt;
+
+&lt;h2 id=&quot;experiences-of-programming&quot;&gt;Experiences of programming&lt;/h2&gt;
+
+&lt;p&gt;I began doing part-time jobs at Tusbaiso from 2015/12, as a totally fresh man in area of Web Development. So I did not have enough basic knowledges about Ruby on Rails, or it can be said I never received basic education of computer science. In fact, My major is Electronic Engineering, it includes both software and hardware. I made a lot developments in &lt;a href=&quot;https://en.wikipedia.org/wiki/Embedded_system&quot;&gt;Embedded System&lt;/a&gt;, it just needs some basic knowledge about C Language and Assembly Language.&lt;/p&gt;
+
+&lt;p&gt;During developing of embedded system, especially of &lt;a href=&quot;https://en.wikipedia.org/wiki/STM32&quot;&gt;STM32&lt;/a&gt;, I accessed the new programming structure includes modular thinking way for STM32 official C Library.That’s my first time to notice that my code was such a mess before. Before, I wrote all initialize code in main function. After reading official references of STM32, I began to know importance of writing sub-functions and making my library. I also noticed it is important to make good names for a function and its params.&lt;/p&gt;
+
+&lt;p&gt;Gradually, I found the beauty of software and began to learn by myself. C++, Java, Python, all of these attracted me deeply, even I did not know which is better or what’s meaning if I learn. I can use IDE such as Visual Studio, Eclipse, Code Block e.t.c. I tried to develop a small app in platform of Android. I knew the concept of Obejct-Oriented and Process-Oriented, came into contact with Linux. I made a Mini MP3 System in STM32 with uC/OS, uC/GUI and FS, which I am so pride until now.&lt;/p&gt;
+
+&lt;p&gt;Finally, I said to others: Hei, see it! I can program! However, after enter Tusbaiso, I have no confidence to say this again, because I found: I can not program at all.&lt;/p&gt;
+
+&lt;h2 id=&quot;struggle-in-mind&quot;&gt;Struggle in mind&lt;/h2&gt;
+
+&lt;p&gt;Why I have no confidence now? I have asked myself many times. I can not answer. But the situation is I lack basic knowledges indeed.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Even I learned C Language systematically, but I still have no deep understanding about Point or I can say I never used this before.&lt;/li&gt;
+  &lt;li&gt;I just know the concept of Obejct-Oriented, but still can not distinguish Class Method and Member Method.&lt;/li&gt;
+  &lt;li&gt;Tranplanted OS successfully, but did not know how OS schedules tasks, how the process and thread works.&lt;/li&gt;
+  &lt;li&gt;I have GitHub Account, but never read code deeply and not to mention commit some project.&lt;/li&gt;
+  &lt;li&gt;I almost have no knowledge about algorithm and data structure.&lt;/li&gt;
+  &lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In one word, I have never practiced and always immersed in my own small “programming” world. When I entered Tsubaiso as a part-time job, I really felt very happy because I can do a job like a real programmer. But I realized the &lt;strong&gt;Technology’s Lack&lt;/strong&gt; was quite a problem. However I love programming, it almost becomes one part of my life. This is a contradiction to me. How to improve myself in technology and thinking ways?&lt;/p&gt;
+
+&lt;h1 id=&quot;cheer-myself-up&quot;&gt;Cheer myself up&lt;/h1&gt;
+
+&lt;p&gt;I want to tell myself: If I really like technology and programming, if I really want to go on with the way, I need a &lt;strong&gt;detailed plan&lt;/strong&gt;, I need to improve myself. As my opinion, the best ways to improve someone are reading, coding and writing.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Yes, I need to read, not only the books of some basic concepts, but also the code other people write. Fortunately, I got some chance to read some excellent books which recommended by my colleagues. Such as &lt;strong&gt;The Art of Readable Code&lt;/strong&gt; and &lt;strong&gt;Complete Code&lt;/strong&gt;. And I have made a plan of reading for this year. If time allowed, I will make a Book Reading Part into my blog. In this part, I want to show my reading plan, and of course, write some memos. I will also focus one or two projects in GitHub. Read their code and documents. (According my level, I think one or two is enough.)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;I need more coding experiences to form a good programming habit. Just keeping on coding can help me find the lack of myself. Keep on maintaining my GitHub pages blog, because to use Static Pages Generator – &lt;a href=&quot;/2016/05/01/post-blogs-with-jekyll&quot;&gt;Jekyll to make a blog&lt;/a&gt; is a challenge in Front-End development. Keep using Ruby on Rails for part-time job, and also study deeply about Linux. Maybe I have no clear aims, but during process of coding, I believe I can discover it.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Keep Writing. I know my English is so poor, = =||…Well, tell the truth, sometimes I also can not bear my grammar and pronunciation(So if you are reading this essay or other post in my blog, please forgive me, and if there are any problems you care, please feel free to &lt;a href=&quot;/about&quot;&gt;contact me&lt;/a&gt;~~). Precisely because of this, I need to improve my writing skills! I will try my best to post one blog in two weeks. The content may be about technology, my reading memo or just essay.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Any way, I do not want to immerse myself in a small world anymore, I need change. Here I find a beautiful sentence, share with you, who are reading this essay and try to understanding me, thank you.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Flollowing heart and intuition.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Each of us has a fire in our hearts burning for something. It’s our responsibility in life to find it and keep it lit. This is your life, and it’s a short one. Don’t let others extinguish your flame. Try what you want to try. Go where you want to go. Follow your own intuition. Dream with your eyes open until you know exactly what it looks like. Then do at least one thing every day to make it a reality.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Tue, 11 Oct 2016 22:00:00 +0900</pubDate>
+        <link>https://simcookies.github.io/2016/10/11/experices-and-feelings-of-rubykaigi</link>
+        <guid isPermaLink="true">https://simcookies.github.io/2016/10/11/experices-and-feelings-of-rubykaigi</guid>
+        
+        <category>ruby</category>
+        
+        <category>meeting</category>
+        
+        
+        <category>essay</category>
         
       </item>
     
