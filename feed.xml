@@ -5,9 +5,169 @@
     <description>All about Simcookies Project.</description>
     <link>https://simcookies.github.io/</link>
     <atom:link href="https://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 02 Apr 2018 20:53:01 +0900</pubDate>
-    <lastBuildDate>Mon, 02 Apr 2018 20:53:01 +0900</lastBuildDate>
+    <pubDate>Fri, 04 May 2018 20:04:33 +0900</pubDate>
+    <lastBuildDate>Fri, 04 May 2018 20:04:33 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Source code reading of Jekyll -- 1</title>
+        <description>&lt;p&gt;It has been long time since I wanted to study Ruby by reading source code of some project from some open source project. I choosed the Jekyll because it’s small and popular in static pages generator. It is my first time to read source codes, I will choose the appropriate way for me. It you have any advices for me, please feel free to reply this article.&lt;/p&gt;
+
+&lt;p&gt;I plan to begin from files at root dir, and then go on directories. Finally, return root dir and make a summary of this project.&lt;/p&gt;
+
+&lt;h1 id=&quot;jeykllgemspec&quot;&gt;jeykll.gemspec&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gemspec&lt;/code&gt; includes basic infos of the Jekyll project. It is necessary in a RubyGem project.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;lib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;expand_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;lib&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__dir__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;vg&quot;&gt;$LOAD_PATH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unshift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$LOAD_PATH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;include?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jekyll/version&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Load the &lt;code class=&quot;highlighter-rouge&quot;&gt;lib/&lt;/code&gt; dir into built-in var &lt;code class=&quot;highlighter-rouge&quot;&gt;$LOAD_PATH&lt;/code&gt; and require &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll/version.rb&lt;/code&gt; which includes version info of Jekyll. &lt;code class=&quot;highlighter-rouge&quot;&gt;File.expand_path&lt;/code&gt; converts a pathname to an absolute pathname. &lt;code class=&quot;highlighter-rouge&quot;&gt;unshift&lt;/code&gt; can prepend objects to the front of self.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Gem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Specification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;all_files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`git ls-files -z`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\x0&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bindir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;exe&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;add_runtime_dependency&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;addressable&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;~&amp;gt; 2.4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Use ` ` to execute a shell script, the script here can get all files under the management of git.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;s.bindir = &quot;exe&quot;&lt;/code&gt; specify the executable ruby script in &lt;code class=&quot;highlighter-rouge&quot;&gt;exe/&lt;/code&gt;.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;add_runtime_dependency&lt;/code&gt; adds a runtime dependency named gem with requirements to this gem.&lt;/p&gt;
+
+&lt;p&gt;We can install Jekyll by &lt;code class=&quot;highlighter-rouge&quot;&gt;gem install jekyll&lt;/code&gt;, and gem will create a exculatable ruby script in &lt;code class=&quot;highlighter-rouge&quot;&gt;gems/ruby-2.X.X/bin&lt;/code&gt;. Implement in console of &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll&lt;/code&gt; will call &lt;code class=&quot;highlighter-rouge&quot;&gt;exe/jekyll&lt;/code&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;exejekyll&quot;&gt;exe/jekyll&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Execulatable ruby script which defined in jekyll.gemspec.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;STDOUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sync&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Normally &lt;code class=&quot;highlighter-rouge&quot;&gt;puts&lt;/code&gt; does not write immediately to &lt;code class=&quot;highlighter-rouge&quot;&gt;STDOUT&lt;/code&gt;, but this can write every single character immediately to the console&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. It is very useful when build websocket server.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;PluginManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;require_from_bundler&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Call the &lt;code class=&quot;highlighter-rouge&quot;&gt;require_from_bundler&lt;/code&gt; method which defined in &lt;code class=&quot;highlighter-rouge&quot;&gt;lib/jekyll/plugin_manager.rb&lt;/code&gt;. In fact, &lt;code class=&quot;highlighter-rouge&quot;&gt;require &quot;jekyll&quot;&lt;/code&gt; will load jekyll.rb file, and all other modules are loaded in this file by &lt;code class=&quot;highlighter-rouge&quot;&gt;autoload :XXX, &quot;jekyll/xxx&quot;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Deprecator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ARGV&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This method will deal with arguments deprecated which defined in &lt;code class=&quot;highlighter-rouge&quot;&gt;lib/jekyll/deprecator.rb&lt;/code&gt;. It will show the error messages and abort calling.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;mercenary&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Mercenary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;program&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:jekyll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jekyll/mercenary&quot;&gt;Mercenary&lt;/a&gt; is lightweight and flexible library for writing command-line apps in Ruby which is also a sub-repo of Jekyll. This gem may be useful in development of gem.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Command&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;subclasses&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;init_with_program&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Initilization of Jekyll commands in block of Mercenary. These commands are defined in &lt;code class=&quot;highlighter-rouge&quot;&gt;lib/jekyll/command.rb&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll.logger&lt;/code&gt; is using to manage logs.&lt;/p&gt;
+
+&lt;h1 id=&quot;libjekyllrb&quot;&gt;lib/jekyll.rb&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Require necessary libs to this project in lib/jekyll.rb&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;require_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;glob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__dir__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;*.rb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;glob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;As it said of comment, this method requires all of the Ruby files in the given directory.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# internal requires&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;autoload&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:Cleaner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jekyll/cleaner&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# extensions&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jekyll/plugin&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lib/jekyll.rb&lt;/code&gt; requires &lt;code class=&quot;highlighter-rouge&quot;&gt;rubygems&lt;/code&gt;, stdlib and 3rd party libs firstly. Also it will claim its own modules using &lt;code class=&quot;highlighter-rouge&quot;&gt;autoload&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt;.&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;some_method&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;class &amp;lt;&amp;lt; self&lt;/code&gt; opens up &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;’s singleton class, so that methods can be redefined for the current &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt; object. With this syntax, we don’t need to write &lt;code class=&quot;highlighter-rouge&quot;&gt;def self.some_method&lt;/code&gt; in the module everytime.&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;There are such a set of methods defined in the &lt;code class=&quot;highlighter-rouge&quot;&gt;class &amp;lt;&amp;lt; self&lt;/code&gt; block:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;# jekyll environment&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# configuration Hash by merging the default options with anything in _config.yml&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;set_timezone&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# Set the TZ environment variable&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;# logger instance&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# set logger writer&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sites&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;# Jekyll sites created&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sanitized_path&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Returns the sanitized path&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;Stackoverflow: &lt;a href=&quot;https://stackoverflow.com/questions/29998728/what-stdout-sync-true-means&quot;&gt;What STDOUT.sync = true means?&lt;/a&gt;. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;About the difference between &lt;code class=&quot;highlighter-rouge&quot;&gt;autoload&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt;, reference is &lt;a href=&quot;https://stackoverflow.com/questions/804297/when-to-use-require-load-or-autoload-in-rubyutm_medium=organic&amp;amp;utm_source=google_rich_qa&amp;amp;utm_campaign=google_rich_qa&quot;&gt;here&lt;/a&gt;. And I plan to write an another article about this. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;Stackoverflow: &lt;a href=&quot;https://stackoverflow.com/questions/2505067/class-self-idiom-in-rubyutm_medium=organic&amp;amp;utm_source=google_rich_qa&amp;amp;utm_campaign=google_rich_qa&quot;&gt;class « self idiom in Ruby&lt;/a&gt;. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Wed, 04 Apr 2018 15:27:12 +0900</pubDate>
+        <link>https://simcookies.github.io/2018/04/04/source-code-reading-of-jekyll-1</link>
+        <guid isPermaLink="true">https://simcookies.github.io/2018/04/04/source-code-reading-of-jekyll-1</guid>
+        
+        <category>source</category>
+        
+        <category>jekyll</category>
+        
+        
+        <category>programming</category>
+        
+      </item>
     
       <item>
         <title>'Web Full-stack develop reference'</title>
@@ -839,93 +999,6 @@ For instance, if you make two class methods in Model.&lt;/p&gt;
         
         
         <category>programming</category>
-        
-      </item>
-    
-      <item>
-        <title>Experiences &amp; Feelings of RubyKaigi</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/RubyKaigi&quot;&gt;RubyKaigi&lt;/a&gt; 2016 was held at Kyoto, Japan from 9/8 to 9/10. I was so lucky to get such a good chance to attend this meeting with my colleagues of &lt;a href=&quot;https://tsubaiso.jp/&quot;&gt;Tusbaiso&lt;/a&gt;. During those three days, I got many experiences. Especially, as a fresh man in area of programming and Rails Development, it was quite valuable because of broadening my horizons. So I want to write a memo about my feelings about this meeting.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;about-rubykaigi&quot;&gt;About RubyKaigi&lt;/h1&gt;
-
-&lt;p&gt;Meeting began from 9/8, and sessions were held by English and Japanese together. Visitors can choose sessions which they are interest in. Firstly, Ruby Language Inventor, Matsumoto Yukihiro (a.k.a Matz), made the opening speech about &lt;em&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=2Ag8l-wq5qk&quot;&gt;Ruby3 Typing&lt;/a&gt;&lt;/em&gt;, which talked about recently change of Dynamic Programming Language and Ruby3 Typing in the future.&lt;/p&gt;
-
-&lt;p&gt;After opening speech, there were many other excellent presentations. For example, I listened about &lt;em&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=lQvDd9GPSB4&quot;&gt;Fearlessly Refactoring Legacy Ruby&lt;/a&gt;&lt;/em&gt; and &lt;em&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=UlfyX8zRVc8&quot;&gt;Deletion Driven Development&lt;/a&gt;&lt;/em&gt;. I got a deep understanding about coding and refactoring through these two sessions. Of course, other presentations were also quite excellent, I also knew some new Technology and Programming concept from those. However, for me, it just likes a flood of knowledge because of lack of basic knowledge.&lt;/p&gt;
-
-&lt;p&gt;During these three days, we had official party, signing sessions and delicious Bentou launch. It was so unbelievable I can see and even talk to so many Ruby community committees. Many companies which using Ruby on Rails Framework from different countries and regions also showed on site. Total number of visitors, staffs and speakers almost got to 1000. Such a grand meeting!&lt;/p&gt;
-
-&lt;h1 id=&quot;my-thinking-and-feeling&quot;&gt;My thinking and feeling&lt;/h1&gt;
-
-&lt;h2 id=&quot;feelings-from-rubykaigi&quot;&gt;Feelings from RubyKaigi&lt;/h2&gt;
-
-&lt;p&gt;It’s so lucky to get choice to attend Rubykaigi, such a grand meeting. I can meet so many people and know so many things which I never know if I still immersed my world. From the speechers, committers and other listeners, I can feel the big gap between them and me. &lt;strong&gt;Just like listen a talk show, but I can not get the point to laugh.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;I remembered some one gave a speech about &lt;strong&gt;Concurrency&lt;/strong&gt; in Ruby. He talked a lot about how to improve algorithm to speed up our code with &lt;strong&gt;Concurrency&lt;/strong&gt;, but I can not get anything at all because I have no idea about what is concurrency not to mention how to improve my code. From their code, I can see names of variables and functions, see their focus in thinking way, see tools what they are using, and compare these to mine, it just like the difference between &lt;strong&gt;Regular Army&lt;/strong&gt; and &lt;strong&gt;Miscellaneous Army&lt;/strong&gt; = =||.&lt;/p&gt;
-
-&lt;h2 id=&quot;experiences-of-programming&quot;&gt;Experiences of programming&lt;/h2&gt;
-
-&lt;p&gt;I began doing part-time jobs at Tusbaiso from 2015/12, as a totally fresh man in area of Web Development. So I did not have enough basic knowledges about Ruby on Rails, or it can be said I never received basic education of computer science. In fact, My major is Electronic Engineering, it includes both software and hardware. I made a lot developments in &lt;a href=&quot;https://en.wikipedia.org/wiki/Embedded_system&quot;&gt;Embedded System&lt;/a&gt;, it just needs some basic knowledge about C Language and Assembly Language.&lt;/p&gt;
-
-&lt;p&gt;During developing of embedded system, especially of &lt;a href=&quot;https://en.wikipedia.org/wiki/STM32&quot;&gt;STM32&lt;/a&gt;, I accessed the new programming structure includes modular thinking way for STM32 official C Library.That’s my first time to notice that my code was such a mess before. Before, I wrote all initialize code in main function. After reading official references of STM32, I began to know importance of writing sub-functions and making my library. I also noticed it is important to make good names for a function and its params.&lt;/p&gt;
-
-&lt;p&gt;Gradually, I found the beauty of software and began to learn by myself. C++, Java, Python, all of these attracted me deeply, even I did not know which is better or what’s meaning if I learn. I can use IDE such as Visual Studio, Eclipse, Code Block e.t.c. I tried to develop a small app in platform of Android. I knew the concept of Obejct-Oriented and Process-Oriented, came into contact with Linux. I made a Mini MP3 System in STM32 with uC/OS, uC/GUI and FS, which I am so pride until now.&lt;/p&gt;
-
-&lt;p&gt;Finally, I said to others: Hei, see it! I can program! However, after enter Tusbaiso, I have no confidence to say this again, because I found: I can not program at all.&lt;/p&gt;
-
-&lt;h2 id=&quot;struggle-in-mind&quot;&gt;Struggle in mind&lt;/h2&gt;
-
-&lt;p&gt;Why I have no confidence now? I have asked myself many times. I can not answer. But the situation is I lack basic knowledges indeed.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Even I learned C Language systematically, but I still have no deep understanding about Point or I can say I never used this before.&lt;/li&gt;
-  &lt;li&gt;I just know the concept of Obejct-Oriented, but still can not distinguish Class Method and Member Method.&lt;/li&gt;
-  &lt;li&gt;Tranplanted OS successfully, but did not know how OS schedules tasks, how the process and thread works.&lt;/li&gt;
-  &lt;li&gt;I have GitHub Account, but never read code deeply and not to mention commit some project.&lt;/li&gt;
-  &lt;li&gt;I almost have no knowledge about algorithm and data structure.&lt;/li&gt;
-  &lt;li&gt;…&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In one word, I have never practiced and always immersed in my own small “programming” world. When I entered Tsubaiso as a part-time job, I really felt very happy because I can do a job like a real programmer. But I realized the &lt;strong&gt;Technology’s Lack&lt;/strong&gt; was quite a problem. However I love programming, it almost becomes one part of my life. This is a contradiction to me. How to improve myself in technology and thinking ways?&lt;/p&gt;
-
-&lt;h1 id=&quot;cheer-myself-up&quot;&gt;Cheer myself up&lt;/h1&gt;
-
-&lt;p&gt;I want to tell myself: If I really like technology and programming, if I really want to go on with the way, I need a &lt;strong&gt;detailed plan&lt;/strong&gt;, I need to improve myself. As my opinion, the best ways to improve someone are reading, coding and writing.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Yes, I need to read, not only the books of some basic concepts, but also the code other people write. Fortunately, I got some chance to read some excellent books which recommended by my colleagues. Such as &lt;strong&gt;The Art of Readable Code&lt;/strong&gt; and &lt;strong&gt;Complete Code&lt;/strong&gt;. And I have made a plan of reading for this year. If time allowed, I will make a Book Reading Part into my blog. In this part, I want to show my reading plan, and of course, write some memos. I will also focus one or two projects in GitHub. Read their code and documents. (According my level, I think one or two is enough.)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;I need more coding experiences to form a good programming habit. Just keeping on coding can help me find the lack of myself. Keep on maintaining my GitHub pages blog, because to use Static Pages Generator – &lt;a href=&quot;/2016/05/01/post-blogs-with-jekyll&quot;&gt;Jekyll to make a blog&lt;/a&gt; is a challenge in Front-End development. Keep using Ruby on Rails for part-time job, and also study deeply about Linux. Maybe I have no clear aims, but during process of coding, I believe I can discover it.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Keep Writing. I know my English is so poor, = =||…Well, tell the truth, sometimes I also can not bear my grammar and pronunciation(So if you are reading this essay or other post in my blog, please forgive me, and if there are any problems you care, please feel free to &lt;a href=&quot;/about&quot;&gt;contact me&lt;/a&gt;~~). Precisely because of this, I need to improve my writing skills! I will try my best to post one blog in two weeks. The content may be about technology, my reading memo or just essay.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Any way, I do not want to immerse myself in a small world anymore, I need change. Here I find a beautiful sentence, share with you, who are reading this essay and try to understanding me, thank you.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Flollowing heart and intuition.&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Each of us has a fire in our hearts burning for something. It’s our responsibility in life to find it and keep it lit. This is your life, and it’s a short one. Don’t let others extinguish your flame. Try what you want to try. Go where you want to go. Follow your own intuition. Dream with your eyes open until you know exactly what it looks like. Then do at least one thing every day to make it a reality.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-</description>
-        <pubDate>Tue, 11 Oct 2016 22:00:00 +0900</pubDate>
-        <link>https://simcookies.github.io/2016/10/11/experices-and-feelings-of-rubykaigi</link>
-        <guid isPermaLink="true">https://simcookies.github.io/2016/10/11/experices-and-feelings-of-rubykaigi</guid>
-        
-        <category>ruby</category>
-        
-        <category>meeting</category>
-        
-        
-        <category>essay</category>
         
       </item>
     
