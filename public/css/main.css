@@ -186,6 +186,16 @@ table {
     fill: #828282; }
 
 /**
+ * MathJax
+ */
+.MathJax_Display {
+  overflow-x: auto;
+  overflow-y: hidden; }
+
+.MathJax {
+  outline: 0; }
+
+/**
  * Site header
  */
 .site-header {
