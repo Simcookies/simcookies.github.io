@@ -5,8 +5,8 @@
     <description>All about Simcookies Project.</description>
     <link>https://simcookies.github.io/</link>
     <atom:link href="https://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 22 Sep 2018 11:59:02 +0900</pubDate>
-    <lastBuildDate>Sat, 22 Sep 2018 11:59:02 +0900</lastBuildDate>
+    <pubDate>Sat, 22 Sep 2018 12:02:05 +0900</pubDate>
+    <lastBuildDate>Sat, 22 Sep 2018 12:02:05 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -14,7 +14,7 @@
         <description>&lt;p&gt;&lt;strong&gt;Regression&lt;/strong&gt; is one class of problems in Machine Learning. Linear Regression is a basic one class of problems of Regression. I want to write a note about the Linear Regression in this post as the beginning of Machine Learning series.&lt;/p&gt;
 
 &lt;hr /&gt;
-&lt;h2 id=&quot;brief-introduction&quot;&gt;Brief Introduction&lt;/h2&gt;
+&lt;h1 id=&quot;brief-introduction&quot;&gt;Brief Introduction&lt;/h1&gt;
 
 &lt;p&gt;Regression problems want to find the relationship between the input variables and output variables. The &lt;em&gt;Regression&lt;/em&gt; was used from a 19th-Century scientist.
 &lt;em&gt;Linear Regression&lt;/em&gt; is most basic problems of Regression. We want to make a model to describe the relationship between input and output.
@@ -63,7 +63,7 @@ b&amp;=\overline y - m\overline x
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;practice-corner&quot;&gt;Practice corner&lt;/h2&gt;
+&lt;h1 id=&quot;practice-corner&quot;&gt;Practice corner&lt;/h1&gt;
 
 &lt;p&gt;For the 2-D case, it’s quite easy to achieve that:&lt;/p&gt;
 
