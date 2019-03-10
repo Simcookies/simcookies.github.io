@@ -5,9 +5,87 @@
     <description>All about Simcookies Project.</description>
     <link>https://simcookies.github.io/</link>
     <atom:link href="https://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 22 Sep 2018 12:02:05 +0900</pubDate>
-    <lastBuildDate>Sat, 22 Sep 2018 12:02:05 +0900</lastBuildDate>
+    <pubDate>Sun, 10 Mar 2019 20:24:02 +0900</pubDate>
+    <lastBuildDate>Sun, 10 Mar 2019 20:24:02 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Summary of Machine Learning Algorithms -- Support Vector Machine</title>
+        <description>&lt;p&gt;&lt;strong&gt;Support Vector Machine&lt;/strong&gt; (SVM) has become a more and more popular algorithm in the field of ML, even some times more than &lt;strong&gt;Neural Network&lt;/strong&gt; (NN). It is widely used for classfication and regression. So, in this post I will give a brief about the SVM.&lt;/p&gt;
+
+&lt;h1 id=&quot;brief-introduction&quot;&gt;Brief Introduction&lt;/h1&gt;
+
+&lt;p&gt;支持向量机是一种监督学习学习方式, 对于分类问题有很好的性能. 而且它是一种非概率性的学习方式– 也就是说, 它能够直接得到分类的结果, 而不像逻辑回归那样得到的是属于某个类的概率. 另外, 支持向量机中关于”核函数”的小技巧, 也使得它有着更广泛的使用范围. “核函数”的概念也被用在了其他分类学习方式当中去.&lt;/p&gt;
+
+&lt;h1 id=&quot;support-vector-machine&quot;&gt;Support Vector Machine&lt;/h1&gt;
+
+&lt;p&gt;首先, 假设我们有两种类型的数据, 一种正类型, 一种负类型. Features 有两个$x_1$和$x_2$,在二维平面上如下图:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/image/svm_original_data.png&quot; alt=&quot;SVM original dataset&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;现在我们想画一条线将这两种类型的数据分开, 下面有三个可供选择的线条.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/image/svm_with_3_lines.png&quot; alt=&quot;SVM with different classfication lines&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;显然, 中间的(b)最能够将数据分开. 那么怎么才能算”最能够将数据分开”呢? We can assume a hyperplane which divide dataset into two classes. And this plane has as longer distance as possiable to all the two kinds of data. We call it **separating hyperplane **(or decision boundray). Equation for hyperplane:
+&lt;script type=&quot;math/tex&quot;&gt;\vec w\cdot \vec x + b=0&lt;/script&gt;
+$\vec w$ is the vector perpendicular to the hyperplane. The magnitude of $\vec w$ is unkown. $\vec x$ are the vectors on the hyperplane. $b$ is bias.&lt;/p&gt;
+
+&lt;p&gt;For negative objects:
+&lt;script type=&quot;math/tex&quot;&gt;\vec w\cdot \vec x_- + b\leq1&lt;/script&gt;
+For positive objects:
+&lt;script type=&quot;math/tex&quot;&gt;\vec w\cdot \vec x_+ + b\geq1&lt;/script&gt;
+The thing what we want to do is &lt;strong&gt;very easy&lt;/strong&gt;,  it just is checking the result of:
+&lt;script type=&quot;math/tex&quot;&gt;\text{sgn}(\vec w\cdot\vec x+b)&lt;/script&gt;
+If it’s plus then it belongs to positive class, otherwise it belongs to negitive class.&lt;/p&gt;
+
+&lt;p&gt;The big problem is how to find the unknow $\vec w$ and $b$. We can select two parallel hyperplanes that separate the two classes of data, so that the distance between them is as large as possible. The distance between these hyperplanes is called &lt;strong&gt;margin&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The two hyperplanes can be described by:
+&lt;script type=&quot;math/tex&quot;&gt;\vec w\cdot \vec x_i + b=1 \\
+\vec w\cdot \vec x_i + b=-1&lt;/script&gt;
+If $y_i$ presents the class of $i$th piece of data, 1 for positive and -1 for negitive, then the two equations can be written into one:
+&lt;script type=&quot;math/tex&quot;&gt;y_i(\vec w \cdot \vec x_i + b) =1&lt;/script&gt;
+Those vectors in the plane are called &lt;strong&gt;support vector&lt;/strong&gt;. The width between two hyperplanes:
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{align}
+\text{Width} &amp;= (\vec x_+-\vec x_-)\cdot \frac{\vec w}{||\vec w||} \notag\\
+&amp;=(\vec w\cdot\vec x_+-\vec w\cdot\vec x_-)\cdot \frac{1}{||\vec w||} \notag\\
+&amp;=(1-b+1+b)\cdot \frac{1}{||\vec w||} = \frac{2}{||\vec w||}
+\end{align} %]]&gt;&lt;/script&gt;
+The thing what we want to do is maxmum the width:
+&lt;script type=&quot;math/tex&quot;&gt;\text{max Width}\to\text{max}\frac{2}{||\vec w||} \to \text{min}||\vec w||\to\text{min}\frac{1}{2}||\vec w||^2&lt;/script&gt;
+Now the problem becomes:
+&lt;script type=&quot;math/tex&quot;&gt;\text{min} \frac{1}{2}||\vec w||^2, s.t., y_i(\vec w \cdot \vec x_i + b) -1\geq0, i = 1,2\dots,n&lt;/script&gt;
+This problem can be solved by &lt;strong&gt;Lagrange multiplier&lt;/strong&gt;:
+&lt;script type=&quot;math/tex&quot;&gt;L(\vec w, b, \alpha) = \frac{1}{2}||\vec w||^2-\sum_{i=1}^{n}\alpha_i\left[y_i(\vec w\cdot\vec x_i + b)-1\right]&lt;/script&gt;
+Now we need know partial difference $L$ with respect to $\vec w$ and $b$ and let them equal to 0:
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{align}
+\frac{\partial{L}}{\partial \vec w_i} &amp;= \vec w - \sum_{i=1}^{n}\alpha_i y_i \vec x_i = 0\notag\\
+\frac{\partial{L}}{\partial b} &amp;= - \sum_{i=1}^{n}\alpha_i y_i  = 0
+\end{align} %]]&gt;&lt;/script&gt;
+We got the $\vec w$, and bring it back to the Largrange muptiplier:
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{align}
+L(\vec w, b, \alpha) &amp;= \frac{1}{2}\left(\sum_{i=1}^n\alpha_iy_i\vec x_i\right)^2-\sum_{i=1}^n\alpha_iy_i\vec x_i\left(\sum_{i=1}^n\alpha_iy_i\vec x_i\right)-\sum_{i=1}^n\alpha_iy_ib+\sum_{i=1}^n\alpha_i\notag\\
+&amp;=\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^n\alpha_i\alpha_jy_iy_j\vec x_i\vec x_j-\sum_{i=1}^n\sum_{j=1}^n\alpha_i\alpha_jy_iy_j\vec x_i \vec x_j - b\sum_{i=1}^n\alpha_iy_i+\sum_{i=1}^n\alpha_i\notag\\
+&amp;=\sum_{i=1}^n\alpha_i-\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^n\alpha_i\alpha_jy_iy_j\vec x_i\vec x_j
+\end{align} %]]&gt;&lt;/script&gt;
+This is a quadratic problem. The most popular way to solve the problem is sequential minimal optimization, &lt;strong&gt;SMO&lt;/strong&gt;(Microsoft).&lt;/p&gt;
+</description>
+        <pubDate>Sun, 02 Dec 2018 10:10:42 +0900</pubDate>
+        <link>https://simcookies.github.io/2018/12/02/support-vector-machine</link>
+        <guid isPermaLink="true">https://simcookies.github.io/2018/12/02/support-vector-machine</guid>
+        
+        <category>algorithm</category>
+        
+        <category>formula</category>
+        
+        
+        <category>machine learning</category>
+        
+      </item>
     
       <item>
         <title>Summary of Machine Learning Algorithms -- Linear Regression</title>
@@ -41,8 +119,9 @@ m&amp;=\frac{\overline x \overline y - \overline{xy}}{\overline x^2 - \overline 
 b&amp;=\overline y - m\overline x
 \end{align} %]]&gt;&lt;/script&gt;
 
-&lt;p&gt;After this, we can draw the best fit line as blue line, which is also our model. According this line, we can make prediction of $x=40$ which plot as red point:
-&lt;img src=&quot;/public/image/dataset_lr_prediction.png&quot; alt=&quot;linear regression prediction&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;After this, we can draw the best fit line as blue line, which is also our model. According this line, we can make prediction of $x=40$ which plot as red point:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/image/dataset_lr_prediction.png&quot; alt=&quot;linear regression prediction&quot; /&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 &lt;h1 id=&quot;for-the-generalized-case&quot;&gt;For the generalized case&lt;/h1&gt;
@@ -897,102 +976,6 @@ This is one way of &lt;a href=&quot;https://en.wikipedia.org/wiki/Denial-of-serv
         
         
         <category>basics</category>
-        
-      </item>
-    
-      <item>
-        <title>Virtual Environment for Python</title>
-        <description>&lt;p&gt;As a student, I need to deal with a lot of experiment data and have to make mess data to porcelain figures. &lt;a href=&quot;https://www.mathworks.com/products/matlab.html&quot;&gt;Matlab&lt;/a&gt; seems a good idea, but you know, we can not pay for it. Naturally, I chose &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt;. Python has two famous stable version–2.7 and 3.5. But unfortunately, they can not compatible with each other. For scientific computing, it’s better to use 2.7 because lots of modules only support 2.7. But there is a trend to use high version finally.&lt;/p&gt;
-
-&lt;p&gt;For example, I am using 2.7 to learn &lt;a href=&quot;http://matplotlib.org/&quot;&gt;matplotlib&lt;/a&gt;, using 3.5 to learn &lt;a href=&quot;https://www.djangoproject.com/&quot;&gt;Django&lt;/a&gt;. The Mac or GNU/Linux also has the default version of Python. Finally, there will be three different versions of Python and at least two versions for &lt;a href=&quot;https://en.wikipedia.org/wiki/Pip_(package_manager)&quot;&gt;pip&lt;/a&gt;. It will be very troublesome to deal with such a mess. Sometimes, I forget which version I am using. And the other reason I feel uncomfortable is I have to install module twice on my Mac which just used for one time.&lt;/p&gt;
-
-&lt;p&gt;For this state, virtualenv is a good choice for us:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;A Virtual Environment is a tool to keep the dependencies required by different projects in separate places, by creating virtual Python environments for them. It solves the “Project X depends on version 1.x but, Project Y needs 4.x” dilemma, and keeps your global site-packages directory clean and manageable.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;installing--basic&quot;&gt;Installing &amp;amp; Basic&lt;/h1&gt;
-
-&lt;p&gt;Installing is very easy, we can install virtualenv via pip:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip install virtualenv
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;After installing, we can check installed modules list via &lt;code class=&quot;highlighter-rouge&quot;&gt;pip freeze&lt;/code&gt;. We can install all the modules in virtualenv, so the modules except virtualenv can be uninstalled via &lt;code class=&quot;highlighter-rouge&quot;&gt;pip uninstall one_package&lt;/code&gt;. OK, it’s time to use virtualenv now!&lt;/p&gt;
-
-&lt;p&gt;Enter your project folder, make a new virtual environment:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;virtualenv venv
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;This command will make a new folder named venv in the current directory. (As a convention, we use venv.) This venv folder contains Python executable files and pip library where you can install modules(Of cause, except virtualenv). The Python executable files will use the version which you use to install virtualenv defaultly. For example, you install virtualenv via pip3 which represent of python3, so the Python excutable files of venv will be python3 too. However, you can change this:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;virtualenv -p /usr/bin/python2.7 venv
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Now, it’s time to activate the virtual environment via &lt;code class=&quot;highlighter-rouge&quot;&gt;source&lt;/code&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;venv/bin/active
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;And then the name of virtual environment will appear on the left of prompt, like this:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;venv&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; username@computer: ~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;From now, we can use the environment isolated from the global environment because the modules which we install will be installed into the &lt;code class=&quot;highlighter-rouge&quot;&gt;venv&lt;/code&gt;. You can leave this virtual environment:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;deactivate
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;management-of-packages&quot;&gt;Management of packages&lt;/h1&gt;
-
-&lt;p&gt;In order to keep your environment consistent, it’s a good idea to “freeze” the current state of the environment packages:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ pip freeze &amp;gt; requirements.txt
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;This command can create a list file of packages which you installed via pip. This can file can be reused for other environment or by your collaborators. This can help ensure consistency across installations, across deployments, and across developers. They can install necessary packages with the file:&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ pip install -r requirements.txt 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;In fact, this is a little similar to &lt;a href=&quot;http://bundler.io/gemfile.html&quot;&gt;Gemfile&lt;/a&gt; which used in Ruby bundle.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Offical Python page: &lt;a href=&quot;https://www.python.org/&quot;&gt;https://www.python.org/&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;Guide to Python: &lt;a href=&quot;http://docs.python-guide.org/en/latest/dev/virtualenvs/&quot;&gt;http://docs.python-guide.org/en/latest/dev/virtualenvs/&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;Python Package Index: &lt;a href=&quot;https://pypi.python.org/pypi/pip&quot;&gt;https://pypi.python.org/pypi/pip&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Mon, 02 Jan 2017 13:07:57 +0900</pubDate>
-        <link>https://simcookies.github.io/2017/01/02/virtual-environment-for-python</link>
-        <guid isPermaLink="true">https://simcookies.github.io/2017/01/02/virtual-environment-for-python</guid>
-        
-        <category>python</category>
-        
-        <category>environment</category>
-        
-        
-        <category>tool</category>
         
       </item>
     
