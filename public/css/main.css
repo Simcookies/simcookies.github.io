@@ -270,7 +270,7 @@ table td:not(:last-child) { border-right: 1px solid #ddd; }
 .page-nav { display: inline-block; }
 
 /** TOC-area */
-.mark-link { width: 48px; position: fixed; top: 90px; right: 1%; font-size: 18px; z-index: 5000; }
+.mark-link { width: 48px; position: fixed; top: 90px; right: 2%; font-size: 18px; z-index: 5000; }
 
 @media screen and (max-width: 1200px) { .mark-link { display: none; } }
 
