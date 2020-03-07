@@ -5,13 +5,13 @@
     <description>All about Simcookies Project.</description>
     <link>https://simcookies.github.io/</link>
     <atom:link href="https://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 11 Mar 2019 19:34:11 +0900</pubDate>
-    <lastBuildDate>Mon, 11 Mar 2019 19:34:11 +0900</lastBuildDate>
-    <generator>Jekyll v3.8.5</generator>
+    <pubDate>Sat, 07 Mar 2020 17:07:40 +0900</pubDate>
+    <lastBuildDate>Sat, 07 Mar 2020 17:07:40 +0900</lastBuildDate>
+    <generator>Jekyll v4.0.0</generator>
     
       <item>
         <title>Summary of Machine Learning Algorithms -- Support Vector Machine</title>
-        <description>&lt;p&gt;&lt;strong&gt;Support Vector Machine&lt;/strong&gt; (SVM) has become a more and more popular algorithm in the field of ML, even some times more than &lt;strong&gt;Neural Network&lt;/strong&gt; (NN). It is widely used for classfication and regression. So, in this post I will give a brief about the SVM.&lt;/p&gt;
+        <description>&lt;p&gt;&lt;strong&gt;Support Vector Machine&lt;/strong&gt; (SVM) has become a more and more popular algorithm in the field of ML, even some times more than &lt;strong&gt;Neural Network&lt;/strong&gt; (NN). It is widely used for classification and regression. So, in this post I will give a brief about the SVM.&lt;/p&gt;
 
 &lt;h1 id=&quot;brief-introduction&quot;&gt;Brief Introduction&lt;/h1&gt;
 
@@ -19,7 +19,7 @@
 
 &lt;h1 id=&quot;support-vector-machine&quot;&gt;Support Vector Machine&lt;/h1&gt;
 
-&lt;p&gt;First, let’s say we have two types of data, one positive type and one negative type. Features have two dimensional data: $\vec{x} = (x_1, x_2)​$, which can be plotted like below (Orange for positive data and blue for negative data):&lt;/p&gt;
+&lt;p&gt;First, let’s say we have two types of data, one positive type and one negative type. Features have two dimensional data: $\vec{x} = (x_1, x_2)$, which can be plotted like below (Orange for positive data and blue for negative data):&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/public/image/svm_original_data.png&quot; alt=&quot;SVM original dataset&quot; /&gt;&lt;/p&gt;
 
@@ -575,7 +575,7 @@ Phusion Passenger (informally also known as mod_rails and mod_rack among the Rub
         <category>server</category>
         
         
-        <category>basic</category>
+        <category>basics</category>
         
       </item>
     
