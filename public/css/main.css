@@ -190,7 +190,7 @@ table td:not(:last-child) { border-right: 1px solid #ddd; }
 .post-link { display: inline; font-size: 24px; }
 
 /** Posts */
-.post { position: relative; min-height: 400px; background: #fff; box-shadow: 0 1px 4px #999; outline: 1px solid #ccc; padding: 30px 45px; }
+.post { position: relative; min-height: 72vh; background: #fff; box-shadow: 0 1px 4px #999; outline: 1px solid #ccc; padding: 30px 45px; }
 
 @media screen and (max-width: 1200px) { .post { padding: 20px; } }
 
