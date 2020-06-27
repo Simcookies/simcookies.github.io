@@ -1,4 +1,24 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Draw UML with PlantUML in Atom</title><meta name="description" content="I want to use UML to help me understanding how Jekyll works, so I found PlantUML. It’s an open source tool which can draw UML pictures quickly. In this post,..."><link rel="stylesheet" href="/public/css/main.css"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="canonical" href="https://simcookies.github.io/2018/05/05/draw-uml-with-plantuml-in-atom"><link rel="alternate" type="application/rss+xml" title="Simcookies" href="https://simcookies.github.io/feed.xml"><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://unpkg.com/simple-jekyll-search@1.5.0/dest/simple-jekyll-search.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Draw UML with PlantUML in Atom</title>
+  <meta name="description" content="I want to use UML to help me understanding how Jekyll works, so I found PlantUML. It’s an open source tool which can draw UML pictures quickly. In this post,...">
+
+  <link rel="stylesheet" href="/public/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="canonical" href="https://simcookies.github.io/2018/05/05/draw-uml-with-plantuml-in-atom">
+  <link rel="alternate" type="application/rss+xml" title="Simcookies" href="https://simcookies.github.io/feed.xml">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script src="https://unpkg.com/simple-jekyll-search@1.5.0/dest/simple-jekyll-search.min.js"></script>
+  <script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
        showProcessingMessages: false,
        messageStyle: "none",
        jax: ["input/TeX", "output/HTML-CSS"],
@@ -6,18 +26,247 @@
            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
            displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
        }
-   });</script><script src="/public/script/main.js"></script><link rel="shortcut icon" type="image/x-icon" href="/public/favicon.ico"></head><body><header class="site-header"><div class="wrapper"><a class="site-title" href="/">Simcookies</a> <span class="menu-icon" id="menu-icon"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i> <i class="fa fa-bars fa-stack-1x"></i></span></span><nav class="site-nav"><div class="trigger"><a class="page-link" href="/about/">About</a> <a class="page-link" href="/archive/">Archive</a> <a class="page-link" href="/wiki/">Wiki</a> <a class="page-link" href="/feed.xml">Feeds</a> <a class="page-link" href="https://github.com/simcookies/gitio" target="_blank"><i class="fa fa-github-alt fa-lg"></i> Repositories</a></div></nav></div></header><div class="scroll-content"><div class="page-content"><div class="wrapper"><article class="post" itemscope itemtype="http://schema.org/BlogPosting"><header class="post-header"><h1 class="post-title" itemprop="name headline">Draw UML with PlantUML in Atom</h1><p class="post-meta"><time datetime="2018-05-05T14:23:16+09:00" itemprop="datePublished">May 5, 2018</time>  <i class="fa fa-archive" aria-hidden="true"></i>  <span><a class="category-div" href="/category/tool">tool</a></span>  <i class="fa fa-tag"></i>  <a class="tag-div" href="/tag/plantUML">plantUML</a>  <a class="tag-div" href="/tag/atom">atom</a> </p></header><div class="post-content" itemprop="articleBody"><p>I want to use UML to help me understanding how Jekyll works, so I found <a href="http://plantuml.com/">PlantUML</a>. It’s an open source tool which can draw UML pictures quickly. In this post, I will config PlantUML into <a href="https://atom.io/">Atom</a>.</p><h1 id="install-atom">Install Atom</h1><p>Just download the Atom and install it.</p><h1 id="install-java">Install Java</h1><p>Java runtime environment is necessary because PlantUML is written in Java. Check if Java is installed in your PC or *nix by <code class="highlighter-rouge">java --version</code>. If Java is installed, it will return messages like:</p><div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java 9.0.1
+   });
+  </script>
+  <script src="/public/script/main.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="/public/favicon.ico">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Simcookies</a>
+
+    <span class="menu-icon" id="menu-icon">
+      <span class="fa-stack fa-lg">
+	<i class="fa fa-square-o fa-stack-2x"></i>
+	<i class="fa fa-bars fa-stack-1x"></i>
+      </span>
+    </span>
+    
+    <nav class="site-nav">
+      <div class="trigger">
+        
+          
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/archive/">Archive</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <a class="page-link" href="/wiki/">Wiki</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+	  
+	  <a class="page-link" href="/feed.xml">Feeds</a>
+	  <a class="page-link" href="https://github.com/simcookies/gitio" target="_blank" rel="noopener noreferrer">
+	    <i class="fa fa-github-alt fa-lg"></i>
+	    Repositories
+	  </a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+    <div class="scroll-content">
+      <div class="page-content">
+        <div class="wrapper">
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Draw UML with PlantUML in Atom</h1>
+    <p class="post-meta">
+      <time datetime="2018-05-05T14:23:16+09:00" itemprop="datePublished">May 5, 2018</time>
+      
+       <i class="fa fa-archive" aria-hidden="true"></i> 
+      <span><a class="category-div" href="/category/tool">tool</a></span>
+      
+      
+       <i class="fa fa-tag"></i> 
+      
+      <a class="tag-div" href="/tag/plantUML">plantUML</a> 
+      
+      <a class="tag-div" href="/tag/atom">atom</a> 
+      
+      
+    </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>I want to use UML to help me understanding how Jekyll works, so I found <a href="http://plantuml.com/" target="_blank" rel="noopener noreferrer">PlantUML</a>. It’s an open source tool which can draw UML pictures quickly. In this post, I will config PlantUML into <a href="https://atom.io/" target="_blank" rel="noopener noreferrer">Atom</a>.</p>
+
+<h1 id="install-atom">Install Atom</h1>
+<p>Just download the Atom and install it.</p>
+
+<h1 id="install-java">Install Java</h1>
+<p>Java runtime environment is necessary because PlantUML is written in Java. Check if Java is installed in your PC or *nix by <code class="language-plaintext highlighter-rouge">java --version</code>. If Java is installed, it will return messages like:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java 9.0.1
 Java<span class="o">(</span>TM<span class="o">)</span> SE Runtime Environment <span class="o">(</span>build 9.0.1+11<span class="o">)</span>
 Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM <span class="o">(</span>build 9.0.1+11, mixed mode<span class="o">)</span>
-</code></pre></div></div><h1 id="install-graphviz">Install graphviz</h1><p>Graphviz is a package of open-source tools for drawing graphs with <strong>dot language</strong> script. It is used by PlantUML to draw UML graphs. In Mac, you can install it by brew.</p><div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>graphviz
-</code></pre></div></div><p>Now we can type <code class="highlighter-rouge">dot -V</code> in the bash command line to check if it was installed successfully.</p><h1 id="check-installation-of-java-and-graphviz">Check installation of Java and graphviz</h1><p>Official site provide a way to check if the environment of PlantUML is ready or not. First download <a href="https://jaist.dl.sourceforge.net/project/plantuml/plantuml.jar">plantuml.jar</a> and then type <code class="highlighter-rouge">java -jar plantuml.jar -testdot</code>. If each installation is OK, it will say: <code class="highlighter-rouge">Installation seems OK. File genration OK.</code></p><h1 id="install-plugins-of-atom">Install plugins of Atom</h1><p>There are two plugins necessary for using PlantUML in Atom.</p><ul><li>languange-plantuml</li><li>plantuml-preview</li></ul><p><a href="https://atom.io/packages/language-plantuml">Language-plantuml</a> provide syntax highlight or autocomplete. <a href="https://atom.io/packages/plantuml-preview">plantuml-preview</a> will create UML diagrams and display it. It also updates on save. You can install these two packages with <code class="highlighter-rouge">apm</code> or directly install them in Atom GUI.</p><p>After installation, plantuml-preview needs some configurations.</p><p><img src="/public/image/setting_of_plantuml.png" alt="setting_of_plantuml"></p><ul><li><strong>Graphviz Dot Executable</strong>: The path of dot which you get it by <code class="highlighter-rouge">which dot</code>.</li><li><strong>Additional PlantUML Arguments</strong>: It’s <code class="highlighter-rouge">-jar</code> with default value.</li><li><strong>PlantUML Jar</strong>: The file you have downloaded before, and put it at some where.</li><li><strong>Java Executable</strong>: Default is <code class="highlighter-rouge">java</code> if you can run java in command line directly. If not, use <code class="highlighter-rouge">which java</code> to find the path.</li></ul><h1 id="write-plantuml-code">Write PlantUML code</h1><p>Congrulations! We have done all the preparation, and now we can write PlantUML code at Atom. The extension can be <code class="highlighter-rouge">.pu</code>. For example:</p><div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@startuml
+</code></pre></div></div>
+
+<h1 id="install-graphviz">Install graphviz</h1>
+<p>Graphviz is a package of open-source tools for drawing graphs with <strong>dot language</strong> script. It is used by PlantUML to draw UML graphs. In Mac, you can install it by brew.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>graphviz
+</code></pre></div></div>
+
+<p>Now we can type <code class="language-plaintext highlighter-rouge">dot -V</code> in the bash command line to check if it was installed successfully.</p>
+
+<h1 id="check-installation-of-java-and-graphviz">Check installation of Java and graphviz</h1>
+<p>Official site provide a way to check if the environment of PlantUML is ready or not. First download <a href="https://jaist.dl.sourceforge.net/project/plantuml/plantuml.jar" target="_blank" rel="noopener noreferrer">plantuml.jar</a> and then type <code class="language-plaintext highlighter-rouge">java -jar plantuml.jar -testdot</code>. If each installation is OK, it will say: <code class="language-plaintext highlighter-rouge">Installation seems OK. File genration OK.</code></p>
+
+<h1 id="install-plugins-of-atom">Install plugins of Atom</h1>
+<p>There are two plugins necessary for using PlantUML in Atom.</p>
+
+<ul>
+  <li>languange-plantuml</li>
+  <li>plantuml-preview</li>
+</ul>
+
+<p><a href="https://atom.io/packages/language-plantuml" target="_blank" rel="noopener noreferrer">Language-plantuml</a> provide syntax highlight or autocomplete.
+<a href="https://atom.io/packages/plantuml-preview" target="_blank" rel="noopener noreferrer">plantuml-preview</a> will create UML diagrams and display it. It also updates on save.
+You can install these two packages with <code class="language-plaintext highlighter-rouge">apm</code> or directly install them in Atom GUI.</p>
+
+<p>After installation, plantuml-preview needs some configurations.</p>
+
+<p><img src="/public/image/setting_of_plantuml.png" alt="setting_of_plantuml"></p>
+
+<ul>
+  <li>
+<strong>Graphviz Dot Executable</strong>: The path of dot which you get it by <code class="language-plaintext highlighter-rouge">which dot</code>.</li>
+  <li>
+<strong>Additional PlantUML Arguments</strong>: It’s <code class="language-plaintext highlighter-rouge">-jar</code> with default value.</li>
+  <li>
+<strong>PlantUML Jar</strong>: The file you have downloaded before, and put it at some where.</li>
+  <li>
+<strong>Java Executable</strong>: Default is <code class="language-plaintext highlighter-rouge">java</code> if you can run java in command line directly. If not, use <code class="language-plaintext highlighter-rouge">which java</code> to find the path.</li>
+</ul>
+
+<h1 id="write-plantuml-code">Write PlantUML code</h1>
+<p>Congrulations! We have done all the preparation, and now we can write PlantUML code at Atom. The extension can be <code class="language-plaintext highlighter-rouge">.pu</code>. For example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@startuml
 Alice -&gt; Bob: Authentication Request
 Bob --&gt; Alice: Authentication Response
 
 Alice -&gt; Bob: Another authentication Request
 Alice &lt;-- Bob: another authentication Response
 @enduml
-</code></pre></div></div><p>The shortcut key <code class="highlighter-rouge">Ctrl + Option + p</code> can preview the UML diagrams. <img src="/public/image/demo_of_plantuml_in_atom.png" alt="demo_of_plantuml_in_atom"></p><p>OK! It’s done! Enjoy it~ <img class="emoji" title=":tada:" alt=":tada:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png" height="20" width="20"></p></div><hr><div class="post-nav"><a href="/2018/04/04/source-code-reading-of-jekyll-1" class="left link">&lt;&lt; Previous </a><a href="/2018/09/21/summary-of-machine-learning-linear-regression" class="right link">Next &gt;&gt;</a></div><hr><div id="disqus_thread"></div><script>/**
+</code></pre></div></div>
+
+<p>The shortcut key <code class="language-plaintext highlighter-rouge">Ctrl + Option + p</code> can preview the UML diagrams.
+<img src="/public/image/demo_of_plantuml_in_atom.png" alt="demo_of_plantuml_in_atom"></p>
+
+<p>OK! It’s done! Enjoy it~ <img class="emoji" title=":tada:" alt=":tada:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png" height="20" width="20"></p>
+
+
+  </div>
+
+  <hr>
+
+  <div class="post-nav">
+    
+    <a href="/2018/04/04/source-code-reading-of-jekyll-1" class="left link">
+    
+      &lt;&lt; Previous
+    </a>
+
+    
+    <a href="/2018/09/21/summary-of-machine-learning-linear-regression" class="right link">
+    
+      Next &gt;&gt;
+    </a>
+  </div>
+
+  <hr>
+  
+    <div id="disqus_thread"></div>
+<script>
+  /**
   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
   */
@@ -34,10 +283,76 @@ Alice &lt;-- Bob: another authentication Response
 
   s.setAttribute('data-timestamp', +new Date());
   (d.head || d.body).appendChild(s);
-  })();</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript></article><div class="mark-link"><a id="bookmark"><span class="fa-stack fa-lg"><i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-book fa-stack-1x fa-inverse"></i></span></a></div><div id="toc-area" class="sidebar" style="display:none"><div class="col toc-area">  <i class="fa fa-bookmark" aria-hidden="true"></i>  Table of Contents<ul class="section-nav"><li class="toc-entry toc-h1"><a href="#install-atom">Install Atom</a></li><li class="toc-entry toc-h1"><a href="#install-java">Install Java</a></li><li class="toc-entry toc-h1"><a href="#install-graphviz">Install graphviz</a></li><li class="toc-entry toc-h1"><a href="#check-installation-of-java-and-graphviz">Check installation of Java and graphviz</a></li><li class="toc-entry toc-h1"><a href="#install-plugins-of-atom">Install plugins of Atom</a></li><li class="toc-entry toc-h1"><a href="#write-plantuml-code">Write PlantUML code</a></li></ul></div></div></div></div><footer class="site-footer">© 2016~2020 by Simcookies. All rights reserved.<div class="quick-link" id="quick-link"><a id="page-top"><span class="fa-stack fa-lg"><i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i> </span></a><a href="/"><span class="fa-stack fa-lg"><i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-home fa-stack-1x fa-inverse"></i></span></a></div></footer></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="noopener noreferrer" target="_blank">comments powered by Disqus.</a>
+</noscript>
+
+  
+
+</article>
+
+  <div class="mark-link">
+  <a id="bookmark">
+    <span class="fa-stack fa-lg">
+      <i class="fa fa-square fa-stack-2x"></i>
+      <i class="fa fa-book fa-stack-1x fa-inverse"></i>
+    </span>
+  </a>
+</div>
+<div id="toc-area" class="sidebar" style="display:none">
+  <div class="col toc-area">
+      <i class="fa fa-bookmark" aria-hidden="true"></i> 
+    Table of Contents
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#install-atom">Install Atom</a></li>
+<li class="toc-entry toc-h1"><a href="#install-java">Install Java</a></li>
+<li class="toc-entry toc-h1"><a href="#install-graphviz">Install graphviz</a></li>
+<li class="toc-entry toc-h1"><a href="#check-installation-of-java-and-graphviz">Check installation of Java and graphviz</a></li>
+<li class="toc-entry toc-h1"><a href="#install-plugins-of-atom">Install plugins of Atom</a></li>
+<li class="toc-entry toc-h1"><a href="#write-plantuml-code">Write PlantUML code</a></li>
+</ul>
+  </div>
+</div>
+
+
+
+        </div>
+      </div>
+      <footer class="site-footer">
+  © 2016~2020 by Simcookies. All rights reserved.
+  <div class="quick-link" id="quick-link">
+    <a id="page-top">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square fa-stack-2x"></i>
+        <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+    <a href="/">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square fa-stack-2x"></i>
+        <i class="fa fa-home fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </div>
+</footer>
+
+    </div>
+
+    
+      <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-85209586-1', 'auto');
-  ga('send', 'pageview');</script></body></html>
+  ga('send', 'pageview');
+
+</script>
+
+    
+
+  </body>
+
+</html>

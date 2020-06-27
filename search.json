@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "使用 PicGo 与 Github 为 Typora 搭建图床",
+      "category" : "blog",
+      "tags"     : "typora",
+      "url"      : "/2020/06/27/make-image-host-service-for-typora-with-picgo-and-gihub",
+      "date"     : "2020-06-27 23:21:01 +0900"
+    } ,
+  
+    {
       "title"    : "Summary of Machine Learning Algorithms -- Support Vector Machine",
       "category" : "machine learning",
       "tags"     : "algorithm, formula",

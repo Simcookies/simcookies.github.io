@@ -1,4 +1,24 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Using BasicTex on OSX Terminal</title><meta name="description" content="MacTeX is a great GUI Application for Latex Distribution. But it is too big with 2.8GB which make me can not accept it. Luckly MacText also provides a smalle..."><link rel="stylesheet" href="/public/css/main.css"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="canonical" href="https://simcookies.github.io/2017/10/18/using-basictex-on-osx-terminal"><link rel="alternate" type="application/rss+xml" title="Simcookies" href="https://simcookies.github.io/feed.xml"><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://unpkg.com/simple-jekyll-search@1.5.0/dest/simple-jekyll-search.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Using BasicTex on OSX Terminal</title>
+  <meta name="description" content="MacTeX is a great GUI Application for Latex Distribution. But it is too big with 2.8GB which make me can not accept it. Luckly MacText also provides a smalle...">
+
+  <link rel="stylesheet" href="/public/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="canonical" href="https://simcookies.github.io/2017/10/18/using-basictex-on-osx-terminal">
+  <link rel="alternate" type="application/rss+xml" title="Simcookies" href="https://simcookies.github.io/feed.xml">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script src="https://unpkg.com/simple-jekyll-search@1.5.0/dest/simple-jekyll-search.min.js"></script>
+  <script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
        showProcessingMessages: false,
        messageStyle: "none",
        jax: ["input/TeX", "output/HTML-CSS"],
@@ -6,7 +26,223 @@
            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
            displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
        }
-   });</script><script src="/public/script/main.js"></script><link rel="shortcut icon" type="image/x-icon" href="/public/favicon.ico"></head><body><header class="site-header"><div class="wrapper"><a class="site-title" href="/">Simcookies</a> <span class="menu-icon" id="menu-icon"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i> <i class="fa fa-bars fa-stack-1x"></i></span></span><nav class="site-nav"><div class="trigger"><a class="page-link" href="/about/">About</a> <a class="page-link" href="/archive/">Archive</a> <a class="page-link" href="/wiki/">Wiki</a> <a class="page-link" href="/feed.xml">Feeds</a> <a class="page-link" href="https://github.com/simcookies/gitio" target="_blank"><i class="fa fa-github-alt fa-lg"></i> Repositories</a></div></nav></div></header><div class="scroll-content"><div class="page-content"><div class="wrapper"><article class="post" itemscope itemtype="http://schema.org/BlogPosting"><header class="post-header"><h1 class="post-title" itemprop="name headline">Using BasicTex on OSX Terminal</h1><p class="post-meta"><time datetime="2017-10-18T00:00:00+09:00" itemprop="datePublished">Oct 18, 2017</time> &nbsp;<i class="fa fa-archive" aria-hidden="true"></i>&nbsp; <span><a class="category-div" href="/category/tool">tool</a></span> &nbsp;<i class="fa fa-tag"></i>&nbsp; <a class="tag-div" href="/tag/latex">latex</a>&nbsp; <a class="tag-div" href="/tag/OXS">OXS</a>&nbsp;</p></header><div class="post-content" itemprop="articleBody"><p>MacTeX is a great GUI Application for Latex Distribution. But it is too big with 2.8GB which make me can not accept it. Luckly MacText also provides a smaller distribution named BaiscTeX. I wrote this blog to take notes of installing BasicTeX and subsequent steps. The goal is to write and compile tex file in Emacs.</p><h1 id="installing-basictex">Installing BasicTeX</h1><ul><li>Download &amp; install <a href="http://www.tug.org/mactex/morepackages.html">BasicTeX</a></li><li>Download &amp; install <a href="http://amaxwell.github.io/tlutility/">TeX Live Utility</a>: TeX Live Utility is a GUI App for management of updating, install and otherwis managing TeX Live.</li></ul><p>After these two steps, latex can be used correctly. <code class="highlighter-rouge">latex xxx.tex</code> to compile tex file to dvi file. <code class="highlighter-rouge">dvipdfmx</code> to make dvi file to pdf file. However, it just can be useful for english writting, if you want to write for Chinese or Japanese, it needs other configurations.</p><h2 id="install-platex">Install platex</h2><p>Use Tex Live Utility can install different compilers include <code class="highlighter-rouge">platex</code> or some font packages.</p><h2 id="errors">Errors</h2><p>Solutions of some errors.</p><ol><li>“jsartile” can not be found: Tex Live Utility(TLU) install “jsclasses”;</li><li>! LaTeX Error: File ‘newpxtext.sty’ not found.: TLU install “newpx”;</li><li>! LaTeX Error: File ‘fontaxes.sty’ not found.: TLU install “fontaxes”;</li><li>! LaTeX Error: File ‘newtxmath.sty’ not found.: TLU install “newtx”;</li><li>Here is a big error when output dvi to pdf:<blockquote><p>kpathsea: Running mktexpk –mfmode / –bdpi 600 –mag 1+0/600 –dpi 600 qtmr.pfb mktexpk: don’t know how to create bitmap font for qtmr.pfb. mktexpk: perhaps qtmr.pfb is missing from the map file. kpathsea: Appending font creation commands to missfont.log.</p><p>dvipdfmx:warning : Could not locate a virtual/physical font for TFM “ntx-Regular-tlf-t1”. dvipdfmx:warning : » This font is mapped to a physical font “qtmr.pfb”. dvipdfmx:warning : » Please check if kpathsea library can find this font: qtmr.pfb dvipdfmx:fatal: Cannot proceed without .vf or “physical” font for PDF output…</p></blockquote><p>TLU to install <code class="highlighter-rouge">kastrup</code> and <code class="highlighter-rouge">tex-gyre</code></p></li><li>When transfer dvi to pdf with dvipdfmx, it said: Could not locate a virtual/physical font for TFM “rml” (or “gbm” here).: Find file of /usr/local/texlive/2017basic/texmf-config/dvipdfmx/dvipdfmx.cfg, and uncomment “cid-x.map”. After that, make <code class="highlighter-rouge">sudo mktexlsr</code>.</li><li>dvipdfmx can load cid-x.map, but it said: dvipdfmx:fatal: Could not find encoding file “H”. : Tex Live Utility installed “adobemapping”.</li></ol></div><hr><div class="post-nav"><a href="/2017/10/16/network-studying-note-2" class="left link">&lt;&lt; Previous </a><a href="/2017/11/23/insert-math-into-post-with-mathjax" class="right link">Next &gt;&gt;</a></div><hr><div id="disqus_thread"></div><script>/**
+   });
+  </script>
+  <script src="/public/script/main.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="/public/favicon.ico">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Simcookies</a>
+
+    <span class="menu-icon" id="menu-icon">
+      <span class="fa-stack fa-lg">
+	<i class="fa fa-square-o fa-stack-2x"></i>
+	<i class="fa fa-bars fa-stack-1x"></i>
+      </span>
+    </span>
+    
+    <nav class="site-nav">
+      <div class="trigger">
+        
+          
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/archive/">Archive</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <a class="page-link" href="/wiki/">Wiki</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+	  
+	  <a class="page-link" href="/feed.xml">Feeds</a>
+	  <a class="page-link" href="https://github.com/simcookies/gitio" target="_blank" rel="noopener noreferrer">
+	    <i class="fa fa-github-alt fa-lg"></i>
+	    Repositories
+	  </a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+    <div class="scroll-content">
+      <div class="page-content">
+        <div class="wrapper">
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Using BasicTex on OSX Terminal</h1>
+    <p class="post-meta">
+      <time datetime="2017-10-18T00:00:00+09:00" itemprop="datePublished">Oct 18, 2017</time>
+      
+       <i class="fa fa-archive" aria-hidden="true"></i> 
+      <span><a class="category-div" href="/category/tool">tool</a></span>
+      
+      
+       <i class="fa fa-tag"></i> 
+      
+      <a class="tag-div" href="/tag/latex">latex</a> 
+      
+      <a class="tag-div" href="/tag/OXS">OXS</a> 
+      
+      
+    </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>MacTeX is a great GUI Application for Latex Distribution. But it is too big with 2.8GB which make me can not accept it. Luckly MacText also provides a smaller distribution named BaiscTeX. I wrote this blog to take notes of installing BasicTeX and subsequent steps. The goal is to write and compile tex file in Emacs.</p>
+
+<h1 id="installing-basictex">Installing BasicTeX</h1>
+
+<ul>
+  <li>Download &amp; install <a href="http://www.tug.org/mactex/morepackages.html" target="_blank" rel="noopener noreferrer">BasicTeX</a>
+</li>
+  <li>Download &amp; install <a href="http://amaxwell.github.io/tlutility/" target="_blank" rel="noopener noreferrer">TeX Live Utility</a>: TeX Live Utility is a GUI App for management of updating, install and otherwis managing TeX Live.</li>
+</ul>
+
+<p>After these two steps, latex can be used correctly. <code class="language-plaintext highlighter-rouge">latex xxx.tex</code> to compile tex file to dvi file. <code class="language-plaintext highlighter-rouge">dvipdfmx</code> to make dvi file to pdf file. However, it just can be useful for english writting, if you want to write for Chinese or Japanese, it needs other configurations.</p>
+
+<h2 id="install-platex">Install platex</h2>
+
+<p>Use Tex Live Utility can install different compilers include <code class="language-plaintext highlighter-rouge">platex</code> or some font packages.</p>
+
+<h2 id="errors">Errors</h2>
+
+<p>Solutions of some errors.</p>
+
+<ol>
+  <li>“jsartile” can not be found: Tex Live Utility(TLU) install “jsclasses”;</li>
+  <li>! LaTeX Error: File ‘newpxtext.sty’ not found.: TLU install “newpx”;</li>
+  <li>! LaTeX Error: File ‘fontaxes.sty’ not found.: TLU install “fontaxes”;</li>
+  <li>! LaTeX Error: File ‘newtxmath.sty’ not found.: TLU install “newtx”;</li>
+  <li>Here is a big error when output dvi to pdf:
+    <blockquote>
+      <p>kpathsea: Running mktexpk –mfmode / –bdpi 600 –mag 1+0/600 –dpi 600 qtmr.pfb
+mktexpk: don’t know how to create bitmap font for qtmr.pfb.
+mktexpk: perhaps qtmr.pfb is missing from the map file.
+kpathsea: Appending font creation commands to missfont.log.</p>
+
+      <p>dvipdfmx:warning : Could not locate a virtual/physical font for TFM “ntx-Regular-tlf-t1”.
+dvipdfmx:warning : » This font is mapped to a physical font “qtmr.pfb”.
+dvipdfmx:warning : » Please check if kpathsea library can find this font: qtmr.pfb
+dvipdfmx:fatal: Cannot proceed without .vf or “physical” font for PDF output…</p>
+    </blockquote>
+
+    <p>TLU to install <code class="language-plaintext highlighter-rouge">kastrup</code> and <code class="language-plaintext highlighter-rouge">tex-gyre</code></p>
+  </li>
+  <li>When transfer dvi to pdf with dvipdfmx, it said: Could not locate a virtual/physical font for TFM “rml” (or “gbm” here).: Find file of /usr/local/texlive/2017basic/texmf-config/dvipdfmx/dvipdfmx.cfg, and uncomment “cid-x.map”. After that, make <code class="language-plaintext highlighter-rouge">sudo mktexlsr</code>.</li>
+  <li>dvipdfmx can load cid-x.map, but it said: dvipdfmx:fatal: Could not find encoding file “H”. : Tex Live Utility installed “adobemapping”.</li>
+</ol>
+
+
+  </div>
+
+  <hr>
+
+  <div class="post-nav">
+    
+    <a href="/2017/10/16/network-studying-note-2" class="left link">
+    
+      &lt;&lt; Previous
+    </a>
+
+    
+    <a href="/2017/11/23/insert-math-into-post-with-mathjax" class="right link">
+    
+      Next &gt;&gt;
+    </a>
+  </div>
+
+  <hr>
+  
+    <div id="disqus_thread"></div>
+<script>
+  /**
   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
   */
@@ -23,10 +259,52 @@
 
   s.setAttribute('data-timestamp', +new Date());
   (d.head || d.body).appendChild(s);
-  })();</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript></article></div></div><footer class="site-footer">&copy;&nbsp;2016~2020 by Simcookies. All rights reserved.<div class="quick-link" id="quick-link"><a id="page-top"><span class="fa-stack fa-lg"><i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i> </span></a><a href="/"><span class="fa-stack fa-lg"><i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-home fa-stack-1x fa-inverse"></i></span></a></div></footer></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="noopener noreferrer" target="_blank">comments powered by Disqus.</a>
+</noscript>
+
+  
+
+</article>
+
+
+        </div>
+      </div>
+      <footer class="site-footer">
+  © 2016~2020 by Simcookies. All rights reserved.
+  <div class="quick-link" id="quick-link">
+    <a id="page-top">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square fa-stack-2x"></i>
+        <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+    <a href="/">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square fa-stack-2x"></i>
+        <i class="fa fa-home fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </div>
+</footer>
+
+    </div>
+
+    
+      <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-85209586-1', 'auto');
-  ga('send', 'pageview');</script></body></html>
+  ga('send', 'pageview');
+
+</script>
+
+    
+
+  </body>
+
+</html>
