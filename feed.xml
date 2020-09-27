@@ -5,9 +5,158 @@
     <description>All about Simcookies Project.</description>
     <link>https://simcookies.github.io/</link>
     <atom:link href="https://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 28 Jun 2020 00:52:48 +0900</pubDate>
-    <lastBuildDate>Sun, 28 Jun 2020 00:52:48 +0900</lastBuildDate>
+    <pubDate>Sun, 27 Sep 2020 18:04:33 +0900</pubDate>
+    <lastBuildDate>Sun, 27 Sep 2020 18:04:33 +0900</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>树莓派上安装并使用 Mosquitto</title>
+        <description>&lt;p&gt;在物联网设备开发中经常需要用到 MQTT 协议进行通信. MQTT 是一个基于发布 (Publish) 和 订阅 (Subscribe) 的消息协议. 位于通信中心的设备称为 MQTT broker. 其他的设备之间的消息传递都是经由这个 broker. 以前一直选择 &lt;a href=&quot;https://www.cloudmqtt.com/&quot;&gt;CloudMQTT&lt;/a&gt;, Free Trail是足够一般情况下的使用, 但是速度上存在一定的问题 (毕竟服务器在美国). 另外, 在自定义特性上面也没有那么的好.&lt;/p&gt;
+
+&lt;p&gt;相比之下, Mosquitto 是一款开源的 MQTT broker 软件. 包括了服务端和客户端. 在实际的开发中, 经常将 broker 设置在本地. 这篇文章就记录了如何在树莓派上安装并且使用 Mosquitto.&lt;/p&gt;
+
+&lt;h1 id=&quot;mosquitto-的安装和配置&quot;&gt;Mosquitto 的安装和配置&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这里使用的树莓派中, 安装的是 Raspbian. 因为是基于 Debian 的, 使用方法基本上没有差别.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;安装&quot;&gt;安装&lt;/h2&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;mosquitto
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这样就可以了. mosquitto 作为一个服务一般都是后台运行的 (作为一个daemon), 安装成功之后就会自动开始运行了. 使用 service 查看运行状况.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;service mosquitto status
+● mosquitto.service - Mosquitto MQTT v3.1/v3.1.1 Broker
+   Loaded: loaded &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;/lib/systemd/system/mosquitto.service&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; enabled&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; vendor preset: enabled&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   Active: active &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;running&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; since Sun 2020-09-27 15:50:35 JST&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 34min ago
+     Docs: man:mosquitto.conf&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+           man:mosquitto&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+ Main PID: 14971 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mosquitto&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    Tasks: 1 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;limit: 2319&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   Memory: 788.0K
+   CGroup: /system.slice/mosquitto.service
+           └─14971 /usr/sbin/mosquitto &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; /etc/mosquitto/mosquitto.conf
+
+Sep 27 15:50:35 openhab systemd[1]: Starting Mosquitto MQTT v3.1/v3.1.1 Broker...
+Sep 27 15:50:35 openhab systemd[1]: Started Mosquitto MQTT v3.1/v3.1.1 Broker.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;从上面的输出的 Active 可以得到 mosquitto 运行正常. 另外通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;netstat&lt;/code&gt; 指令查看这个服务的接口 IP 以及 Port 的状态.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;netstat &lt;span class=&quot;nt&quot;&gt;-ltnp&lt;/span&gt;
+Active Internet connections &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;only servers&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:1883            0.0.0.0:&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;               LISTEN      14971/mosquitto
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;可以看出服务面向了所有 IP 地址, 以及使用了 1883 端口, 而这些都是 mosquitto 的默认配置.&lt;/p&gt;
+
+&lt;h2 id=&quot;配置&quot;&gt;配置&lt;/h2&gt;
+
+&lt;p&gt;首先为了保证最基本的安全通信, &lt;strong&gt;可以为 broker 设置用户名和密码.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mosquitto_passwd &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; /etc/mosquitto/passwd username
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;为一个叫做 username 的人生成一个相应的密码, 存储在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/mosquitto/passwd&lt;/code&gt; 中. 并且在配置文件  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/mosquitto/mosquitto.conf&lt;/code&gt; 中进行指定.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;allow_anonymous &lt;span class=&quot;nb&quot;&gt;false
+&lt;/span&gt;password_file /etc/mosquitto/passwd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这样在之后的连接中, 就能够使用用户名 username 和密码进行登录来了. 如果并不需要用户名密码登录的话, 可以设置匿名用户登录, 这样任何设备都可以直接连接 broker 了.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;allow_anonymous &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;另外通过修改配置文件也可以修改开放 IP 和端口&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bind_address 0.0.0.0 &lt;span class=&quot;c&quot;&gt;# 使用 ip 地址或者主机名&lt;/span&gt;
+port 1883            &lt;span class=&quot;c&quot;&gt;#开发端口&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;有的时候在一些特殊情况下不支持基本的 MQTT 协议, 比如 Python 或者 JavaScript 的 Paho 包, 需要使用 websockets 的协议. 同样也是在配置文件中修改.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;listener 8083
+protocol websockets
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;不同于基本的 MQTT broker, 这里相当于新建一个 websockets 协议, 8083 端口的新的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;listener&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;以上基本的配置就结束了. 需要注意的是, 文件末尾必须留下换行符号, 而且配置好文件之后需要重新启动 mosquitto 服务.&lt;/p&gt;
+
+&lt;h1 id=&quot;使用-mqttbox-进行测试&quot;&gt;使用 MQTTBox 进行测试&lt;/h1&gt;
+
+&lt;p&gt;为了测试上述的安装与配置, 以及实际的通信没有问题, 可以使用一个 &lt;a href=&quot;http://workswithweb.com/mqttbox.html&quot;&gt;MQTTBox&lt;/a&gt; 的小工具. 当然也是可以使用 mosquitto 自带的 clients 功能, 只不过没有那么可视化.&lt;/p&gt;
+
+&lt;p&gt;最开始添加一个 MQTT Client. 填入红框中的基本参数就可以了.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20200927172533.png&quot; alt=&quot;Snipaste_2020-09-27_17-24-49&quot; style=&quot;zoom: 80%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;其中 “MQTT Client Name” 随意记入. 因为上述的配置中没有选择特殊的 websockets, 所以 Protocol 中选择 mqtt/tcp, 而不选择 ws. Host 中填入安装 mosquitto 的设备的可访问的局域网 IP 地址. 最后填入用户名和密码保存就可以了.&lt;/p&gt;
+
+&lt;p&gt;显示连接成功的话, 就可以进行测试. 一开始 MQTTBox 会默认打开一个 publish 和一个 subscribe. 通过发布和订阅一样的 Topic (例中使用了 EdgeDevice/Status 作为 Topic) 就能测试通信了.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20200927173300.png&quot; alt=&quot;Snipaste_2020-09-27_17-32-04&quot; style=&quot;zoom: 80%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;左侧发布的 Payload 的内容, 右侧订阅也能收到一样的内容就表示通信没有问题.&lt;/p&gt;
+
+&lt;h1 id=&quot;特殊的-topic&quot;&gt;特殊的 Topic&lt;/h1&gt;
+
+&lt;p&gt;在 mosquitto 中有一些特殊的主题, 通过订阅他们可以获得当前 broker 的实时情况. 这些内容可以使用 man 手册查看 mosquitto 得到, 这里我列出两个一下个人觉得有用的.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Topic&lt;/th&gt;
+      &lt;th&gt;内容&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$SYS/broker/clients/connected&lt;/td&gt;
+      &lt;td&gt;当前连接着的客户端数量&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$SYS/broker/clients/expired&lt;/td&gt;
+      &lt;td&gt;因为超过持续连接时间而中断的客户端数量&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&quot;trouble-shouting&quot;&gt;Trouble shouting&lt;/h1&gt;
+
+&lt;p&gt;基本配置能够保证绝大部分的通信, 但比如下面 Log 中的错误.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Client XXX has exceeded timeout, disconnecting.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这只是因为在 keepalive 时间内(默认15秒) 没有进行任何通信而产生的自动断开, 并不是Mosquitto的问题, 而是通信设备连接软件的问题.&lt;/p&gt;
+
+&lt;p&gt;解决办法也很简单:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;在 keepalive 时间内保证通信;&lt;/li&gt;
+  &lt;li&gt;在主循环中使用client.loop()方法保证通信.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sun, 27 Sep 2020 15:53:04 +0900</pubDate>
+        <link>https://simcookies.github.io/2020/09/27/mosquitto-mqtt-on-raspberry-pi</link>
+        <guid isPermaLink="true">https://simcookies.github.io/2020/09/27/mosquitto-mqtt-on-raspberry-pi</guid>
+        
+        <category>mqtt</category>
+        
+        <category>raspberrypi</category>
+        
+        <category>server</category>
+        
+        
+        <category>tool</category>
+        
+      </item>
     
       <item>
         <title>使用 PicGo 与 Github 为 Typora 搭建图床</title>
@@ -825,118 +974,6 @@ dvipdfmx:fatal: Cannot proceed without .vf or “physical” font for PDF output
         
         
         <category>tool</category>
-        
-      </item>
-    
-      <item>
-        <title>Network Studying Note 2</title>
-        <description>&lt;p&gt;In the post of &lt;a href=&quot;/2017/03/19/network_studying_note_1&quot;&gt;Network Studying Note 1&lt;/a&gt;, I took notes about the history of Internet and Internet Protocol Suite, especially, the TCP/IP Protocol. TCP/IP contains four layers of Application, Transport, Network and Network Interface. During transmission from layer to layer, top-down is called &lt;strong&gt;Encapsulation&lt;/strong&gt; and button-up is called &lt;strong&gt;Decapsulation&lt;/strong&gt;. In this post, I will write about the Encapsulations of last three layers and also includes about Three-way-Handshake.&lt;/p&gt;
-
-&lt;p&gt;In order to transport network data, the application will send data to transport layer with some header data. The Application is just responsible for processing data logically and regardless of the transmission of it.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;transport-layer&quot;&gt;Transport Layer&lt;/h1&gt;
-
-&lt;p&gt;TCP Segment &amp;amp; UDP Segment&lt;/p&gt;
-
-&lt;p&gt;The best-known transport protocol of TCP/IP is the &lt;a href=&quot;https://en.wikipedia.org/wiki/Transmission_Control_Protocol&quot;&gt;Transmission Control Protocol (TCP)&lt;/a&gt;. It is used for connection-oriented transmissions, whereas the connectionless &lt;a href=&quot;https://en.wikipedia.org/wiki/User_Datagram_Protocol&quot;&gt;User Datagram Protocol (UDP)&lt;/a&gt; is used for simpler messaging transmissions. TCP is the more complex protocol, due to its stateful design incorporating reliable transmission and data stream services.&lt;/p&gt;
-
-&lt;h2 id=&quot;tcp&quot;&gt;TCP&lt;/h2&gt;
-
-&lt;p&gt;TCP provides reliable, ordered, and error-checked delivery of a stream of octets between applications running on hosts communicating over an IP network. Major Internet applications such as the WWW, email, remote administration, and file transfer rely on TCP. This picture shows the segment structure of TCP.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/public/image/tcp_segment.png&quot; alt=&quot;tcp_segment&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The most used bits are:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Source port&lt;/strong&gt; (16 bits): Identifies the sending port. Every server or client has 0 ~ 65535 port, and different ports are corresponding to different services. The most used ports:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Port Number&lt;/th&gt;
-      &lt;th&gt;Server&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;20 or 21&lt;/td&gt;
-      &lt;td&gt;FTP&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;22&lt;/td&gt;
-      &lt;td&gt;ssh&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;23&lt;/td&gt;
-      &lt;td&gt;Telent&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;25&lt;/td&gt;
-      &lt;td&gt;SMTP&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;80&lt;/td&gt;
-      &lt;td&gt;HTTP&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;110&lt;/td&gt;
-      &lt;td&gt;POP3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;443&lt;/td&gt;
-      &lt;td&gt;HTTPS&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Destination port&lt;/strong&gt; (16 bits): Identifies the receiving port&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;udp&quot;&gt;UDP&lt;/h2&gt;
-
-&lt;p&gt;UDP provides checksums for data integrity and port numbers for addressing different functions at the source and destination of the datagram. UDP is different with TCP without having no handshaking dialogues. This picture shows the segment structure of UDP.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/public/image/udp_segment.png&quot; alt=&quot;udp_segment&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;handshaking&quot;&gt;Handshaking&lt;/h2&gt;
-
-&lt;p&gt;TCP pays more attention to security, instead, UDP pays more attention to effectiveness. Three times handshaking was introduced into TCP for security with a set of SYN, SYN-ACK, ACK signals. As my understanding, it sounds like that a communication in a classroom. A teacher wants to communicate with a student.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Firstly, he calls his name and asks him is listening or not, the first handshaking.&lt;/li&gt;
-  &lt;li&gt;Secondly, the student answers Yes and asks teacher is still there or not, the second handshaking.&lt;/li&gt;
-  &lt;li&gt;Finally, the teacher makes sure and says “I will communicate with you from now” to begin this communication, the third handshaking.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;After three times handshaking, the safe communication can be established. If the student is not there or after the student said “I’m here” but the teacher was gone, the communication cannot be established. By the way, if the teacher was gone after the first handshaking, the student will always wait for him and try to connect with the teacher after a period of time until the teacher answers or “his death”.
-This is one way of &lt;a href=&quot;https://en.wikipedia.org/wiki/Denial-of-service_attack&quot;&gt;DoS Attack&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;On the other hand, UDP has no handshaking. The teacher just says what he wants to say regardless of the student’s attendance. So UDP has better effectiveness.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;encapsulation&quot;&gt;Encapsulation&lt;/h1&gt;
-
-&lt;p&gt;How to transmit data with four layers? For UDP, the data of Application will be sent to Transport layer, and it adds UDP header in the front of data and sends to next Internet layer. Internet layer will add IP header in the front of that data and send to Data Link layer. Data Link layer add a Frame header in the front of data and add Frame footer in the behind of data. Finally, it sends the frame by physical signals. Here is the picture.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/public/image/encapsulation.png&quot; alt=&quot;encapsulation&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Decapsulation has opposite steps of encapsulation.&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 16 Oct 2017 00:00:00 +0900</pubDate>
-        <link>https://simcookies.github.io/2017/10/16/network-studying-note-2</link>
-        <guid isPermaLink="true">https://simcookies.github.io/2017/10/16/network-studying-note-2</guid>
-        
-        <category>internet</category>
-        
-        
-        <category>basics</category>
         
       </item>
     

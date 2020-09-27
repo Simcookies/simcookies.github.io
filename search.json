@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "树莓派上安装并使用 Mosquitto",
+      "category" : "tool",
+      "tags"     : "mqtt, raspberrypi, server",
+      "url"      : "/2020/09/27/mosquitto-mqtt-on-raspberry-pi",
+      "date"     : "2020-09-27 15:53:04 +0900"
+    } ,
+  
+    {
       "title"    : "使用 PicGo 与 Github 为 Typora 搭建图床",
       "category" : "blog",
       "tags"     : "typora",
