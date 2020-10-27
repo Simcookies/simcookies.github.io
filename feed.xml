@@ -5,9 +5,9 @@
     <description>All about Simcookies Project.</description>
     <link>https://simcookies.github.io/</link>
     <atom:link href="https://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Sep 2020 18:04:33 +0900</pubDate>
-    <lastBuildDate>Sun, 27 Sep 2020 18:04:33 +0900</lastBuildDate>
-    <generator>Jekyll v4.1.1</generator>
+    <pubDate>Tue, 27 Oct 2020 23:02:01 +0900</pubDate>
+    <lastBuildDate>Tue, 27 Oct 2020 23:02:01 +0900</lastBuildDate>
+    <generator>Jekyll v4.0.0</generator>
     
       <item>
         <title>树莓派上安装并使用 Mosquitto</title>
@@ -44,7 +44,7 @@ Sep 27 15:50:35 openhab systemd[1]: Starting Mosquitto MQTT v3.1/v3.1.1 Broker..
 Sep 27 15:50:35 openhab systemd[1]: Started Mosquitto MQTT v3.1/v3.1.1 Broker.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;从上面的输出的 Active 可以得到 mosquitto 运行正常. 另外通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;netstat&lt;/code&gt; 指令查看这个服务的接口 IP 以及 Port 的状态.&lt;/p&gt;
+&lt;p&gt;从上面的输出的 Active 可以得到 mosquitto 运行正常. 另外通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;netstat&lt;/code&gt; 指令查看这个服务的接口 IP 以及 Port 的状态.&lt;/p&gt;
 
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;netstat &lt;span class=&quot;nt&quot;&gt;-ltnp&lt;/span&gt;
 Active Internet connections &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;only servers&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
@@ -61,7 +61,7 @@ tcp        0      0 0.0.0.0:1883            0.0.0.0:&lt;span class=&quot;k&quot;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mosquitto_passwd &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; /etc/mosquitto/passwd username
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;为一个叫做 username 的人生成一个相应的密码, 存储在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/mosquitto/passwd&lt;/code&gt; 中. 并且在配置文件  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/mosquitto/mosquitto.conf&lt;/code&gt; 中进行指定.&lt;/p&gt;
+&lt;p&gt;为一个叫做 username 的人生成一个相应的密码, 存储在 &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mosquitto/passwd&lt;/code&gt; 中. 并且在配置文件  &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mosquitto/mosquitto.conf&lt;/code&gt; 中进行指定.&lt;/p&gt;
 
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;allow_anonymous &lt;span class=&quot;nb&quot;&gt;false
 &lt;/span&gt;password_file /etc/mosquitto/passwd
@@ -84,7 +84,7 @@ port 1883            &lt;span class=&quot;c&quot;&gt;#开发端口&lt;/span&gt;
 protocol websockets
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;不同于基本的 MQTT broker, 这里相当于新建一个 websockets 协议, 8083 端口的新的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;listener&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;不同于基本的 MQTT broker, 这里相当于新建一个 websockets 协议, 8083 端口的新的 &lt;code class=&quot;highlighter-rouge&quot;&gt;listener&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;以上基本的配置就结束了. 需要注意的是, 文件末尾必须留下换行符号, 而且配置好文件之后需要重新启动 mosquitto 服务.&lt;/p&gt;
 
@@ -131,7 +131,7 @@ protocol websockets
 
 &lt;p&gt;基本配置能够保证绝大部分的通信, 但比如下面 Log 中的错误.&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Client XXX has exceeded timeout, disconnecting.
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Client XXX has exceeded timeout, disconnecting.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;这只是因为在 keepalive 时间内(默认15秒) 没有进行任何通信而产生的自动断开, 并不是Mosquitto的问题, 而是通信设备连接软件的问题.&lt;/p&gt;
@@ -166,7 +166,7 @@ protocol websockets
 
 &lt;h1 id=&quot;github-设置&quot;&gt;Github 设置&lt;/h1&gt;
 
-&lt;p&gt;可以新建或者用现有的仓库&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, 这个仓库就是用来存放未来所有上传上来的图片的, 当作云存储来用的感觉. 这里的仓库名称和 branch 名称留以备用.&lt;/p&gt;
+&lt;p&gt;可以新建或者用现有的仓库&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, 这个仓库就是用来存放未来所有上传上来的图片的, 当作云存储来用的感觉. 这里的仓库名称和 branch 名称留以备用.&lt;/p&gt;
 
 &lt;p&gt;另外为了让 PicGo 能够上传图片至 Github, 需要给予其访问权限, 这里 PicGo 采用的就是 token. 在 Github 设置的地方新建一个 token 备用.&lt;/p&gt;
 
@@ -174,7 +174,7 @@ protocol websockets
 
 &lt;h1 id=&quot;下载安装-picgo&quot;&gt;下载安装 &lt;a href=&quot;https://molunerfinn.com/PicGo/&quot;&gt;PicGo&lt;/a&gt;&lt;/h1&gt;
 
-&lt;p&gt;安装好之后的 PicGo 长成这个样子&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+&lt;p&gt;安装好之后的 PicGo 长成这个样子&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20200627235009.png&quot; alt=&quot;image-20200627235009023&quot; /&gt;&lt;/p&gt;
 
@@ -190,20 +190,20 @@ protocol websockets
 
 &lt;h1 id=&quot;typora-连接-picgo&quot;&gt;Typora 连接 PicGo&lt;/h1&gt;
 
-&lt;p&gt;在偏好设置 &amp;gt; 图像里面选择: 插入图片时上传图片, 并且设置上传服务为 PicGo(App) 并且指定一下 PicGo 的安装路径. 最后可以使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;验证图片上传选项&lt;/code&gt; 来查看效果, 会返回上传成功的 JSON 消息.&lt;/p&gt;
+&lt;p&gt;在偏好设置 &amp;gt; 图像里面选择: 插入图片时上传图片, 并且设置上传服务为 PicGo(App) 并且指定一下 PicGo 的安装路径. 最后可以使用&lt;code class=&quot;highlighter-rouge&quot;&gt;验证图片上传选项&lt;/code&gt; 来查看效果, 会返回上传成功的 JSON 消息.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20200628001949.png&quot; alt=&quot;image-20200628001949008&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20200628002355.png&quot; alt=&quot;image-20200628002355088&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;同时, 在 Github 的图床里面会多出来两张 Typora 的 logo. 至此, 所有的设置都完成了, 再次向 Typora 中插入或者直接拷贝图片的时候, 便会自动触发 PicGo 自动上传图片到 Github 功能. 加上 OneDrive, 一个本地的 Markdown 编辑器 Typora 彻底变成了一个方便易用的云端笔记工具 (真的推荐 Latex 公式功能) :smiley:&lt;/p&gt;
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;这个代码仓库必须要是 public 性质的才能在各个地方都能够被访问到. 这里涉及到了图片访问权限的问题, 所以请针对情况使用. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;这个代码仓库必须要是 public 性质的才能在各个地方都能够被访问到. 这里涉及到了图片访问权限的问题, 所以请针对情况使用. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;其中图床设置的地方应当有很多项, 但是因为其他项暂时都用不到, 所以都关闭了 &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;其中图床设置的地方应当有很多项, 但是因为其他项暂时都用不到, 所以都关闭了 &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
@@ -238,65 +238,68 @@ protocol websockets
 &lt;p&gt;&lt;img src=&quot;/public/image/svm_with_3_lines.png&quot; alt=&quot;SVM with different classfication lines&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Obviously, the middle (b) is the best way to separate the data. So how can we count the “most able to” separate the data? We can assume a hyperplane which divide dataset into two classes. And this plane has as longer distance as possiable to all the two kinds of data. We call it **separating hyperplane **(or decision boundray). Equation for hyperplane (here is the line (b) in the figure):
-\(\vec w\cdot \vec x + b=0\)
+&lt;script type=&quot;math/tex&quot;&gt;\vec w\cdot \vec x + b=0&lt;/script&gt;
 $\vec w$ is the vector perpendicular to the hyperplane. The magnitude of $\vec w$ is unkown. $\vec x$ are the vectors on the hyperplane. $b$ is bias.&lt;/p&gt;
 
 &lt;p&gt;For negative objects:
-\(\vec w\cdot \vec x_- + b\leq1\)
+&lt;script type=&quot;math/tex&quot;&gt;\vec w\cdot \vec x_- + b\leq1&lt;/script&gt;
 For positive objects:
-\(\vec w\cdot \vec x_+ + b\geq1\)
+&lt;script type=&quot;math/tex&quot;&gt;\vec w\cdot \vec x_+ + b\geq1&lt;/script&gt;
 The thing what we want to do is &lt;strong&gt;very easy&lt;/strong&gt;,  it just is checking the result of:
-\(\text{sgn}(\vec w\cdot\vec x+b)\)
+&lt;script type=&quot;math/tex&quot;&gt;\text{sgn}(\vec w\cdot\vec x+b)&lt;/script&gt;
 If it’s plus then it belongs to positive class, otherwise it belongs to negitive class.&lt;/p&gt;
 
 &lt;p&gt;The big problem is how to find the unknow $\vec w$ and $b$. We can select two parallel hyperplanes that separate the two classes of data, so that the distance between them is as large as possible. The distance between these hyperplanes is called &lt;strong&gt;margin&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;The two hyperplanes can be described by:&lt;/p&gt;
 
-\[\vec w\cdot \vec x_i + b=1 \\
-\vec w\cdot \vec x_i + b=-1\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\vec w\cdot \vec x_i + b=1 \\
+\vec w\cdot \vec x_i + b=-1&lt;/script&gt;
 
 &lt;p&gt;Here is another example (Red for positive and blue for negative).  The two gray lines are the margin.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/public/image/svm_margin.png&quot; alt=&quot;svm_margin&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If $y_i$ presents the class of $i$-th piece of data, 1 for positive and -1 for negitive, then the two equations can be written into one:
-\(y_i(\vec w \cdot \vec x_i + b) =1\)&lt;/p&gt;
+&lt;script type=&quot;math/tex&quot;&gt;y_i(\vec w \cdot \vec x_i + b) =1&lt;/script&gt;&lt;/p&gt;
 
 &lt;p&gt;Those vectors in the plane are called &lt;strong&gt;support vector&lt;/strong&gt;. The width between two hyperplanes:&lt;/p&gt;
 
-\[\begin{align}
-\text{Width} &amp;amp;= (\vec x_+-\vec x_-)\cdot \frac{\vec w}{||\vec w||} \notag\\
-&amp;amp;=(\vec w\cdot\vec x_+-\vec w\cdot\vec x_-)\cdot \frac{1}{||\vec w||} \notag\\
-&amp;amp;=(1-b+1+b)\cdot \frac{1}{||\vec w||} = \frac{2}{||\vec w||}
-\end{align}\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align}
+\text{Width} &amp;= (\vec x_+-\vec x_-)\cdot \frac{\vec w}{||\vec w||} \notag\\
+&amp;=(\vec w\cdot\vec x_+-\vec w\cdot\vec x_-)\cdot \frac{1}{||\vec w||} \notag\\
+&amp;=(1-b+1+b)\cdot \frac{1}{||\vec w||} = \frac{2}{||\vec w||}
+\end{align} %]]&gt;&lt;/script&gt;
 
 &lt;p&gt;The thing what we want to do is maxmum the width:&lt;/p&gt;
 
-\[\text{max Width}\to\text{max}\frac{2}{||\vec w||} \to \text{min}||\vec w||\to\text{min}\frac{1}{2}||\vec w||^2\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{max Width}\to\text{max}\frac{2}{||\vec w||} \to \text{min}||\vec w||\to\text{min}\frac{1}{2}||\vec w||^2&lt;/script&gt;
 
 &lt;p&gt;Now the problem becomes:&lt;/p&gt;
 
-\[\text{min} \frac{1}{2}||\vec w||^2, s.t., y_i(\vec w \cdot \vec x_i + b) -1\geq0, i = 1,2\dots,n\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{min} \frac{1}{2}||\vec w||^2, s.t., y_i(\vec w \cdot \vec x_i + b) -1\geq0, i = 1,2\dots,n&lt;/script&gt;
 
 &lt;p&gt;This problem can be solved by &lt;strong&gt;Lagrange multiplier&lt;/strong&gt;:&lt;/p&gt;
 
-\[L(\vec w, b, \alpha) = \frac{1}{2}||\vec w||^2-\sum_{i=1}^{n}\alpha_i\left[y_i(\vec w\cdot\vec x_i + b)-1\right]\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;L(\vec w, b, \alpha) = \frac{1}{2}||\vec w||^2-\sum_{i=1}^{n}\alpha_i\left[y_i(\vec w\cdot\vec x_i + b)-1\right]&lt;/script&gt;
 
 &lt;p&gt;Now we need know partial difference $L$ with respect to $\vec w$ and $b$ and let them equal to 0:&lt;/p&gt;
 
-\[\begin{align}
-\frac{\partial{L}}{\partial \vec w_i} &amp;amp;= \vec w - \sum_{i=1}^{n}\alpha_i y_i \vec x_i = 0\notag\\
-\frac{\partial{L}}{\partial b} &amp;amp;= - \sum_{i=1}^{n}\alpha_i y_i  = 0
-\end{align}\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align}
+\frac{\partial{L}}{\partial \vec w_i} &amp;= \vec w - \sum_{i=1}^{n}\alpha_i y_i \vec x_i = 0\notag\\
+\frac{\partial{L}}{\partial b} &amp;= - \sum_{i=1}^{n}\alpha_i y_i  = 0
+\end{align} %]]&gt;&lt;/script&gt;
 
 &lt;p&gt;We got the $\vec w$, and bring it back to the Largrange muptiplier:&lt;/p&gt;
 
-\[\begin{align}
-L(\vec w, b, \alpha) &amp;amp;= \frac{1}{2}\left(\sum_{i=1}^n\alpha_iy_i\vec x_i\right)^2-\sum_{i=1}^n\alpha_iy_i\vec x_i\left(\sum_{i=1}^n\alpha_iy_i\vec x_i\right)-\sum_{i=1}^n\alpha_iy_ib+\sum_{i=1}^n\alpha_i\notag\\
-&amp;amp;=\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^n\alpha_i\alpha_jy_iy_j\vec x_i\vec x_j-\sum_{i=1}^n\sum_{j=1}^n\alpha_i\alpha_jy_iy_j\vec x_i \vec x_j - b\sum_{i=1}^n\alpha_iy_i+\sum_{i=1}^n\alpha_i\notag\\
-&amp;amp;=\sum_{i=1}^n\alpha_i-\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^n\alpha_i\alpha_jy_iy_j\vec x_i\vec x_j
-\end{align}\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align}
+L(\vec w, b, \alpha) &amp;= \frac{1}{2}\left(\sum_{i=1}^n\alpha_iy_i\vec x_i\right)^2-\sum_{i=1}^n\alpha_iy_i\vec x_i\left(\sum_{i=1}^n\alpha_iy_i\vec x_i\right)-\sum_{i=1}^n\alpha_iy_ib+\sum_{i=1}^n\alpha_i\notag\\
+&amp;=\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^n\alpha_i\alpha_jy_iy_j\vec x_i\vec x_j-\sum_{i=1}^n\sum_{j=1}^n\alpha_i\alpha_jy_iy_j\vec x_i \vec x_j - b\sum_{i=1}^n\alpha_iy_i+\sum_{i=1}^n\alpha_i\notag\\
+&amp;=\sum_{i=1}^n\alpha_i-\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^n\alpha_i\alpha_jy_iy_j\vec x_i\vec x_j
+\end{align} %]]&gt;&lt;/script&gt;
 
 &lt;p&gt;This is a quadratic problem. The most popular way to solve the problem is sequential minimal optimization, &lt;strong&gt;SMO&lt;/strong&gt;(Microsoft).&lt;/p&gt;
 </description>
@@ -324,14 +327,14 @@ L(\vec w, b, \alpha) &amp;amp;= \frac{1}{2}\left(\sum_{i=1}^n\alpha_iy_i\vec x_i
 &lt;em&gt;Linear Regression&lt;/em&gt; is most basic problems of Regression. We want to make a model to describe the relationship between input and output.
 So let’s assume the input variables are $x_1, x_2, \dots , x_n$, and the output variable is $y$. This formula shows the linear relationship between them:&lt;/p&gt;
 
-\[y=m_1x_1+m_2x_2 + \dots+m_nx_n+b=m^Tx+b\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;y=m_1x_1+m_2x_2 + \dots+m_nx_n+b=m^Tx+b&lt;/script&gt;
 
 &lt;p&gt;Here, $m_i$ is coefficient. The $m = (m_1, m_2, \dots, m_n)$ and $x = (x_1, x_2, \dots, x_n)$ are vectors, the $b$ calls bias. We have the model now, what we want to do next is to find the $m$ and $b$ with given &lt;strong&gt;dataset&lt;/strong&gt; and then, we can use the model to make some prediction of some unknown data.&lt;/p&gt;
 
 &lt;hr /&gt;
 &lt;h1 id=&quot;the-case-of-2-dimension&quot;&gt;The case of 2-dimension&lt;/h1&gt;
 
-&lt;p&gt;For the 2-dimension (one input variable $x$ with one output variable $y$), we can get $m$ and $b$ easily. The model formula becomes $y=mx+b$ which is a very simple line and we call it the &lt;em&gt;best fit line&lt;/em&gt;. \(m\) is the best fit line slope and $b$ is best fit line y-intercept.&lt;/p&gt;
+&lt;p&gt;For the 2-dimension (one input variable $x$ with one output variable $y$), we can get $m$ and $b$ easily. The model formula becomes $y=mx+b$ which is a very simple line and we call it the &lt;em&gt;best fit line&lt;/em&gt;. &lt;script type=&quot;math/tex&quot;&gt;m&lt;/script&gt; is the best fit line slope and $b$ is best fit line y-intercept.&lt;/p&gt;
 
 &lt;p&gt;Now, we have one dataset with $(x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), \dots, (x^{(m)}, y^{(m)})$. Here is the plot of them:&lt;/p&gt;
 
@@ -339,10 +342,11 @@ So let’s assume the input variables are $x_1, x_2, \dots , x_n$, and the outpu
 
 &lt;p&gt;We can get $m$ and $b$ quite easily with these formulas (from &lt;strong&gt;statistics&lt;/strong&gt;):&lt;/p&gt;
 
-\[\begin{align}
-m&amp;amp;=\frac{\overline x \overline y - \overline{xy}}{\overline x^2 - \overline {x^2}} \\
-b&amp;amp;=\overline y - m\overline x
-\end{align}\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align}
+m&amp;=\frac{\overline x \overline y - \overline{xy}}{\overline x^2 - \overline {x^2}} \\
+b&amp;=\overline y - m\overline x
+\end{align} %]]&gt;&lt;/script&gt;
 
 &lt;p&gt;After this, we can draw the best fit line as blue line, which is also our model. According this line, we can make prediction of $x=40$ which plot as red point:&lt;/p&gt;
 
@@ -353,15 +357,15 @@ b&amp;amp;=\overline y - m\overline x
 
 &lt;p&gt;For the generalized case, $m$ is a vector. So we cannot get it easily just with those formulas upper. Now assume the $h(x)$ is the &lt;strong&gt;Hypothesis&lt;/strong&gt; model:&lt;/p&gt;
 
-\[h(x^{(i)})=m^Tx^{(i)}+b\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h(x^{(i)})=m^Tx^{(i)}+b&lt;/script&gt;
 
 &lt;p&gt;We can use a &lt;strong&gt;cost function&lt;/strong&gt; – &lt;strong&gt;Mean Squared Error&lt;/strong&gt; (MSE) to evaluate this model:&lt;/p&gt;
 
-\[J(m, b) = \frac{1}{2n}\sum_{i=1}^n\left[h(x^{(i)})-y^{(i)}\right]^2\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(m, b) = \frac{1}{2n}\sum_{i=1}^n\left[h(x^{(i)})-y^{(i)}\right]^2&lt;/script&gt;
 
 &lt;p&gt;$1/2n$ here is just for calculating convenience. What we need to do it to find the $m$ and $b$ to minimize the MSE which also means the line we made is as close as possible to those dataset points:&lt;/p&gt;
 
-\[\min_{m, b}J(m,b)\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\min_{m, b}J(m,b)&lt;/script&gt;
 
 &lt;p&gt;Now the &lt;strong&gt;Find unknown $m$ and $b$&lt;/strong&gt; becomes &lt;strong&gt;Find the min value of $J$, and get $m$ and $b$&lt;/strong&gt;. This problem can be solved by &lt;strong&gt;Gradient Descent&lt;/strong&gt; (which I want to give a another post to give some details).&lt;/p&gt;
 
@@ -377,23 +381,23 @@ b&amp;amp;=\overline y - m\overline x
   &lt;li&gt;
     &lt;p&gt;The total sum of squares (proportional to the variance of the data):&lt;/p&gt;
 
-\[SS_{\text{tot}} = \sum_i(y^{(i)} - \overline y)^2\]
+    &lt;script type=&quot;math/tex; mode=display&quot;&gt;SS_{\text{tot}} = \sum_i(y^{(i)} - \overline y)^2&lt;/script&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;The regression sum of squares, also called the explained sum of squares:&lt;/p&gt;
 
-\[SS_{\text{reg}} = \sum_i(h(x^{(i)}) - \overline y)^2\]
+    &lt;script type=&quot;math/tex; mode=display&quot;&gt;SS_{\text{reg}} = \sum_i(h(x^{(i)}) - \overline y)^2&lt;/script&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;The sum of squares of residuals, also called the residual sum of squares:&lt;/p&gt;
 
-\[SS_{\text{res}} = \sum_i(y^{(i)} - h(x^{(i)}))^2 = \sum_i(e^{(i)})^2\]
+    &lt;script type=&quot;math/tex; mode=display&quot;&gt;SS_{\text{res}} = \sum_i(y^{(i)} - h(x^{(i)}))^2 = \sum_i(e^{(i)})^2&lt;/script&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;lastly, define the coefficient of determination.&lt;/p&gt;
 
-\[\text{R}^2 = \frac{SS_{\text{reg}}}{SS_{\text{tot}}} = 1- \frac{SS_{\text{res}}}{SS_{\text{tot}}}\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{R}^2 = \frac{SS_{\text{reg}}}{SS_{\text{tot}}} = 1- \frac{SS_{\text{res}}}{SS_{\text{tot}}}&lt;/script&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;The better the linear regression fits the data in comparison to the simple average, the closer the value of $\text{R}^2$ is to 1.&lt;/p&gt;
@@ -415,34 +419,34 @@ b&amp;amp;=\overline y - m\overline x
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;
 
 &lt;span class=&quot;c1&quot;&gt;# train dataset
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;float64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;ys&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;float64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;float64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ys&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;float64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;best_fit_slope_and_intercept&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;regression_line&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;regression_line&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
 
 &lt;span class=&quot;c1&quot;&gt;# prediction
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict_x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;predict_y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predict_x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;
 
 &lt;span class=&quot;c1&quot;&gt;# data visualization
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scatter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;regression_line&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scatter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict_x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predict_y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'r'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scatter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;regression_line&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scatter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict_x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predict_y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'r'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;For generalized case, we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sklearn&lt;/code&gt; package. here is the code sketch:&lt;/p&gt;
+&lt;p&gt;For generalized case, we can use &lt;code class=&quot;highlighter-rouge&quot;&gt;sklearn&lt;/code&gt; package. here is the code sketch:&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.linear_model&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LinearRegression&lt;/span&gt;
 
 &lt;span class=&quot;c1&quot;&gt;# Prepare some train dataset and test dataset
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LinearRegression&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;clf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;accuracy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;clf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;accuracy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;clf.score&lt;/code&gt; will return the value of coefficient of determination $\text{R}^2$.&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;clf.score&lt;/code&gt; will return the value of coefficient of determination $\text{R}^2$.&lt;/p&gt;
 
 &lt;p&gt;In fact, the data preprocess is quite important step, it includes data cleaning and feature selection.
 That’s a big topic, so I want to make another post to give details.&lt;/p&gt;
@@ -475,7 +479,7 @@ That’s a big topic, so I want to make another post to give details.&lt;/p&gt;
 &lt;p&gt;Just download the Atom and install it.&lt;/p&gt;
 
 &lt;h1 id=&quot;install-java&quot;&gt;Install Java&lt;/h1&gt;
-&lt;p&gt;Java runtime environment is necessary because PlantUML is written in Java. Check if Java is installed in your PC or *nix by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java --version&lt;/code&gt;. If Java is installed, it will return messages like:&lt;/p&gt;
+&lt;p&gt;Java runtime environment is necessary because PlantUML is written in Java. Check if Java is installed in your PC or *nix by &lt;code class=&quot;highlighter-rouge&quot;&gt;java --version&lt;/code&gt;. If Java is installed, it will return messages like:&lt;/p&gt;
 
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;java 9.0.1
 Java&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;TM&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; SE Runtime Environment &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;build 9.0.1+11&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
@@ -488,10 +492,10 @@ Java HotSpot&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;TM&lt;span class=&quot
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;graphviz
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Now we can type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dot -V&lt;/code&gt; in the bash command line to check if it was installed successfully.&lt;/p&gt;
+&lt;p&gt;Now we can type &lt;code class=&quot;highlighter-rouge&quot;&gt;dot -V&lt;/code&gt; in the bash command line to check if it was installed successfully.&lt;/p&gt;
 
 &lt;h1 id=&quot;check-installation-of-java-and-graphviz&quot;&gt;Check installation of Java and graphviz&lt;/h1&gt;
-&lt;p&gt;Official site provide a way to check if the environment of PlantUML is ready or not. First download &lt;a href=&quot;https://jaist.dl.sourceforge.net/project/plantuml/plantuml.jar&quot;&gt;plantuml.jar&lt;/a&gt; and then type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java -jar plantuml.jar -testdot&lt;/code&gt;. If each installation is OK, it will say: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Installation seems OK. File genration OK.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Official site provide a way to check if the environment of PlantUML is ready or not. First download &lt;a href=&quot;https://jaist.dl.sourceforge.net/project/plantuml/plantuml.jar&quot;&gt;plantuml.jar&lt;/a&gt; and then type &lt;code class=&quot;highlighter-rouge&quot;&gt;java -jar plantuml.jar -testdot&lt;/code&gt;. If each installation is OK, it will say: &lt;code class=&quot;highlighter-rouge&quot;&gt;Installation seems OK. File genration OK.&lt;/code&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;install-plugins-of-atom&quot;&gt;Install plugins of Atom&lt;/h1&gt;
 &lt;p&gt;There are two plugins necessary for using PlantUML in Atom.&lt;/p&gt;
@@ -503,23 +507,23 @@ Java HotSpot&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;TM&lt;span class=&quot
 
 &lt;p&gt;&lt;a href=&quot;https://atom.io/packages/language-plantuml&quot;&gt;Language-plantuml&lt;/a&gt; provide syntax highlight or autocomplete.
 &lt;a href=&quot;https://atom.io/packages/plantuml-preview&quot;&gt;plantuml-preview&lt;/a&gt; will create UML diagrams and display it. It also updates on save.
-You can install these two packages with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apm&lt;/code&gt; or directly install them in Atom GUI.&lt;/p&gt;
+You can install these two packages with &lt;code class=&quot;highlighter-rouge&quot;&gt;apm&lt;/code&gt; or directly install them in Atom GUI.&lt;/p&gt;
 
 &lt;p&gt;After installation, plantuml-preview needs some configurations.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/public/image/setting_of_plantuml.png&quot; alt=&quot;setting_of_plantuml&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Graphviz Dot Executable&lt;/strong&gt;: The path of dot which you get it by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;which dot&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Additional PlantUML Arguments&lt;/strong&gt;: It’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-jar&lt;/code&gt; with default value.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Graphviz Dot Executable&lt;/strong&gt;: The path of dot which you get it by &lt;code class=&quot;highlighter-rouge&quot;&gt;which dot&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Additional PlantUML Arguments&lt;/strong&gt;: It’s &lt;code class=&quot;highlighter-rouge&quot;&gt;-jar&lt;/code&gt; with default value.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;PlantUML Jar&lt;/strong&gt;: The file you have downloaded before, and put it at some where.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Java Executable&lt;/strong&gt;: Default is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java&lt;/code&gt; if you can run java in command line directly. If not, use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;which java&lt;/code&gt; to find the path.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Java Executable&lt;/strong&gt;: Default is &lt;code class=&quot;highlighter-rouge&quot;&gt;java&lt;/code&gt; if you can run java in command line directly. If not, use &lt;code class=&quot;highlighter-rouge&quot;&gt;which java&lt;/code&gt; to find the path.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;write-plantuml-code&quot;&gt;Write PlantUML code&lt;/h1&gt;
-&lt;p&gt;Congrulations! We have done all the preparation, and now we can write PlantUML code at Atom. The extension can be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.pu&lt;/code&gt;. For example:&lt;/p&gt;
+&lt;p&gt;Congrulations! We have done all the preparation, and now we can write PlantUML code at Atom. The extension can be &lt;code class=&quot;highlighter-rouge&quot;&gt;.pu&lt;/code&gt;. For example:&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@startuml
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@startuml
 Alice -&amp;gt; Bob: Authentication Request
 Bob --&amp;gt; Alice: Authentication Response
 
@@ -528,7 +532,7 @@ Alice &amp;lt;-- Bob: another authentication Response
 @enduml
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The shortcut key &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ctrl + Option + p&lt;/code&gt; can preview the UML diagrams.
+&lt;p&gt;The shortcut key &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl + Option + p&lt;/code&gt; can preview the UML diagrams.
 &lt;img src=&quot;/public/image/demo_of_plantuml_in_atom.png&quot; alt=&quot;demo_of_plantuml_in_atom&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;OK! It’s done! Enjoy it~ :tada:&lt;/p&gt;
@@ -556,7 +560,7 @@ Alice &amp;lt;-- Bob: another authentication Response
 &lt;h1 id=&quot;jeykllgemspec&quot;&gt;jeykll.gemspec&lt;/h1&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gemspec&lt;/code&gt; includes basic infos of the Jekyll project. It is necessary in a RubyGem project.&lt;/p&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gemspec&lt;/code&gt; includes basic infos of the Jekyll project. It is necessary in a RubyGem project.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;lib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;expand_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;lib&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__dir__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -564,7 +568,7 @@ Alice &amp;lt;-- Bob: another authentication Response
 &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jekyll/version&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Load the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lib/&lt;/code&gt; dir into built-in var &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$LOAD_PATH&lt;/code&gt; and require &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll/version.rb&lt;/code&gt; which includes version info of Jekyll. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;File.expand_path&lt;/code&gt; converts a pathname to an absolute pathname. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unshift&lt;/code&gt; can prepend objects to the front of self.&lt;/p&gt;
+&lt;p&gt;Load the &lt;code class=&quot;highlighter-rouge&quot;&gt;lib/&lt;/code&gt; dir into built-in var &lt;code class=&quot;highlighter-rouge&quot;&gt;$LOAD_PATH&lt;/code&gt; and require &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll/version.rb&lt;/code&gt; which includes version info of Jekyll. &lt;code class=&quot;highlighter-rouge&quot;&gt;File.expand_path&lt;/code&gt; converts a pathname to an absolute pathname. &lt;code class=&quot;highlighter-rouge&quot;&gt;unshift&lt;/code&gt; can prepend objects to the front of self.&lt;/p&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Gem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Specification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
   &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
@@ -578,10 +582,10 @@ Alice &amp;lt;-- Bob: another authentication Response
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Use ` ` to execute a shell script, the script here can get all files under the management of git.
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s.bindir = &quot;exe&quot;&lt;/code&gt; specify the executable ruby script in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exe/&lt;/code&gt;.
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;add_runtime_dependency&lt;/code&gt; adds a runtime dependency named gem with requirements to this gem.&lt;/p&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;s.bindir = &quot;exe&quot;&lt;/code&gt; specify the executable ruby script in &lt;code class=&quot;highlighter-rouge&quot;&gt;exe/&lt;/code&gt;.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;add_runtime_dependency&lt;/code&gt; adds a runtime dependency named gem with requirements to this gem.&lt;/p&gt;
 
-&lt;p&gt;We can install Jekyll by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem install jekyll&lt;/code&gt;, and gem will create a exculatable ruby script in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gems/ruby-2.X.X/bin&lt;/code&gt;. Implement in console of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll&lt;/code&gt; will call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exe/jekyll&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We can install Jekyll by &lt;code class=&quot;highlighter-rouge&quot;&gt;gem install jekyll&lt;/code&gt;, and gem will create a exculatable ruby script in &lt;code class=&quot;highlighter-rouge&quot;&gt;gems/ruby-2.X.X/bin&lt;/code&gt;. Implement in console of &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll&lt;/code&gt; will call &lt;code class=&quot;highlighter-rouge&quot;&gt;exe/jekyll&lt;/code&gt;.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -594,17 +598,17 @@ Alice &amp;lt;-- Bob: another authentication Response
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;STDOUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sync&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Normally &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;puts&lt;/code&gt; does not write immediately to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;STDOUT&lt;/code&gt;, but this can write every single character immediately to the console&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. It is very useful when build websocket server.&lt;/p&gt;
+&lt;p&gt;Normally &lt;code class=&quot;highlighter-rouge&quot;&gt;puts&lt;/code&gt; does not write immediately to &lt;code class=&quot;highlighter-rouge&quot;&gt;STDOUT&lt;/code&gt;, but this can write every single character immediately to the console&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. It is very useful when build websocket server.&lt;/p&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;PluginManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;require_from_bundler&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Call the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;require_from_bundler&lt;/code&gt; method which defined in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lib/jekyll/plugin_manager.rb&lt;/code&gt;. In fact, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;require &quot;jekyll&quot;&lt;/code&gt; will load jekyll.rb file, and all other modules are loaded in this file by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;autoload :XXX, &quot;jekyll/xxx&quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Call the &lt;code class=&quot;highlighter-rouge&quot;&gt;require_from_bundler&lt;/code&gt; method which defined in &lt;code class=&quot;highlighter-rouge&quot;&gt;lib/jekyll/plugin_manager.rb&lt;/code&gt;. In fact, &lt;code class=&quot;highlighter-rouge&quot;&gt;require &quot;jekyll&quot;&lt;/code&gt; will load jekyll.rb file, and all other modules are loaded in this file by &lt;code class=&quot;highlighter-rouge&quot;&gt;autoload :XXX, &quot;jekyll/xxx&quot;&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Deprecator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ARGV&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;This method will deal with arguments deprecated which defined in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lib/jekyll/deprecator.rb&lt;/code&gt;. It will show the error messages and abort calling.&lt;/p&gt;
+&lt;p&gt;This method will deal with arguments deprecated which defined in &lt;code class=&quot;highlighter-rouge&quot;&gt;lib/jekyll/deprecator.rb&lt;/code&gt;. It will show the error messages and abort calling.&lt;/p&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;mercenary&quot;&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
@@ -618,9 +622,9 @@ Alice &amp;lt;-- Bob: another authentication Response
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Command&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;subclasses&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;init_with_program&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Initilization of Jekyll commands in block of Mercenary. These commands are defined in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lib/jekyll/command.rb&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Initilization of Jekyll commands in block of Mercenary. These commands are defined in &lt;code class=&quot;highlighter-rouge&quot;&gt;lib/jekyll/command.rb&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jekyll.logger&lt;/code&gt; is using to manage logs.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll.logger&lt;/code&gt; is using to manage logs.&lt;/p&gt;
 
 &lt;h1 id=&quot;libjekyllrb&quot;&gt;lib/jekyll.rb&lt;/h1&gt;
 
@@ -645,7 +649,7 @@ Alice &amp;lt;-- Bob: another authentication Response
 &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jekyll/plugin&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lib/jekyll.rb&lt;/code&gt; requires &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rubygems&lt;/code&gt;, stdlib and 3rd party libs firstly. Also it will claim its own modules using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;autoload&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;require&lt;/code&gt;.&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lib/jekyll.rb&lt;/code&gt; requires &lt;code class=&quot;highlighter-rouge&quot;&gt;rubygems&lt;/code&gt;, stdlib and 3rd party libs firstly. Also it will claim its own modules using &lt;code class=&quot;highlighter-rouge&quot;&gt;autoload&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt;.&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;some_method&lt;/span&gt;
@@ -654,9 +658,9 @@ Alice &amp;lt;-- Bob: another authentication Response
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;class &amp;lt;&amp;lt; self&lt;/code&gt; opens up &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;’s singleton class, so that methods can be redefined for the current &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt; object. With this syntax, we don’t need to write &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;def self.some_method&lt;/code&gt; in the module everytime.&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;class &amp;lt;&amp;lt; self&lt;/code&gt; opens up &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;’s singleton class, so that methods can be redefined for the current &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt; object. With this syntax, we don’t need to write &lt;code class=&quot;highlighter-rouge&quot;&gt;def self.some_method&lt;/code&gt; in the module everytime.&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
-&lt;p&gt;There are such a set of methods defined in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;class &amp;lt;&amp;lt; self&lt;/code&gt; block:&lt;/p&gt;
+&lt;p&gt;There are such a set of methods defined in the &lt;code class=&quot;highlighter-rouge&quot;&gt;class &amp;lt;&amp;lt; self&lt;/code&gt; block:&lt;/p&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;# jekyll environment&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# configuration Hash by merging the default options with anything in _config.yml&lt;/span&gt;
@@ -669,16 +673,16 @@ Alice &amp;lt;-- Bob: another authentication Response
 
 &lt;hr /&gt;
 
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Stackoverflow: &lt;a href=&quot;https://stackoverflow.com/questions/29998728/what-stdout-sync-true-means&quot;&gt;What STDOUT.sync = true means?&lt;/a&gt;. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;Stackoverflow: &lt;a href=&quot;https://stackoverflow.com/questions/29998728/what-stdout-sync-true-means&quot;&gt;What STDOUT.sync = true means?&lt;/a&gt;. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;About the difference between &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;autoload&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;require&lt;/code&gt;, reference is &lt;a href=&quot;https://stackoverflow.com/questions/804297/when-to-use-require-load-or-autoload-in-rubyutm_medium=organic&amp;amp;utm_source=google_rich_qa&amp;amp;utm_campaign=google_rich_qa&quot;&gt;here&lt;/a&gt;. And I plan to write an another article about this. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;About the difference between &lt;code class=&quot;highlighter-rouge&quot;&gt;autoload&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt;, reference is &lt;a href=&quot;https://stackoverflow.com/questions/804297/when-to-use-require-load-or-autoload-in-rubyutm_medium=organic&amp;amp;utm_source=google_rich_qa&amp;amp;utm_campaign=google_rich_qa&quot;&gt;here&lt;/a&gt;. And I plan to write an another article about this. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
-    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Stackoverflow: &lt;a href=&quot;https://stackoverflow.com/questions/2505067/class-self-idiom-in-rubyutm_medium=organic&amp;amp;utm_source=google_rich_qa&amp;amp;utm_campaign=google_rich_qa&quot;&gt;class « self idiom in Ruby&lt;/a&gt;. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;Stackoverflow: &lt;a href=&quot;https://stackoverflow.com/questions/2505067/class-self-idiom-in-rubyutm_medium=organic&amp;amp;utm_source=google_rich_qa&amp;amp;utm_campaign=google_rich_qa&quot;&gt;class « self idiom in Ruby&lt;/a&gt;. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
@@ -698,7 +702,7 @@ Alice &amp;lt;-- Bob: another authentication Response
     
       <item>
         <title>'Web Full-stack develop reference'</title>
-        <description>&lt;p&gt;I finished reading the book of &lt;em&gt;&lt;a href=&quot;https://www.gitbook.com/book/coin8086/getfullstack/details&quot;&gt;Web Full-stack Develop Reference&lt;/a&gt;&lt;/em&gt; at one weekend&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. As writing in the book, it focuses on the principles, general methods and tools of Web developing, not a specific programming language. The first half of the book’s content is mainly introduced the basic knowledge of the Web includes the three elements of the web page elements – HTML, CSS, JavaScript, so I just looked through it. I focused on reading the third chapter – Programming Languages and Technologies. Besides, I made some others related researches about it and write a new post as below. (It’s terriable to write in English:joy:)&lt;/p&gt;
+        <description>&lt;p&gt;I finished reading the book of &lt;em&gt;&lt;a href=&quot;https://www.gitbook.com/book/coin8086/getfullstack/details&quot;&gt;Web Full-stack Develop Reference&lt;/a&gt;&lt;/em&gt; at one weekend&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. As writing in the book, it focuses on the principles, general methods and tools of Web developing, not a specific programming language. The first half of the book’s content is mainly introduced the basic knowledge of the Web includes the three elements of the web page elements – HTML, CSS, JavaScript, so I just looked through it. I focused on reading the third chapter – Programming Languages and Technologies. Besides, I made some others related researches about it and write a new post as below. (It’s terriable to write in English:joy:)&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -717,7 +721,7 @@ Alice &amp;lt;-- Bob: another authentication Response
 
 &lt;p&gt;While CGI handles one process for per request, so CGI is not a good choice for lots of requests that consume a lot of resources.&lt;/p&gt;
 
-&lt;h2 id=&quot;php&quot;&gt;PHP&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;php&quot;&gt;PHP&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 
 &lt;h2 id=&quot;java-servlet&quot;&gt;Java (Servlet)&lt;/h2&gt;
 
@@ -740,9 +744,9 @@ Alice &amp;lt;-- Bob: another authentication Response
 
 &lt;h2 id=&quot;ruby&quot;&gt;Ruby&lt;/h2&gt;
 
-&lt;p&gt;Ruby is the programming language which I am always using. Rack specification defines the interface between the server and the Ruby application which is similar to WSGI in Python. I never heard about Rack even I am using Ruby on Rails (it is based on Rack :cold_sweat:). As WSGI in Python, Rack also has the concept of middleware.&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Ruby is the programming language which I am always using. Rack specification defines the interface between the server and the Ruby application which is similar to WSGI in Python. I never heard about Rack even I am using Ruby on Rails (it is based on Rack :cold_sweat:). As WSGI in Python, Rack also has the concept of middleware.&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;nodejs&quot;&gt;Node.js&lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;nodejs&quot;&gt;Node.js&lt;sup id=&quot;fnref:4&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 
 &lt;hr /&gt;
 
@@ -789,19 +793,19 @@ Phusion Passenger (informally also known as mod_rails and mod_rack among the Rub
   &lt;/ul&gt;
 &lt;/blockquote&gt;
 
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Strictly speaking, it is only the author’s own summary of the Gitbook. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;Strictly speaking, it is only the author’s own summary of the Gitbook. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;I am not very understanding for PHP, after all, I am an ‘entery level’ player. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;I am not very understanding for PHP, after all, I am an ‘entery level’ player. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
-    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;I want to write an another post to introduce WSGI and Rack. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;I want to write an another post to introduce WSGI and Rack. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
-    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Still in studying process, I may write a new post about it after it~ &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:4&quot;&gt;
+      &lt;p&gt;Still in studying process, I may write a new post about it after it~ &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
@@ -825,7 +829,7 @@ Phusion Passenger (informally also known as mod_rails and mod_rack among the Rub
         <title>Rails error of 'key must be 32 bytes'</title>
         <description>&lt;p&gt;I made a Rails Application with Rails 5.0.0.1, and got an strange error when I run the server by localhost.&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ArgumentError in WelcomeController#index
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ArgumentError in WelcomeController#index
 	key must be 32 bytes
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -845,7 +849,7 @@ Phusion Passenger (informally also known as mod_rails and mod_rack among the Rub
 &lt;pre&gt;&lt;code class=&quot;language-Ruby&quot;&gt;# gem 'rails', '5.0.0.1' =&amp;gt; '5.0.1'
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;And then &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle update&lt;/code&gt; to update the gems. The error will be gone.&lt;/p&gt;
+&lt;p&gt;And then &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle update&lt;/code&gt; to update the gems. The error will be gone.&lt;/p&gt;
 
 &lt;p&gt;Some people said they sitll got the error after they change the Gemfile. It’s a better way to update Ruby version too. :)&lt;/p&gt;
 
@@ -877,30 +881,30 @@ Phusion Passenger (informally also known as mod_rails and mod_rack among the Rub
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;use-redcarpet-or-karmdown-as-markdown-compiler&quot;&gt;Use redcarpet or karmdown as Markdown compiler&lt;sup id=&quot;fnref:footnote&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:footnote&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;use-redcarpet-or-karmdown-as-markdown-compiler&quot;&gt;Use redcarpet or karmdown as Markdown compiler&lt;sup id=&quot;fnref:footnote&quot;&gt;&lt;a href=&quot;#fn:footnote&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 
-&lt;p&gt;Set it in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; file:&lt;/p&gt;
+&lt;p&gt;Set it in &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; file:&lt;/p&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;ss&quot;&gt;markdwon: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kramdown&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# or redcarpet&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;use-latex-like-code&quot;&gt;Use LaTeX-like code&lt;/h2&gt;
 
-&lt;p&gt;MathJax use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\\( \\)&lt;/code&gt; for inline math and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\\[ \\]&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$$ $$&lt;/code&gt; for displayed math. For instance:&lt;/p&gt;
+&lt;p&gt;MathJax use &lt;code class=&quot;highlighter-rouge&quot;&gt;\\( \\)&lt;/code&gt; for inline math and &lt;code class=&quot;highlighter-rouge&quot;&gt;\\[ \\]&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;$$ $$&lt;/code&gt; for displayed math. For instance:&lt;/p&gt;
 
 &lt;div class=&quot;language-latex highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;$$&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; E &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; mc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$$&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;You can get:&lt;/p&gt;
 
-\[E=mc^2\]
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;E=mc^2&lt;/script&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\\( \alpha\times\beta\times\gamma \\)&lt;/code&gt; can get \(\alpha\times\beta\times\gamma\)&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\\( \alpha\times\beta\times\gamma \\)&lt;/code&gt; can get \(\alpha\times\beta\times\gamma\)&lt;/p&gt;
 
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:footnote&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Because some strange things will happen when you use default Markdown compiler. &lt;a href=&quot;#fnref:footnote&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:footnote&quot;&gt;
+      &lt;p&gt;Because some strange things will happen when you use default Markdown compiler. &lt;a href=&quot;#fnref:footnote&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
@@ -929,11 +933,11 @@ Phusion Passenger (informally also known as mod_rails and mod_rack among the Rub
   &lt;li&gt;Download &amp;amp; install &lt;a href=&quot;http://amaxwell.github.io/tlutility/&quot;&gt;TeX Live Utility&lt;/a&gt;: TeX Live Utility is a GUI App for management of updating, install and otherwis managing TeX Live.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;After these two steps, latex can be used correctly. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;latex xxx.tex&lt;/code&gt; to compile tex file to dvi file. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dvipdfmx&lt;/code&gt; to make dvi file to pdf file. However, it just can be useful for english writting, if you want to write for Chinese or Japanese, it needs other configurations.&lt;/p&gt;
+&lt;p&gt;After these two steps, latex can be used correctly. &lt;code class=&quot;highlighter-rouge&quot;&gt;latex xxx.tex&lt;/code&gt; to compile tex file to dvi file. &lt;code class=&quot;highlighter-rouge&quot;&gt;dvipdfmx&lt;/code&gt; to make dvi file to pdf file. However, it just can be useful for english writting, if you want to write for Chinese or Japanese, it needs other configurations.&lt;/p&gt;
 
 &lt;h2 id=&quot;install-platex&quot;&gt;Install platex&lt;/h2&gt;
 
-&lt;p&gt;Use Tex Live Utility can install different compilers include &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;platex&lt;/code&gt; or some font packages.&lt;/p&gt;
+&lt;p&gt;Use Tex Live Utility can install different compilers include &lt;code class=&quot;highlighter-rouge&quot;&gt;platex&lt;/code&gt; or some font packages.&lt;/p&gt;
 
 &lt;h2 id=&quot;errors&quot;&gt;Errors&lt;/h2&gt;
 
@@ -957,9 +961,9 @@ dvipdfmx:warning : » Please check if kpathsea library can find this font: qtmr
 dvipdfmx:fatal: Cannot proceed without .vf or “physical” font for PDF output…&lt;/p&gt;
     &lt;/blockquote&gt;
 
-    &lt;p&gt;TLU to install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kastrup&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tex-gyre&lt;/code&gt;&lt;/p&gt;
+    &lt;p&gt;TLU to install &lt;code class=&quot;highlighter-rouge&quot;&gt;kastrup&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;tex-gyre&lt;/code&gt;&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;When transfer dvi to pdf with dvipdfmx, it said: Could not locate a virtual/physical font for TFM “rml” (or “gbm” here).: Find file of /usr/local/texlive/2017basic/texmf-config/dvipdfmx/dvipdfmx.cfg, and uncomment “cid-x.map”. After that, make &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo mktexlsr&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;When transfer dvi to pdf with dvipdfmx, it said: Could not locate a virtual/physical font for TFM “rml” (or “gbm” here).: Find file of /usr/local/texlive/2017basic/texmf-config/dvipdfmx/dvipdfmx.cfg, and uncomment “cid-x.map”. After that, make &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo mktexlsr&lt;/code&gt;.&lt;/li&gt;
   &lt;li&gt;dvipdfmx can load cid-x.map, but it said: dvipdfmx:fatal: Could not find encoding file “H”. : Tex Live Utility installed “adobemapping”.&lt;/li&gt;
 &lt;/ol&gt;
 
