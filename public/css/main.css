@@ -151,7 +151,13 @@ table td:not(:last-child) { border-right: 1px solid #ddd; }
 @media screen and (max-width: 700px) { .sidebar .col { box-shadow: none; margin-top: 0 !important; outline: none; border-top: 2px dotted #ccc; }
   .sidebar .col:last-child { border-bottom: 2px dotted #ccc; } }
 
-.sidebar .col .search { width: 100%; font-size: 16px; background-image: url("/public/image/searchicon.png"); background-color: #fff; background-position: 8px 9px; background-repeat: no-repeat; border: none; padding: 8px 8px 8px 30px; box-sizing: border-box; }
+.sidebar .col .search-input { width: 100%; font-size: 16px; background-image: url("/public/image/searchicon.png"); background-color: #fff; background-position: 8px 9px; background-repeat: no-repeat; border: none; padding: 8px 8px 8px 30px; box-sizing: border-box; }
+
+.sidebar .col .search-result { position: absolute; width: 100%; text-align: left; margin-top: 2px; z-index: 999; padding-right: 22px; box-sizing: border-box; }
+
+.sidebar .col .search-result div { background-color: #FFF; box-shadow: 10px 10px 10px #CCC, -10px 10px 10px #CCC; border-radius: 0 0 8px 8px; }
+
+.sidebar .col .search-result div #results-container { margin-bottom: 0; }
 
 .sidebar .col .category-list { margin-left: 0; list-style: none; }
 
