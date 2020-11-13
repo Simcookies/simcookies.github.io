@@ -19,7 +19,7 @@
     <span class="k">return</span> <span class="kp">false</span>
   <span class="k">end</span>
 <span class="k">end</span>
-</code></pre></div></div><p>It is a bit unclear and unreadable. When I study in <a href="https://www.codeschool.com/" target="_blank" rel="noopener noreferrer">Code School</a>, I learned about a new concept called <code class="highlighter-rouge">Guard Clauses</code>. We can use it to replace nested conditional with Guard Clauses.</p><div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Ruby code</span>
+</code></pre></div></div><p>It is a bit unclear and unreadable. When I study in <a href="https://www.codeschool.com/" target="_blank" rel="noopener noreferrer">Code School</a>, I learned about a new concept called <code class="language-plaintext highlighter-rouge">Guard Clauses</code>. We can use it to replace nested conditional with Guard Clauses.</p><div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Ruby code</span>
 <span class="k">def</span> <span class="nf">publish_book</span>
   <span class="k">return</span> <span class="kp">false</span> <span class="k">unless</span> <span class="vi">@book</span><span class="p">.</span><span class="nf">is_approved?</span>
   <span class="k">return</span> <span class="kp">false</span> <span class="k">if</span> <span class="vi">@book</span><span class="p">.</span><span class="nf">author</span> <span class="o">==</span> <span class="s2">"Bad"</span>
