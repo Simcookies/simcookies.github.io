@@ -5,8 +5,8 @@
     <description>All about Simcookies Project.</description>
     <link>https://simcookies.github.io/</link>
     <atom:link href="https://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 13 Nov 2020 19:26:53 +0900</pubDate>
-    <lastBuildDate>Fri, 13 Nov 2020 19:26:53 +0900</lastBuildDate>
+    <pubDate>Fri, 13 Nov 2020 20:27:13 +0900</pubDate>
+    <lastBuildDate>Fri, 13 Nov 2020 20:27:13 +0900</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -51,7 +51,7 @@
       &lt;th&gt;ID&lt;/th&gt;
       &lt;th&gt;年龄&lt;/th&gt;
       &lt;th&gt;有工作&lt;/th&gt;
-      &lt;th&gt;由自己的房子&lt;/th&gt;
+      &lt;th&gt;有自己的房子&lt;/th&gt;
       &lt;th&gt;信贷状况&lt;/th&gt;
       &lt;th&gt;类别&lt;/th&gt;
     &lt;/tr&gt;
