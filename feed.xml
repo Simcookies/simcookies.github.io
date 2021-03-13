@@ -5,9 +5,101 @@
     <description>All about Simcookies Project.</description>
     <link>https://simcookies.github.io/</link>
     <atom:link href="https://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 13 Nov 2020 22:12:08 +0900</pubDate>
-    <lastBuildDate>Fri, 13 Nov 2020 22:12:08 +0900</lastBuildDate>
+    <pubDate>Sat, 13 Mar 2021 12:59:54 +0900</pubDate>
+    <lastBuildDate>Sat, 13 Mar 2021 12:59:54 +0900</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>机器学习算法系列 - 决策树C4.5算法</title>
+        <description>&lt;p&gt;上一篇文章&lt;a href=&quot;/2020/11/12/summary-of-machine-learning-algorithms-decision-tree-id3&quot;&gt;机器学习算法系列 - 决策树ID3算法&lt;/a&gt;, 对决策树中非常典型的 ID3 算法做了深入介绍. 这篇文章本来会大概总结一下 C4.5 算法. 但是由于 C4.5 算法与 ID3 算法高度的一致, 所以这里只谈及一些前者相对于后者的改进.&lt;/p&gt;
+
+&lt;h1 id=&quot;提出问题&quot;&gt;提出问题&lt;/h1&gt;
+
+&lt;p&gt;ID3 算法的核心在于找到信息增益最大的特征, 在上一篇文章的例子当中, 就能感觉到其非常直观和易于理解. 但是在一些特殊的情况下, 单是绝对的信息增益是不能够找到真正最有用的特征的.&lt;/p&gt;
+
+&lt;p&gt;假设训练数据集中有一列 ID, 每条记录都有一个独立的 ID. 那么这个 ID 列的条件熵会变成 0 (因为在 ID 确定的条件下, 出现的类别数只有一个). 使用这个值为 0 的条件熵得到的信息增益就会非常大 (等于原来的信息熵). 从现实意义上看, 这也是符合的. 因为一条记录如果确定了它的 ID, 那么他的类别一定也是能被确定的. 原因就是 ID 这个信息里面包含了太多的信息量了. 但是显然不能使用 ID 作为一个节点的特征. 实际上, 对于某些特征来说, 其每个属性所包含的每个分类类别很多的时候, 都会得到很大信息增益. 这个时候只通过信息增益是不能选出有效的特征的.&lt;/p&gt;
+
+&lt;p&gt;概括地说, 就是一个特征其特征熵很大的时候信息增益就很大, 反之就很小.&lt;/p&gt;
+
+&lt;h1 id=&quot;解决方法&quot;&gt;解决方法&lt;/h1&gt;
+
+&lt;p&gt;为了排除特征本身信息熵地干扰, C4.5 算法选择了信息增益率 (Gain Ratio) 作为选择分支的准则。对于特征熵很大的特征，除上一个相应的较大的数值，反之特征熵小的特征除一个较小的数值，使得特征的信息熵的影响变小。这里 C4.5 算法中所除以的数值使用了属性熵。&lt;/p&gt;
+
+\[H_A(D) = -\sum\limits_{i=1}^{n}\frac{|D_i|}{|D|}\log\frac{|D_i|}{|D|}\notag\]
+
+&lt;p&gt;当数据集 $D$ 中 $A$ 属性里有很多不同的取值时，上述的属性熵就会变得很大。这样由信息增益除以该值所得到的增益率就能够正真反映出属性 $A$ 作为一个特征，区分样本的能力。&lt;strong&gt;最终就避免了 ID3 趋向与选择取值较多的属性作为节点的问题&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;描述&quot;&gt;描述&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;从根节点开始, 对节点计算所有可能的特征的信息增益;&lt;/li&gt;
+  &lt;li&gt;选择&lt;strong&gt;信息增益比&lt;/strong&gt;最大的特征作为节点的特征, 构建子节点;&lt;/li&gt;
+  &lt;li&gt;对子节点递归调用上述方法, 构建决策树;&lt;/li&gt;
+  &lt;li&gt;直到所有特征的信息增益均很小 (可用事前决定的阈值进行判断) 或者没有特征可以选择&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;步骤&quot;&gt;步骤&lt;/h2&gt;
+
+&lt;p&gt;输入: 训练数据集 $D$, 特征集 $A$, 阈值 $\epsilon$&lt;br /&gt;
+输出: 决策树 $T$&lt;br /&gt;
+步骤:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;若 $D$ 中所有实例输入同一类 $C_k$, 则 $T$ 为单节点树, 并将类 $C_k$ 作为该节点的类标记, 返回 $T$; (只有一个类的情况)&lt;/li&gt;
+  &lt;li&gt;若 $A=\varnothing$ , 则 $T$ 为单节点树, 并将 $D$ 实例数最大的类 $C_k$ 作为该节点的类标记, 返回 $T$; (没有特征量的情况)&lt;/li&gt;
+  &lt;li&gt;否则, 计算 $A$ 中各个特征对于 $D$ 的&lt;strong&gt;信息增益比&lt;/strong&gt;, 选择信息增益比最大的特征 $A_g$;&lt;/li&gt;
+  &lt;li&gt;如果 $A_g$ 的信息增益比小于阈值 $\epsilon$, 则置 $T$ 为单节点树, 并将 $D$ 中实例数最大的类 $C_k$ 作为该节点的类标记, 返回 $T$;&lt;/li&gt;
+  &lt;li&gt;否则, 对 $A_g$ 的每一个可能值 $a_i$, 依 $A_g = a_i$ 将 $D$ 分割为若干个非空子集 $D_i$, 将 $D_i$ 中实例数最大的类作为标记, 构建子节点, 由节点及其子节点构成树 $T$, 返回 $T$;&lt;/li&gt;
+  &lt;li&gt;对于第 $i$ 个子节点, 以 $D_i$ 为训练集, 以 $A-{A_g}$ 为特征集, 递归调用步1 ~ 步5, 得到子树 $T_i$, 返回 $T_i$.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;可以看出 C4.5 算法和 ID3 算法除了特征选择的参照物不同之外，其他基本上是一致的。&lt;/p&gt;
+
+&lt;h1 id=&quot;基于-python-scratch-的实现&quot;&gt;基于 Python Scratch 的实现&lt;/h1&gt;
+
+&lt;p&gt;对于同一个问题&lt;a href=&quot;/2020/11/12/summary-of-machine-learning-algorithms-decision-tree-id3#问题提出&quot;&gt;预测能否贷款&lt;/a&gt;，和前文的ID3一样，这里也给出 Python Scratch 的实现。代码上C4.5算法和ID3算法也是一致的，只是增加了计算属性熵的部分，并且原来取得最大信息增益的函数需要改为计算最大信息增益率的函数。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;find_best_gain_ratio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;h_d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calc_entropy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gr_max&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;feature_gr_max&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x_feature&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calc_probs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_feature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Hs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;calc_entropy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_feature&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unique&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_feature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;h_da&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Hs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h_d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h_da&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 计算属性熵
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;h_ad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calc_entropy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_feature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;gr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h_ad&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gr_max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;gr_max&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gr&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;feature_gr_max&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gr_max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;feature_gr_max&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;最终版的代码在这里 &lt;a href=&quot;https://github.com/simcookies/algorithm_implement/blob/master/ml/Decision_Tree_C4.5_scratch.ipynb&quot;&gt;Github&lt;/a&gt;。scikit-learn 的实现和之前的一篇完全一样，这里不再赘述。另外根据 scikit-learn 的官方文档，决策树中采用的并不是 ID3/C4.5 算法，而是 CART。（这就很尴尬😅了，不过知道算法的实现终归是好事。）&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;scikit-learn uses an optimised version of the CART algorithm; however, scikit-learn implementation does not support categorical variables for now.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;以上就是关于 C4.5 算法的说明。之后算法的发明者 Ross Quinlan 将算法更新到了 C5.0（有专利保护），使得计算更快，结果更精确，不过这就是另外的话了。&lt;/p&gt;
+</description>
+        <pubDate>Sat, 13 Mar 2021 12:30:31 +0900</pubDate>
+        <link>https://simcookies.github.io/2021/03/13/summary-of-machine-learning-algorithms-decision-tree-c4.5</link>
+        <guid isPermaLink="true">https://simcookies.github.io/2021/03/13/summary-of-machine-learning-algorithms-decision-tree-c4.5</guid>
+        
+        <category>algorithm</category>
+        
+        <category>formula</category>
+        
+        
+        <category>machine learning</category>
+        
+      </item>
     
       <item>
         <title>机器学习算法系列 - 决策树ID3算法</title>
@@ -454,7 +546,7 @@ style N4 fill:#ff0
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20201113191853.png&quot; alt=&quot;决策树&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;可以看出 scikit-learn 得到的树和上面 scratch 得到树是一样的. 到这里, 关于 ID3 简单的实现就结束了.&lt;/p&gt;
+&lt;p&gt;可以看出 scikit-learn 得到的树和上面 scratch 得到树是一样的. 最终版的代码在这里 &lt;a href=&quot;https://github.com/simcookies/algorithm_implement/blob/master/ml/Decision_Tree_ID3_scratch.ipynb&quot;&gt;Github&lt;/a&gt;。到这里, 关于 ID3 简单的实现就结束了.&lt;/p&gt;
 </description>
         <pubDate>Thu, 12 Nov 2020 22:02:31 +0900</pubDate>
         <link>https://simcookies.github.io/2020/11/12/summary-of-machine-learning-algorithms-decision-tree-id3</link>
@@ -574,7 +666,11 @@ child1 --&amp;gt; child4[Leaf]
 
 &lt;p&gt;因此, 需要一个相对的值来进行校正, 这就导入了&lt;strong&gt;信息增益比&lt;/strong&gt;:&lt;/p&gt;
 
-\[g_R(D,A)=\frac{g(D,A)}{H(D)}\notag\]
+\[g_R(D,A)=\frac{g(D,A)}{H_A(D)}\notag\]
+
+&lt;p&gt;$H_A(D)$ 为特征 $A$ 的属性熵, 也叫特征熵:&lt;/p&gt;
+
+\[H_A(D) = -\sum\limits_{i=1}^{n}\frac{|D_i|}{|D|}\log\frac{|D_i|}{|D|}\notag\]
 
 &lt;h3 id=&quot;基尼指数-gini-index&quot;&gt;基尼指数 (Gini Index)&lt;/h3&gt;
 
@@ -1538,49 +1634,6 @@ Phusion Passenger (informally also known as mod_rails and mod_rack among the Rub
         
         
         <category>basics</category>
-        
-      </item>
-    
-      <item>
-        <title>Rails error of 'key must be 32 bytes'</title>
-        <description>&lt;p&gt;I made a Rails Application with Rails 5.0.0.1, and got an strange error when I run the server by localhost.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ArgumentError in WelcomeController#index
-	key must be 32 bytes
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And details are here:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Extracted&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;around&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#72):&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;70&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cipher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_cipher&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;71&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;encrypt&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;72&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@secret&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;73&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;74&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Rely on OpenSSL for the initialization vector&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;75&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;random_iv&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;It seems the version of the Rails need to be update. So I changed Gemfile:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-Ruby&quot;&gt;# gem 'rails', '5.0.0.1' =&amp;gt; '5.0.1'
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And then &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle update&lt;/code&gt; to update the gems. The error will be gone.&lt;/p&gt;
-
-&lt;p&gt;Some people said they sitll got the error after they change the Gemfile. It’s a better way to update Ruby version too. :)&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/rails/rails/issues/25185&quot;&gt;refference is here&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Thu, 30 Nov 2017 15:49:44 +0900</pubDate>
-        <link>https://simcookies.github.io/2017/11/30/rails-error-of-key-must-be-32-bytes</link>
-        <guid isPermaLink="true">https://simcookies.github.io/2017/11/30/rails-error-of-key-must-be-32-bytes</guid>
-        
-        <category>ruby</category>
-        
-        <category>rails</category>
-        
-        
-        <category>solution</category>
         
       </item>
     
