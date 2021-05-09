@@ -5,9 +5,228 @@
     <description>All about Simcookies Project.</description>
     <link>https://simcookies.github.io/</link>
     <atom:link href="https://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 13 Mar 2021 12:59:54 +0900</pubDate>
-    <lastBuildDate>Sat, 13 Mar 2021 12:59:54 +0900</lastBuildDate>
+    <pubDate>Sun, 09 May 2021 16:37:58 +0900</pubDate>
+    <lastBuildDate>Sun, 09 May 2021 16:37:58 +0900</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>机器学习算法系列 - 逻辑回归</title>
+        <description>&lt;p&gt;逻辑回归(Logistic Regression)也是非常经典以及常用的算法. 虽然名字叫做”回归”, 但实际上是一个常用于解决分类且多是二分类问题的算法. 在一些文献中也会被称为对数回归或者最大熵分类. 在这个模型中, 使用了逻辑函数(Logit)对描述单个实验可能结果的&lt;strong&gt;概率&lt;/strong&gt;进行建模.&lt;/p&gt;
+
+&lt;h1 id=&quot;逻辑回归&quot;&gt;逻辑回归&lt;/h1&gt;
+
+&lt;h2 id=&quot;logit-函数和-sigmoid-函数&quot;&gt;Logit 函数和 Sigmoid 函数&lt;/h2&gt;
+
+&lt;p&gt;为了讨论逻辑回归中的核心也就是Logit函数, 首先要看Odds. Odds 又叫发生比或者叫几率, 指的是一个事件发生和不发生的概率的比值.&lt;/p&gt;
+
+\[\text{odds}=\frac{p}{1-p}\notag\]
+
+&lt;p&gt;如果能够预测出这个Odds, 也就能够计算得到该事件发生的概率了. 而Logit函数就是对这里的 Odds 取对数.&lt;/p&gt;
+
+\[\text{logit}(\text{p})=\log\frac{p}{1-p}\notag\]
+
+&lt;p&gt;&lt;strong&gt;问题假设&lt;/strong&gt;: 现在要预测能否通过银行的贷款审核(结果只有是否两种, 属于二分类问题), 而手头已有的数据特征量为用户的个人信息以及信用卡偿还信息等. (这里的特征量用 $x_i(i=1,2,\dots,n)$ 表示) 这里我们假设 $\text{logit}(\text{p})$ 和特征量之间服从线性关系 (至于为什么要这么假设, 到后面可以看到这个假设能够帮助我们做分类).&lt;/p&gt;
+
+\[\begin{align*}
+&amp;amp;\log\frac{p}{1-p}=\theta_0+\theta_1x_1+\theta_2x_2+\dots+\theta_nx_n=\vec{\theta}\cdot\vec{x}\\
+&amp;amp;\Rightarrow \frac{p}{1-p} = \exp(\vec{\theta}\cdot\vec{x})\\
+&amp;amp;\Rightarrow p=\frac{\exp(\vec{\theta}\cdot\vec{x})}{1+\exp(\vec{\theta}\cdot\vec{x})}=\frac{1}{1+\exp(-\vec{\theta}\cdot\vec{x})}=g(\vec{\theta}\cdot\vec{x})
+\end{align*}\]
+
+&lt;p&gt;最后得到的这个假设函数称之为 Logistic 函数, 也叫 &lt;strong&gt;Sigmoid 函数&lt;/strong&gt;.其函数图像为:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20210502173103.png&quot; alt=&quot;sigmoid&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;其横轴就是特征量的权重和, 纵轴就是该事件发生的概率. 再根据得到的概率, 设定一个阈值, 也叫决策边界(Decision Bound). 比如这里我们设置阈值为0.5, 概率大于0.5的认为该事件会发生, 也就是银行贷款能通过, 小于0.5则不能通过. 也就是说, 不同于决策树分类得到的结果, 逻辑回归不仅可以得到最终的分类结果, 还能够得到中间产物 – 属于某一个类别的概率 $p$.&lt;/p&gt;
+
+&lt;p&gt;在日常生活中, 我们会用到加权求和分类的方法. 给用户每个特征量一个权重之后, 计算加权求和. 如果分数超过了某一个阈值我们就认为可以放贷. 其实这个方法用类似上述的数学语言表达的话, 可以认为最后计算的总分减去阈值是真正的权重和. 这个特征量的权重和超过零的话就判断为该事件发生, 反之为不发生.这里也用到了一个假设函数, 就是&lt;strong&gt;阶梯函数&lt;/strong&gt;(Step function).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20210502175321.png&quot; alt=&quot;sigmoid_and_step&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如上图所示, 阶梯函数更加直接. 但是阶梯函数在加权和接近于0的部分会非常的敏感, 对数据的误差容忍度很低, 并且其在0处不能够微分. 相比之下, Sigmoid函数就显得温和一些, 且单调递增可微.&lt;/p&gt;
+
+&lt;h2 id=&quot;逻辑回归的算法描述&quot;&gt;逻辑回归的算法描述&lt;/h2&gt;
+
+&lt;p&gt;有了 Sigmoid 函数的加持, 从特征量 $\vec{x}$ 到对数Odds $\text{logit}(\text{p})$ 的一一映射就产生了, 问题就在于如何确定式子里的参数 $\theta$ 的值. 其实逻辑回归本质上是在用简单线性回归的预测结果去逼近对数发生比或者说对数几率, 所以在&lt;strong&gt;机器学习方法&lt;/strong&gt;这本书中, 周老师更愿意把 Logistic Regression 翻译成”对数几率回归”, 简称”对率回归”. 个人感觉非常赞同! (但是基于很多人还是会用”逻辑回归”这个词, 所以本文也保持这个名称)&lt;/p&gt;
+
+&lt;p&gt;同线性回归一样, 为了确定参数 $\theta$ 需要定义一个代价函数, 再通过优化算法最小化代价函数. 首先假设函数(Hypothesis)为:&lt;/p&gt;
+
+\[h_\theta(x)=\text{Sigmoid}(\theta^Tx)=\frac{1}{1+\exp(-\theta^Tx)}\notag\]
+
+&lt;p&gt;需要进行学习的目标参数(Parameter)为上式中的 $\theta$. 线性回归中采用的代价函数为:&lt;/p&gt;
+
+\[J(\theta)=\frac 1 m\sum_{i=1}^{m}\frac 1 2\left(h_\theta\left(x^{(i)}\right)-y^{(i)}\right)^2\notag\]
+
+&lt;p&gt;其中 $m$ 是数据的数量. 但是假设函数是 Logit 函数, 所以得到的代价函数将是非凸函数. 对于非凸函数使用梯度下降法将有可能找不到全局最小值. 这里采用对数极大似然估计可以将代价函数转换为凸函数:&lt;/p&gt;
+
+\[J(\theta)=\frac 1 m \sum_{i=1}^m\left[-y^{(i)}\log\left(h_\theta\left(x^{(i)}\right)\right)-\left(1-y^{(i)}\right)\log\left(1-h_\theta\left(x^{(i)}\right)\right)\right]\notag\]
+
+&lt;p&gt;可以求得代价函数对 $\theta$ 的导数为:&lt;/p&gt;
+
+\[\frac\partial{\partial\theta_j}J(\theta)=\frac 1 m\sum_{i=1}^m\left(h_\theta\left(x^{(i)}\right)-y^{(i)}\right)x_j^{(i)}\notag\]
+
+&lt;p&gt;利用上述的导数不断地更新参数 $\theta$, 就能获得最小的代价函数 $\min_\theta J(\theta)$:&lt;/p&gt;
+
+\[\theta_j\Leftarrow\theta_j-\alpha\frac\partial{\partial\theta_j}J(\theta)\notag\]
+
+&lt;p&gt;这里的 $\alpha$ 为学习速率. 有了上面的值, 算法可以被描述为:&lt;/p&gt;
+
+&lt;p&gt;输入: 训练数据集 D, 学习速率 $\alpha$&lt;br /&gt;
+输出: 模型权重参数 $\theta$&lt;br /&gt;
+步骤:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;计算代价函数平均梯度;&lt;/li&gt;
+  &lt;li&gt;乘上学习速率;&lt;/li&gt;
+  &lt;li&gt;计算更新权重参数 $\theta$;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;基于-python-scratch-的实现&quot;&gt;基于 Python Scratch 的实现&lt;/h1&gt;
+
+&lt;p&gt;为了方便理解, 可以使用 Scikit-Learn 的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make_classification&lt;/code&gt; 帮助我们生成一堆用来分类的, 简单的数据.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.datasets&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;make_classification&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;make_classification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n_samples&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n_features&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n_informative&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n_redundant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n_clusters_per_class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;class_sep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;random_state&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这里生成了20组拥有两个类别的数据, 特征量的数量也只有1个. 绘制成图形如下图:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20210509124118.png&quot; alt=&quot;下载&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;首先定义代价函数:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# 后续要用的 sigmoid 函数
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sigmoid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+
+&lt;span class=&quot;c1&quot;&gt;# 正向计算得到预测值
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ravel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;hx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sigmoid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hx&lt;/span&gt;
+
+
+&lt;span class=&quot;c1&quot;&gt;# 代价函数
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cost_fuction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;predictions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;class1_cost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predictions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;class2_cost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predictions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;class1_cost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class2_cost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;再定义用于更新权重参数的核心函数:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;update_weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.01&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;predictions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gradient&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predictions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gradient&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gradient&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这里默认学习速率 lr 为 0.01. 最后定义包含核心算法的, 用于学习的函数:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.01&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cost_history&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iters&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost_fuction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;cost_history&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update_weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iters&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;f&quot;Epochs:&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iters&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;, iters: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;, cost: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cost&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost_history&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;训练函数中的迭代次数不限, 而是用 Epoch 来指定. 每一个 Epoch 里面默认循环 iter = 1000 次, 并且输出每个Epoch的代价函数值, 以查看训练过程. 预先使用随机函数定义好初始的权重参数, 使用默认10次Epoch来训练.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;initial_weights&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cost_history&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initial_weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.01&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上述代码的输出为:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Epochs:0, iters: 0, cost: 0.32268668797387234
+Epochs:1, iters: 1000, cost: 0.1632418968511627
+Epochs:2, iters: 2000, cost: 0.13241899314581226
+Epochs:3, iters: 3000, cost: 0.11868723129920973
+Epochs:4, iters: 4000, cost: 0.1108135413966402
+Epochs:5, iters: 5000, cost: 0.10568263401138037
+Epochs:6, iters: 6000, cost: 0.10206687727097812
+Epochs:7, iters: 7000, cost: 0.09937998342713258
+Epochs:8, iters: 8000, cost: 0.09730508677348992
+Epochs:9, iters: 9000, cost: 0.09565536684950605
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;可以看到, 随着循环次数的增加, 代价函数的值再不断地变小. 可视化一下看一下:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20210509152656.png&quot; alt=&quot;下载 (1)&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;可以看出循环了10000次也就是10个Epoch的时候, 代价函数的值已经很小了, 就是说对于学习速率 0.01 的情况, 学习到这里就可以了. 尝试不同的学习速率:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20210509153535.png&quot; alt=&quot;下载&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;很明显的看到, 学习速率越大, 代价函数的值下降的也越快, 至少在这个例子里是这样. 对于复杂的问题的话, 合适的学习速率的选择是非常重要的. 对于 0.01 的学习速率, 得到其计算好的权重参数后, 考察一下其模型的精度. 还是用最直观的描点看:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20210509153941.png&quot; alt=&quot;下载&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;对比预测的点还有实际的点, 可以看到20点中有一个点(十分接近于0)预测发生了错位(精度为95%), 虽然可以通过继续学习提高精度, 但是基本上已经算可以了. 复杂的问题中不断地学习会导致过学习问题, 这也是很常见的.&lt;/p&gt;
+
+&lt;h1 id=&quot;基于-scikit-learn-的实现&quot;&gt;基于 Scikit-Learn 的实现&lt;/h1&gt;
+
+&lt;p&gt;Scikit-Learn中提供了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LogisticRegression&lt;/code&gt; 的函数. 至于数据我们采用 Scikit-Learn 的 Toy Datasets 中的判断乳腺癌阴阳性的数据集. 并且为了便于计算, 使用最大最小值 Scaler 将特征量映射到 (0, 1) 区间上去.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.datasets&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;load_breast_cancer&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.preprocessing&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MinMaxScaler&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;load_breast_cancer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;normalized_range&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MinMaxScaler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;feature_range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;normalized_range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit_transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.linear_model&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LogisticRegression&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;clf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LogisticRegression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;clf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;clf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 0.9718804920913884
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;就是这样的简单, 基本上默认的参数可以保证很高的精度, 达到了0.97以上.再尝试用我们自己的函数:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;initial_weights&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initial_weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;accuracy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 0.9736379613356766
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在使用很大的学习速率还有足够的迭代次数之后, 也能达到较高的精度. (当然这里还没有用到交叉验证, 用了之后我们的模型应该过学习的很厉害. 这一点这篇文章里暂时不考虑.)&lt;/p&gt;
+
+&lt;p&gt;上述代码的原版在这里&lt;a href=&quot;https://github.com/simcookies/algorithm_implement/blob/master/ml/Logistic_Regression_scratch.ipynb&quot;&gt;Github&lt;/a&gt;, 以上就是对逻辑回归算法的一的简单总结.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 09 May 2021 16:36:31 +0900</pubDate>
+        <link>https://simcookies.github.io/2021/05/09/summary-of-machine-learning-algorithms-logistic-regression</link>
+        <guid isPermaLink="true">https://simcookies.github.io/2021/05/09/summary-of-machine-learning-algorithms-logistic-regression</guid>
+        
+        <category>algorithm</category>
+        
+        <category>formula</category>
+        
+        
+        <category>machine learning</category>
+        
+      </item>
     
       <item>
         <title>机器学习算法系列 - 决策树C4.5算法</title>
@@ -1509,131 +1728,6 @@ Alice &amp;lt;-- Bob: another authentication Response
         
         
         <category>programming</category>
-        
-      </item>
-    
-      <item>
-        <title>'Web Full-stack develop reference'</title>
-        <description>&lt;p&gt;I finished reading the book of &lt;em&gt;&lt;a href=&quot;https://www.gitbook.com/book/coin8086/getfullstack/details&quot;&gt;Web Full-stack Develop Reference&lt;/a&gt;&lt;/em&gt; at one weekend&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. As writing in the book, it focuses on the principles, general methods and tools of Web developing, not a specific programming language. The first half of the book’s content is mainly introduced the basic knowledge of the Web includes the three elements of the web page elements – HTML, CSS, JavaScript, so I just looked through it. I focused on reading the third chapter – Programming Languages and Technologies. Besides, I made some others related researches about it and write a new post as below. (It’s terriable to write in English:joy:)&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;dynamic-content-some-ways-for-server-programming&quot;&gt;(Dynamic content) Some ways for Server Programming&lt;/h1&gt;
-
-&lt;h2 id=&quot;common-gateway-interface-cgi&quot;&gt;Common Gateway Interface, CGI&lt;/h2&gt;
-
-&lt;p&gt;Although no one is using it today basically, the mainstream Web server still supports it. Here are the processing steps of it:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;User’s requests are sent to the server through the Internet.&lt;/li&gt;
-  &lt;li&gt;The server sends the received request to the CGI program for processing.&lt;/li&gt;
-  &lt;li&gt;CGI program passes the results to the server.&lt;/li&gt;
-  &lt;li&gt;The server sends the responses to users.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;While CGI handles one process for per request, so CGI is not a good choice for lots of requests that consume a lot of resources.&lt;/p&gt;
-
-&lt;h2 id=&quot;php&quot;&gt;PHP&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
-
-&lt;h2 id=&quot;java-servlet&quot;&gt;Java (Servlet)&lt;/h2&gt;
-
-&lt;p&gt;Java Servlet just provides servers for Java. Here is it’s processing steps:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;User’s requests are sent to the server through the Internet.&lt;/li&gt;
-  &lt;li&gt;The server starts and calls Servlet.&lt;/li&gt;
-  &lt;li&gt;Servlet processes according to user’s requests and passes the results to the server.&lt;/li&gt;
-  &lt;li&gt;The server sends the responses to users.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Java Servlet handles one thread for per request which is different from CGI, so it has better performance than CGI (If you want to know more about this, please read this &lt;a href=&quot;http://www.c4learn.com/java/servlet/servlet-vs-cgi/&quot;&gt;reference&lt;/a&gt;. In fact, we use more frameworks such as &lt;a href=&quot;https://spring.io/&quot;&gt;Spring&lt;/a&gt; instead of using Java Servlet directly.&lt;/p&gt;
-
-&lt;h2 id=&quot;python&quot;&gt;Python&lt;/h2&gt;
-
-&lt;p&gt;Python mainly depends on the WSGI (Web Server Gateway Interface) specification on the server side. This specification defines the main interface between the server and the application.&lt;/p&gt;
-
-&lt;p&gt;There is a Middleware concept in WSGI: after the server receives the request, the middleware responds firstly, and then send to the next level which may be an application or another middleware. Simply say, it adds one or more middlewares which can achieve log or handle errors between the server and the application.&lt;/p&gt;
-
-&lt;h2 id=&quot;ruby&quot;&gt;Ruby&lt;/h2&gt;
-
-&lt;p&gt;Ruby is the programming language which I am always using. Rack specification defines the interface between the server and the Ruby application which is similar to WSGI in Python. I never heard about Rack even I am using Ruby on Rails (it is based on Rack :cold_sweat:). As WSGI in Python, Rack also has the concept of middleware.&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;nodejs&quot;&gt;Node.js&lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;server-architecture&quot;&gt;Server architecture&lt;/h1&gt;
-
-&lt;p&gt;I was vague about this concept before, but I got a rough outline after reading the book. I will sort out various concepts includes well known Apache, Nginx or IIS.&lt;/p&gt;
-
-&lt;h2 id=&quot;basic-situation&quot;&gt;Basic situation&lt;/h2&gt;
-
-&lt;p&gt;If the site’s traffic is not a lot, we can put the server directly on the network. Here is an instance:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20201102143913.png&quot; alt=&quot;basic instance&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The web server here may be Apache HTTP Server, Nginx, Microsoft’s IIS and so on; dedicated Servlet which I said above, it just provides servers for Java; and the web server embedded in Node.js.&lt;/p&gt;
-
-&lt;h2 id=&quot;load-balancing&quot;&gt;Load balancing&lt;/h2&gt;
-
-&lt;p&gt;In general, one Web Server for one website is not enough, we need a group of servers. The load balancer accepts the HTTP request and distributes it to the internal web server. There is a well-known load balancer named &lt;a href=&quot;https://en.wikipedia.org/wiki/HAProxy&quot;&gt;HAProxy&lt;/a&gt;, the Apache, Nginx which I said above can also act as a load balancer.&lt;/p&gt;
-
-&lt;h2 id=&quot;specifi-analysis&quot;&gt;Specifi analysis&lt;/h2&gt;
-
-&lt;p&gt;I often hear the Web Server Architecture composed of Nginx + Passenger + Ruby on Rails or Apache + Unicorn + Ruby on Rails, here are the details explanations for each link:&lt;/p&gt;
-
-&lt;p&gt;Nginx or Apache is the load balancer and also the web server, which responds to client requests and sends them to the application. Unicorn is an HTTP server for Ruby. It will load the Ruby application in its own process space, and the package HTTP contents outside and communicate with Ruby application. Unicorn is easy to debug, and it’s applied to manage Rack application. Some other server such to Thin, Puma is similar as Unicorn. And Passenger is a bit special, it’s directly integrated into Nginx and Apache and becomes the module which they can use directly.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;From Wikipedia
-Phusion Passenger (informally also known as mod_rails and mod_rack among the Ruby community) is a free web server and application server with support for Ruby, Python and Node.js&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Passenger can also manage the number of Rails processes, life cycles, request queues and so on. This fig can help you to understand the relationship between them.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20201102144000.png&quot; alt=&quot;server analysis&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;refferences&quot;&gt;Refferences&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;a href=&quot;http://fujiike.hateblo.jp/entry/2015/08/20/170751&quot;&gt;ApacheとNginxとPassengerとUnicornの違い【すごい初心者向け】&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/4113299/ruby-on-rails-server-options&quot;&gt;Ruby on Rails Server options&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;https://www.gitbook.com/book/coin8086/getfullstack/details&quot;&gt;Web全栈技术指南&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Strictly speaking, it is only the author’s own summary of the Gitbook. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;I am not very understanding for PHP, after all, I am an ‘entery level’ player. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;I want to write an another post to introduce WSGI and Rack. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Still in studying process, I may write a new post about it after it~ &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Sat, 02 Dec 2017 15:49:44 +0900</pubDate>
-        <link>https://simcookies.github.io/2017/12/02/fullstack-reference</link>
-        <guid isPermaLink="true">https://simcookies.github.io/2017/12/02/fullstack-reference</guid>
-        
-        <category>ruby</category>
-        
-        <category>python</category>
-        
-        <category>server</category>
-        
-        
-        <category>basics</category>
         
       </item>
     
