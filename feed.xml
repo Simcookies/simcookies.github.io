@@ -5,9 +5,185 @@
     <description>All about Simcookies Project.</description>
     <link>https://simcookies.github.io/</link>
     <atom:link href="https://simcookies.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 09 May 2021 16:37:58 +0900</pubDate>
-    <lastBuildDate>Sun, 09 May 2021 16:37:58 +0900</lastBuildDate>
+    <pubDate>Sat, 17 Jul 2021 21:59:53 +0900</pubDate>
+    <lastBuildDate>Sat, 17 Jul 2021 21:59:53 +0900</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>机器学习算法系列 - 最小二乘法/岭回归/Lasso</title>
+        <description>&lt;p&gt;&lt;strong&gt;普通最小二乘法&lt;/strong&gt;(Ordinary Least Squares, OLS), &lt;strong&gt;岭回归&lt;/strong&gt;(Ridge Regression), 最小绝对值收留和选择算子(Least absolute shrinkage and selection operator, &lt;strong&gt;Lasso&lt;/strong&gt;), 这三个算法是线性模型中比较基本的算法. 这一篇文章里一次性对这三个进行一个简单的总结.&lt;/p&gt;
+
+&lt;p&gt;首先, 因为三者都是线性模型, 所以首先假设我们该模型为:&lt;/p&gt;
+
+\[y(w,x)=w_0+w_1x_1+\dots+w_mx_m\notag\]
+
+&lt;p&gt;其中 $w=(w_1,\dots,w_m)$ 称为系数 (coefficient), 而 $w_0$ 称为截距 (intercept), 而三个算法就是为了找出系数和截距. 使用矩阵的方式表达显得更亲切:&lt;/p&gt;
+
+\[y=\begin{bmatrix}y_1\\y_2\\\vdots\\y_n\end{bmatrix},
+X=\begin{bmatrix}
+1&amp;amp;x_{11}&amp;amp;x_{12}&amp;amp;\dots&amp;amp;x_{1m}\\
+1&amp;amp;x_{21}&amp;amp;x_{22}&amp;amp;\dots&amp;amp;x_{2m}\\
+\vdots&amp;amp;\vdots&amp;amp;\vdots&amp;amp;\dots&amp;amp;\vdots\\
+1&amp;amp;x_{n1}&amp;amp;x_{n2}&amp;amp;\dots&amp;amp;x_{nm}
+\end{bmatrix},w=\begin{bmatrix}w_0\\w_1\\w_2\\\vdots\\w_m\end{bmatrix}\\\notag
+y=Xw\]
+
+&lt;h1 id=&quot;普通最小二乘法&quot;&gt;普通最小二乘法&lt;/h1&gt;
+
+&lt;p&gt;最小二乘法可能是我接触到最早的机器学习的算法了. 研究生期间经常通过推导出的传递函数去拟合电路仿真的理想结果, 从而确定电路参数, 这本身就是最小二乘法的一个非常重要的应用 – &lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%9B%B2%E7%B7%9A%E6%93%AC%E5%90%88&quot;&gt;曲线拟合&lt;/a&gt;. 而最小二乘法中的线性或者说普通的最小二乘法, 作为统计回归分析中的一个手段, 是比较容易理解的一个算法. 其可以分解成:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;随机给出一组系数 $w$;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用 $w$ 结合数据集的特征量 $X$ 计算出预测值 $Xw$;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;计算预测值和实际值之间的差, 即模型的损失函数, 这里特指残差平方和 (也就是L2范数) $e^2=\left|y-Xw\right|_2^2$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;求出使得残差平方和取得最小值的 $w$&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, 也可以使用更简单的矩阵的方法求出 $w$.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;用一个简单的图表示出来就是:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20210619195655.png&quot; alt=&quot;OLS&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;一堆蓝色的点为观测数据, 看着是满足线性关系的感觉. 而橙色的直线就近似的表达了 $x$ 和 $y$ 之间这种线性的关系, 蓝色短线就是预测值和实际数据之间残差大小. 使得所有蓝线距离之和最小的参数就是我们要找的参数. 具体的数学表达为:&lt;/p&gt;
+
+\[\min_{w}\left\|y-Xw\right\|_2^2=\min_w\sum_{i=1}^n\left(y_i-x_i^Tw\right)^2\notag\\
+\rightarrow \hat w=(X^TX)^{-1}X^Ty\]
+
+&lt;p&gt;这里的 $\hat w$ 是利用矩阵的方式求得的参数结果.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;矩阵的解法(TL;DR)&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;假设满足使得 $X$ 和 $y$ 线性关系的参数矩阵为 $\hat w$. 那么就有:&lt;/p&gt;
+
+\[\begin{align*}
+X\hat w &amp;amp;= y\\
+X^TX\hat w &amp;amp;= X^Ty\\
+\hat w&amp;amp;=(X^TX)^{-1}X^Ty
+\end{align*}\]
+
+&lt;p&gt;而最后一步成立的条件就是 $X^TX$ 是可逆的, 也就是说是满秩的. 但是如果特征量之间的相关性很强时 (也称之为变量的共线性), $X^TX$ 就会很小, 甚至趋于0. 这个时候就需要对这个矩阵做些处理了, 也就带来了岭回归.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;在 Scikit-Learn 中, 实现普通最小二乘法算法的是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LinearRegression&lt;/code&gt; 模型.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.linear_model&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LinearRegression&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.datasets&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;make_regression&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# 生成数据
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;make_regression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n_samples&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_features&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_informative&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random_state&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;noise&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# 训练模型
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LinearRegression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# 配置参数并绘图
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coef_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intercept_&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;y_dash&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scatter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_dash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;C1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;模型的参数反映在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;coef_&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;intercept_&lt;/code&gt; 中, 有了这两个值就得到了近似直线. 绘图结果:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20210619203040.png&quot; alt=&quot;OLS_sklearn&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最小二乘法估算系数的手段在统计学中也称为&lt;strong&gt;最小二乘估计&lt;/strong&gt;. 正如上面提到的为了能够使用最小二乘估计得到唯一的参数解, 特征量 $X$ 必须满足线性无关. 如果线性相关了, 得到的解会对特征量非常的敏感, 这种情况称为&lt;strong&gt;多重共线性&lt;/strong&gt; (multicollinearity), 因此数据一定要经过处理, &lt;strong&gt;特别是要去除掉高度相关的特征量&lt;/strong&gt;, 也就出现了改良的算法.&lt;/p&gt;
+
+&lt;h1 id=&quot;岭回归&quot;&gt;岭回归&lt;/h1&gt;
+
+&lt;p&gt;有时也被称作脊回归、吉洪诺夫正则化(Tikhonov regularization). 可以看作是最小二乘法的改良版. 其目的在于改善普通最小二乘法的多重共线性问题. 主要做法是向损失函数增加一个L2范数的惩罚项:&lt;/p&gt;
+
+\[\begin{align*}
+&amp;amp;\min_w\left\|Xw-y\right\|_2^2+\lambda\left\|w\right\|_2^2\\
+=&amp;amp;\min_w\sum_{i=1}^m\left(y_i-x_i^Tw\right)^2+\lambda\sum_{i=1}^nw_i^2
+\end{align*}\]
+
+&lt;p&gt;其中 $\lambda\geq0$ (有时也用 $\alpha$, 两者是等价的) 称为正则化参数, 复杂系数或者岭参数, 该值越大对于异常的 $w$ 的惩罚越大, 使得训练得到的系数对于多重共线性问题更加的稳健. 以矩阵的形式表达出来:&lt;/p&gt;
+
+\[\hat w =(X^TX+\lambda I)^{-1}X^Ty\notag\]
+
+&lt;p&gt;L2范数惩罚项的加入, 使得原本的 $(X^TX)$ 变成了 $(X^TX+\lambda I)$ 从而保证了满秩和可逆. 但同时也放弃了最小二乘法的无偏性, 以降低精度为代价解决了病态矩阵问题. (好像因为 $I$ 是单位矩阵, 只有对角线有值, 所以名字叫岭回归.)&lt;/p&gt;
+
+&lt;p&gt;另外为了从物理角度理解岭回归, 上述的损失函数还可以等价为:&lt;/p&gt;
+
+\[f(w)=\sum_{i=1}^m\left(y_i-x_i^Tw\right)^2\\\notag
+s.t.\sum_{i=1}^nw_i^2\leq t\]
+
+&lt;p&gt;可以理解为在一个约束条件下的最小二乘法. 假设变量的个数为两个, 那么残差平方和就可以表示为 $w_1, w_2$ 的一个二次函数, 它是一个在三维空间中的抛物面, 可以使用等值线表示. 如果没有限制条件, 那么通过梯度下降法一定能够找到位于椭圆中心的那个最优值点. 而限制条件 $w_1^2+w_2^2\leq t$ 则相当于二维平面中的一个圆, 限制了两个变量的取值范围. 所以当等值线与圆相切的时候, 才能得到了约束条件下的最优点.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20210620101826.png&quot; alt=&quot;ridge_geometry&quot; style=&quot;zoom: 50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;在 Scikit-learn 中, 实现岭回归的方式是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ridge&lt;/code&gt; 模型. 使用方法和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LinearRegression&lt;/code&gt; 基本一致, 只是需要一个岭参数 $\alpha$, 这里不再赘述. 需要关注的官方文档中给出的一个参数值随正则化参数 $\alpha$ 变化而变化的趋势图(&lt;a href=&quot;https://scikit-learn.org/stable/auto_examples/linear_model/plot_ridge_path.html#sphx-glr-auto-examples-linear-model-plot-ridge-path-py&quot;&gt;参考连接&lt;/a&gt;):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20210717203842.png&quot; alt=&quot;sphx_glr_plot_ridge_path_001&quot; style=&quot;zoom: 80%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这个图可以看出, 对于一个病态矩阵的问题 (任何一个元素的些许变动, 比如说数据的噪声, 导致整个矩阵的行列式值和逆矩阵发生很大的变化), 当正则化参数取值很大时(图的左侧), 损失函数受到惩罚项的影响就会占到主要作用, 各个特征参数都表现会&lt;u&gt;接近于 0&lt;/u&gt;, 呈现出欠拟合状态; 而取值很小时(接近于0, 图的右侧), 损失函数则趋于最小二乘法的损失函数, 呈现出过拟合状态, 并且此时特征参数表现出了很大的震荡.&lt;/p&gt;
+
+&lt;p&gt;这再次说明了最小二乘法在面临病态矩阵问题时, 受到数据噪声的影响太大. 而岭回归则通过引入L2范数的惩罚项使得影响减弱. &lt;strong&gt;正是这个特性, 使得岭回归相比于最小二乘法更适用于共线性和病态数据的拟合, 常用于多维问题.&lt;/strong&gt; 不过同时需要注意的是, 作为超参数的 $\alpha$, 取值大小的平衡是非常重要的. 而 Scikit-learn 中内置的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RidgeCV&lt;/code&gt; 是集成了交叉验证的岭回归模型训练器, 能够帮助我们找到适合的正则化参数.&lt;/p&gt;
+
+&lt;h1 id=&quot;lasso&quot;&gt;Lasso&lt;/h1&gt;
+
+&lt;p&gt;也叫套索回归, 也是OLS的改良版. 和岭回归的区别是, Lasso向损失函数增加一个L1范数的惩罚项.&lt;/p&gt;
+
+\[\begin{align*}
+&amp;amp;\min_w\left\|Xw-y\right\|_2^2+\lambda\left\|w\right\|_1^2\\
+=&amp;amp;\min_w\sum_{i=1}^m\left(y_i-x_i^Tw\right)^2+\lambda\sum_{i=1}^n|w_i|
+\end{align*}\]
+
+&lt;p&gt;因为L1范数是绝对值的形式, 损失函数在零点处不可导, 所以不能求得解析解. 所以使用梯度下降法求解最小值. 和岭回归一样, 从物理角度去看, 上述的式子等价为:&lt;/p&gt;
+
+\[f(w)=\sum_{i=1}^m\left(y_i-x_i^Tw\right)^2\\\notag
+s.t.\sum_{i=1}^n|w_i|\leq t\]
+
+&lt;p&gt;也是一个在约束条件下求解最小值的问题. 假设变量也是两个, 则限制条件 $|w_1|+|w_2|\leq t$ 则相当于二维平面中的一个矩形. 两者相交时得到最优点.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/simcookies/image-host/master/imgs/20210711235439.png&quot; alt=&quot;Lasso_geometry&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Scikit-learn中使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Lasso&lt;/code&gt; 模型实现 Lasso 算法. 使用方法也是传入一个正则化参数即可, 这里不赘述.&lt;/p&gt;
+
+&lt;p&gt;需要注意的是, 与岭回归不同的地方在于, Lasso回归引入的L1范数惩罚项会使得某些特征参数的值&lt;u&gt;变成 0&lt;/u&gt;(岭回归只会使得参数更容易趋于0但不等于0). 那么为什么L1范数会比L2范数更能使得参数为 0 呢? 因为从上面的两张物理意义图中可以看出, 概率上方形的约束条件更容在坐标轴的顶点上与等值线产生交点. 圆形则是更容易在除坐标轴以外的地方产生相切点.&lt;/p&gt;
+
+&lt;p&gt;由于上述的特征, Lasso算法可以通过调整正则化参数, 使得一些特征量的权重参数为 0, 也就是删除这些特征量 (这也会使得计算量会变小). &lt;strong&gt;因此Lasso回归也能够用来做特征选择.&lt;/strong&gt;  Lasso名字中的 Selection Operator 也指出了这一点. 另外和岭回归一样, 通过交叉验证, 选择出一个合适的正则化参数也是非常重要的.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;以上就是线性模型中常用的基本的三个算法. 写的内容不是很难, 但是在写的过程中我发现文章当中”统计模型” 以及 “机器学习” 的内容似乎混杂在了一起. 这不禁让我对这两者的区别产生了思考, 所以这篇文章花了相当长的时间. 估计之后会写一篇新的文章, 以总结自己针对两者的区别的调查和思考.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;这篇文章暂时不涉及求取最小值的方法, 多是采用梯度下降法. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sat, 17 Jul 2021 16:36:31 +0900</pubDate>
+        <link>https://simcookies.github.io/2021/07/17/summary-of-machine-learning-algorithms-linear-model-1</link>
+        <guid isPermaLink="true">https://simcookies.github.io/2021/07/17/summary-of-machine-learning-algorithms-linear-model-1</guid>
+        
+        <category>algorithm</category>
+        
+        <category>formula</category>
+        
+        
+        <category>machine learning</category>
+        
+      </item>
     
       <item>
         <title>机器学习算法系列 - 逻辑回归</title>
@@ -1579,155 +1755,6 @@ Alice &amp;lt;-- Bob: another authentication Response
         
         
         <category>tool</category>
-        
-      </item>
-    
-      <item>
-        <title>Source code reading of Jekyll -- 1</title>
-        <description>&lt;p&gt;It has been long time since I wanted to study Ruby by reading source code of some project from some open source project. I choosed the Jekyll because it’s small and popular in static pages generator. It is my first time to read source codes, I will choose the appropriate way for me. It you have any advices for me, please feel free to reply this article.&lt;/p&gt;
-
-&lt;p&gt;I plan to begin from files at root dir, and then go on directories. Finally, return root dir and make a summary of this project.&lt;/p&gt;
-
-&lt;h1 id=&quot;jeykllgemspec&quot;&gt;jeykll.gemspec&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gemspec&lt;/code&gt; includes basic infos of the Jekyll project. It is necessary in a RubyGem project.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;lib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;expand_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;lib&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__dir__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;vg&quot;&gt;$LOAD_PATH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unshift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$LOAD_PATH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;include?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jekyll/version&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Load the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lib/&lt;/code&gt; dir into built-in var &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$LOAD_PATH&lt;/code&gt; and require &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll/version.rb&lt;/code&gt; which includes version info of Jekyll. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;File.expand_path&lt;/code&gt; converts a pathname to an absolute pathname. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unshift&lt;/code&gt; can prepend objects to the front of self.&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Gem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Specification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;all_files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`git ls-files -z`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\x0&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bindir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;exe&quot;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;add_runtime_dependency&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;addressable&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;~&amp;gt; 2.4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Use ` ` to execute a shell script, the script here can get all files under the management of git.
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s.bindir = &quot;exe&quot;&lt;/code&gt; specify the executable ruby script in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exe/&lt;/code&gt;.
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;add_runtime_dependency&lt;/code&gt; adds a runtime dependency named gem with requirements to this gem.&lt;/p&gt;
-
-&lt;p&gt;We can install Jekyll by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem install jekyll&lt;/code&gt;, and gem will create a exculatable ruby script in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gems/ruby-2.X.X/bin&lt;/code&gt;. Implement in console of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll&lt;/code&gt; will call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exe/jekyll&lt;/code&gt;.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;exejekyll&quot;&gt;exe/jekyll&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Execulatable ruby script which defined in jekyll.gemspec.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;STDOUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sync&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Normally &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;puts&lt;/code&gt; does not write immediately to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;STDOUT&lt;/code&gt;, but this can write every single character immediately to the console&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. It is very useful when build websocket server.&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;PluginManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;require_from_bundler&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Call the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;require_from_bundler&lt;/code&gt; method which defined in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lib/jekyll/plugin_manager.rb&lt;/code&gt;. In fact, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;require &quot;jekyll&quot;&lt;/code&gt; will load jekyll.rb file, and all other modules are loaded in this file by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;autoload :XXX, &quot;jekyll/xxx&quot;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Deprecator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ARGV&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This method will deal with arguments deprecated which defined in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lib/jekyll/deprecator.rb&lt;/code&gt;. It will show the error messages and abort calling.&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;mercenary&quot;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Mercenary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;program&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:jekyll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/jekyll/mercenary&quot;&gt;Mercenary&lt;/a&gt; is lightweight and flexible library for writing command-line apps in Ruby which is also a sub-repo of Jekyll. This gem may be useful in development of gem.&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Command&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;subclasses&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;init_with_program&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Initilization of Jekyll commands in block of Mercenary. These commands are defined in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lib/jekyll/command.rb&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jekyll.logger&lt;/code&gt; is using to manage logs.&lt;/p&gt;
-
-&lt;h1 id=&quot;libjekyllrb&quot;&gt;lib/jekyll.rb&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Require necessary libs to this project in lib/jekyll.rb&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;require_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;glob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__dir__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;*.rb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;glob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As it said of comment, this method requires all of the Ruby files in the given directory.&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# internal requires&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;autoload&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:Cleaner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jekyll/cleaner&quot;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# extensions&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jekyll/plugin&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lib/jekyll.rb&lt;/code&gt; requires &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rubygems&lt;/code&gt;, stdlib and 3rd party libs firstly. Also it will claim its own modules using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;autoload&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;require&lt;/code&gt;.&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;some_method&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;class &amp;lt;&amp;lt; self&lt;/code&gt; opens up &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;’s singleton class, so that methods can be redefined for the current &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt; object. With this syntax, we don’t need to write &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;def self.some_method&lt;/code&gt; in the module everytime.&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;p&gt;There are such a set of methods defined in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;class &amp;lt;&amp;lt; self&lt;/code&gt; block:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;# jekyll environment&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# configuration Hash by merging the default options with anything in _config.yml&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;set_timezone&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# Set the TZ environment variable&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;# logger instance&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# set logger writer&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;sites&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;# Jekyll sites created&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;sanitized_path&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Returns the sanitized path&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Stackoverflow: &lt;a href=&quot;https://stackoverflow.com/questions/29998728/what-stdout-sync-true-means&quot;&gt;What STDOUT.sync = true means?&lt;/a&gt;. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;About the difference between &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;autoload&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;require&lt;/code&gt;, reference is &lt;a href=&quot;https://stackoverflow.com/questions/804297/when-to-use-require-load-or-autoload-in-rubyutm_medium=organic&amp;amp;utm_source=google_rich_qa&amp;amp;utm_campaign=google_rich_qa&quot;&gt;here&lt;/a&gt;. And I plan to write an another article about this. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Stackoverflow: &lt;a href=&quot;https://stackoverflow.com/questions/2505067/class-self-idiom-in-rubyutm_medium=organic&amp;amp;utm_source=google_rich_qa&amp;amp;utm_campaign=google_rich_qa&quot;&gt;class « self idiom in Ruby&lt;/a&gt;. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Wed, 04 Apr 2018 15:27:12 +0900</pubDate>
-        <link>https://simcookies.github.io/2018/04/04/source-code-reading-of-jekyll-1</link>
-        <guid isPermaLink="true">https://simcookies.github.io/2018/04/04/source-code-reading-of-jekyll-1</guid>
-        
-        <category>source</category>
-        
-        <category>jekyll</category>
-        
-        
-        <category>programming</category>
         
       </item>
     
